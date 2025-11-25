@@ -10,7 +10,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^23.2.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.7",
     "@faker-js/faker": "^10.1.0",
+    "allure-cypress": "^3.4.2",
     "cypress": "^15.7.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
