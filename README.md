@@ -34,7 +34,7 @@ The goal is to demonstrate proficiency in modern test automation tools, design p
 ### 4. Advanced Patterns
 *   **Custom Commands**: Encapsulated logic for repetitive actions (e.g., `cy.login()`, `cy.queryDb()`).
 *   **Accessibility Testing**: Automated WCAG compliance checks using `cypress-axe`.
-*   **Visual Regression**: Setup for pixel-perfect UI validation.
+*   **Visual Testing**: Comprehensive visual regression testing options. See [Visual Testing Guide](docs/visual-testing-guide.md) for 5 different tools compatible with Cypress 15.
 *   **Performance**: Basic response time assertions for API endpoints.
 
 ## ⚡️ Getting Started

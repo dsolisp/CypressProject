@@ -1,5 +1,6 @@
 import { defineConfig } from 'cypress';
 import sqlite3 from 'sqlite3';
+import getCompareSnapshotsPlugin from 'cypress-image-diff-js/plugin';
 
 const db = sqlite3.verbose();
 
@@ -7,7 +8,6 @@ export default defineConfig({
   e2e: {
     baseUrl: 'https://www.saucedemo.com',
     setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) {
-      // Database Task
       on('task', {
         queryDb: (query: string) => {
           return new Promise((resolve, reject) => {
@@ -20,6 +20,8 @@ export default defineConfig({
           });
         },
       });
+
+      getCompareSnapshotsPlugin(on, config);
       return config;
     },
   },

@@ -6,3 +6,7 @@ QUICKSTART.md
 TUTORIAL_COMPLETE.md
 /node_modules
 
+# Visual Testing - Keep baselines, ignore comparisons
+cypress/snapshots/actual/
+cypress/snapshots/diff/
+cypress/.DS_Store

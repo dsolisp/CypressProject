@@ -1,10 +1,21 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "lib": ["es5", "dom"],
-        "types": ["cypress", "node"],
-         "strict": true,
-         "esModuleInterop": true
-    },
-  "include": ["cypress/**/*.ts", "cypress/**/*.js"]
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "es5",
+      "dom"
+    ],
+    "types": [
+      "cypress",
+      "node"
+    ],
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "bundler"
+  },
+  "include": [
+    "cypress/**/*.ts",
+    "cypress/**/*.js"
+  ]
 }
