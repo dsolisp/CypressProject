@@ -9,4 +9,6 @@ TUTORIAL_COMPLETE.md
 # Visual Testing - Keep baselines, ignore comparisons
 cypress/snapshots/actual/
 cypress/snapshots/diff/
-cypress/.DS_Store
+.DS_Store
+*.json
+/cypress/screenshots

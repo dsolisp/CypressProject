@@ -1,16 +1,23 @@
 import BasePage from './BasePage';
 
 class VisualTestingPage extends BasePage {
-    private defaultSnapshotConfig = {
+    private readonly defaultSnapshotConfig = {
         errorThreshold: 0.05,
         capture: 'viewport' as const,
     };
+
+    private readonly VIEWPORT_PRESETS = {
+        mobile: { width: 375, height: 812, device: 'iphone-x' as const },
+        tablet: { width: 768, height: 1024, device: 'ipad-2' as const },
+        desktop: { width: 1920, height: 1080 },
+        laptop: { width: 1366, height: 768 },
+    } as const;
 
     constructor() {
         super();
     }
 
-    takeFullPageSnapshot(name: string, customConfig?: any) {
+    captureFullPage(name: string, customConfig?: any) {
         cy.compareSnapshot(name, {
             ...this.defaultSnapshotConfig,
             capture: 'fullPage',
@@ -18,14 +25,14 @@ class VisualTestingPage extends BasePage {
         });
     }
 
-    takeViewportSnapshot(name: string, customConfig?: any) {
+    captureViewport(name: string, customConfig?: any) {
         cy.compareSnapshot(name, {
             ...this.defaultSnapshotConfig,
             ...customConfig,
         });
     }
 
-    takeSnapshotIgnoringElements(name: string, selectorsToBlackout: string[]) {
+    captureWithBlackout(name: string, selectorsToBlackout: string[]) {
         cy.compareSnapshot(name, {
             ...this.defaultSnapshotConfig,
             screenshotConfig: {
@@ -34,33 +41,28 @@ class VisualTestingPage extends BasePage {
         });
     }
 
-    takeFlexibleSnapshot(name: string, threshold: number) {
+    captureWithThreshold(name: string, threshold: number) {
         cy.compareSnapshot(name, {
             errorThreshold: threshold,
             capture: 'viewport',
         });
     }
 
-    takeElementSnapshotFromChainable(elementChainable: Cypress.Chainable<JQuery<HTMLElement>>, name: string) {
+    captureElement(elementChainable: Cypress.Chainable<JQuery<HTMLElement>>, name: string) {
         elementChainable.compareSnapshot(name, this.defaultSnapshotConfig);
     }
 
-    takeMobileSnapshot(name: string) {
-        cy.viewport('iphone-x');
-        cy.wait(300);
-        this.takeViewportSnapshot(name);
-    }
+    captureAtViewport(name: string, preset: keyof typeof this.VIEWPORT_PRESETS, customConfig?: any) {
+        const viewport = this.VIEWPORT_PRESETS[preset];
 
-    takeTabletSnapshot(name: string) {
-        cy.viewport('ipad-2');
-        cy.wait(300);
-        this.takeViewportSnapshot(name);
-    }
+        if ('device' in viewport && viewport.device) {
+            cy.viewport(viewport.device);
+        } else {
+            cy.viewport(viewport.width, viewport.height);
+        }
 
-    takeDesktopSnapshot(name: string) {
-        cy.viewport(1920, 1080);
         cy.wait(300);
-        this.takeViewportSnapshot(name);
+        this.captureViewport(name, customConfig);
     }
 }
 
