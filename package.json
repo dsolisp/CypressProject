@@ -8,6 +8,7 @@
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "cy:run:sauce": "cypress run --spec 'cypress/ui/sauce/sauce.cy.ts'",
+    "test:unit": "cypress run --spec 'cypress/unit/**/*.cy.ts'",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
