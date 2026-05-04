@@ -1,14 +1,60 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# CypressProject .gitignore
+# 7 Laws of QA Automation — Law 3: Repeatability (no local state committed)
+# ADR-009: Auth state must never be committed
+# ═══════════════════════════════════════════════════════════════════════════════
 
-# Tutorial and Progress Files
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules/
+.pnpm-store/
 
-QUICKSTART.md
+# ── Build & Cache ─────────────────────────────────────────────────────────────
+dist/
+.cache/
+.parcel-cache/
 
-TUTORIAL_COMPLETE.md
-/node_modules
+# ── Cypress test outputs ───────────────────────────────────────────────────────
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
 
-# Visual Testing - Keep baselines, ignore comparisons
+# ── Visual regression artifacts ────────────────────────────────────────────────
+cypress-image-diff-screenshots/
+cypress-image-diff-html-report/
 cypress/snapshots/actual/
 cypress/snapshots/diff/
+
+# ── Allure reporting ──────────────────────────────────────────────────────────
+allure-results/
+allure-report/
+
+# ── Auth state (ADR-009) ──────────────────────────────────────────────────────
+.auth/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Database artifacts ────────────────────────────────────────────────────────
+*.db
+*.sqlite
+
+# ── OS files ──────────────────────────────────────────────────────────────────
 .DS_Store
-*.json
-/cypress/screenshots
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# ── IDE files ─────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*~
+
+# ── Personal / non-project files ──────────────────────────────────────────────
+english_exam_refresher.md
+resume2_optimized.html
+QUICKSTART.md
+TUTORIAL_COMPLETE.md
