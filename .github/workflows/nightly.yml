@@ -1,0 +1,115 @@
+name: Nightly Test Suite
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: nightly-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  nightly-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      HEADLESS: true
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Run unit tests
+        run: pnpm run test:unit
+        
+      - name: Run Sauce UI tests
+        continue-on-error: true
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          command: pnpm exec cypress run --spec 'cypress/ui/sauce/**/*.cy.ts'
+
+      - name: Run Practice UI tests
+        continue-on-error: true
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          command: pnpm exec cypress run --spec 'cypress/ui/practice/**/*.cy.ts'
+
+      - name: Run Backend tests
+        continue-on-error: true
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          command: pnpm exec cypress run --spec 'cypress/backend/**/*.cy.ts'
+
+      - name: Run Visual tests
+        continue-on-error: true
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          command: pnpm exec cypress run --spec 'cypress/ui/visual/**/*.cy.ts'
+
+      - name: Run Accessibility tests
+        continue-on-error: true
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          command: pnpm exec cypress run --spec 'cypress/accessibility/**/*.cy.ts'
+
+      - name: Run Performance tests
+        continue-on-error: true
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          command: pnpm exec cypress run --spec 'cypress/performance/**/*.cy.ts'
+
+      - name: Run BDD tests
+        continue-on-error: true
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          command: pnpm exec cypress run --spec 'cypress/integration/**/*.feature'
+
+      - name: Upload Allure results (JSON)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ github.run_id }}
+          path: allure-results/
+
+      - name: Generate Allure Report
+        if: always()
+        run: |
+          npm install -g allure-commandline
+          allure generate allure-results --clean -o allure-report
+
+      - name: Upload Report to Cloudflare R2
+        if: always()
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 sync allure-report/ s3://qa-portfolio-allure/${{ github.event.repository.name }}/${{ github.run_id }}/ --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+
+      - name: Add Report URL to Summary
+        if: always()
+        run: |
+          echo "### 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
+          echo "[View Full Report](${{ secrets.R2_PUBLIC_URL }}/${{ github.event.repository.name }}/${{ github.run_id }}/index.html)" >> $GITHUB_STEP_SUMMARY
