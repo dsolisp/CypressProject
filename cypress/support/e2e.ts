@@ -13,8 +13,12 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
+// Core commands and auth helpers (ADR-009)
 import './commands';
-import compareSnapshotCommand from 'cypress-image-diff-js/command';
 
+// Header component commands (ADR-005 Cypress idiom)
+import './commands/header';
+
+// Visual regression snapshot command
+import compareSnapshotCommand from 'cypress-image-diff-js/command';
 compareSnapshotCommand();

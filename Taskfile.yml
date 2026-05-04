@@ -1,0 +1,124 @@
+version: "3"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# QA Portfolio — Cypress / TypeScript Stack
+# Interface contract: task names are IDENTICAL across all 5 repos.
+# ──────────────────────────────────────────────────────────────────────────────
+
+vars:
+  ALLURE_RESULTS: allure-results
+  ALLURE_REPORT:  allure-report
+  AUTH_FILE:      .auth/sauce.json
+
+tasks:
+
+  # ── Core ──────────────────────────────────────────────────────────────────
+
+  test:
+    desc: "Run the full test suite (headless)"
+    cmds:
+      - pnpm exec cypress run --reporter allure-cypress
+
+  test:sauce:
+    desc: "Run SauceDemo E2E tests only"
+    cmds:
+      - pnpm exec cypress run --spec "cypress/e2e/sauce-demo/**/*.cy.ts" --reporter allure-cypress
+
+  test:advanced:
+    desc: "Run Advanced Interactions tests (E1-E9)"
+    cmds:
+      - pnpm exec cypress run --spec "cypress/e2e/advanced/**/*.cy.ts" --reporter allure-cypress
+
+  test:api:
+    desc: "Run API tests (cy.request-based)"
+    cmds:
+      - pnpm exec cypress run --spec "cypress/e2e/api/**/*.cy.ts" --reporter allure-cypress
+
+  test:a11y:
+    desc: "Run Accessibility tests (cypress-axe)"
+    cmds:
+      - pnpm exec cypress run --spec "cypress/e2e/accessibility/**/*.cy.ts" --reporter allure-cypress
+
+  test:open:
+    desc: "Open Cypress Test Runner (interactive)"
+    cmds:
+      - pnpm exec cypress open
+
+  test:headed:
+    desc: "Run full suite in headed mode"
+    cmds:
+      - pnpm exec cypress run --headed
+
+  # ── Quality ───────────────────────────────────────────────────────────────
+
+  lint:
+    desc: "Run ESLint (0 warnings policy)"
+    cmds:
+      - pnpm exec eslint . --max-warnings 0
+
+  lint:fix:
+    desc: "Auto-fix ESLint violations"
+    cmds:
+      - pnpm exec eslint . --fix
+
+  lint:types:
+    desc: "TypeScript type-check"
+    cmds:
+      - pnpm exec tsc --noEmit
+
+  audit:
+    desc: "Run violation audit (must return 0)"
+    cmds:
+      - bash scripts/audit_violations.sh
+      - bash scripts/check-sync.sh
+
+  # ── Practice App ──────────────────────────────────────────────────────────
+
+  practice:up:
+    desc: "Start qa-practice-app on localhost:8080"
+    cmds:
+      - docker compose -f qa-practice-app/docker-compose.yml up -d
+      - echo "Practice app running at http://localhost:8080"
+
+  practice:down:
+    desc: "Stop qa-practice-app"
+    cmds:
+      - docker compose -f qa-practice-app/docker-compose.yml down
+
+  # ── Auth ──────────────────────────────────────────────────────────────────
+
+  auth:clear:
+    desc: "Clear Cypress session cache (force fresh login)"
+    cmds:
+      - pnpm exec cypress cache clear
+      - echo "Cypress session cache cleared."
+
+  # ── Allure ────────────────────────────────────────────────────────────────
+
+  allure:open:
+    desc: "Generate and open Allure report"
+    cmds:
+      - allure generate {{.ALLURE_RESULTS}} -o {{.ALLURE_REPORT}} --clean
+      - allure open {{.ALLURE_REPORT}}
+
+  allure:clean:
+    desc: "Remove allure results and report"
+    cmds:
+      - rm -rf {{.ALLURE_RESULTS}} {{.ALLURE_REPORT}}
+
+  # ── Setup ─────────────────────────────────────────────────────────────────
+
+  setup:
+    desc: "Install all dependencies via pnpm"
+    cmds:
+      - pnpm install
+
+  # ── CI convenience ────────────────────────────────────────────────────────
+
+  ci:
+    desc: "Full CI pipeline (lint + types + audit + test)"
+    cmds:
+      - task: lint
+      - task: lint:types
+      - task: audit
+      - task: test
