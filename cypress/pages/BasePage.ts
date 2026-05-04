@@ -1,29 +1,25 @@
+/**
+ * BasePage — shared navigation helpers for all Cypress Page Objects.
+ * Inheritance capped at 1 level: MyPage extends BasePage (Law 4).
+ * Contains zero assertions — pages return chainables; tests assert (Law 2).
+ * Raw selectors live in the matching locators file only (Law 1).
+ */
 export default class BasePage {
-    baseUrl: string;
+  /**
+   * Optional base URL override for pages that navigate outside the
+   * Cypress-configured baseUrl (e.g. InteractionsPage → the-internet.herokuapp.com).
+   */
+  protected baseUrl?: string;
 
-    constructor() {
-        this.baseUrl = 'https://www.saucedemo.com';
-    }
+  /** Navigate to a path. Prepends baseUrl if set; otherwise uses Cypress baseUrl. */
+  open(path = '/') {
+    cy.visit(this.baseUrl ? `${this.baseUrl}${path}` : path);
+    return this;
+  }
 
-    open(path: string) {
-        cy.visit(this.baseUrl + path);
-    }
-
-    getElement(selector: string) {
-        return cy.get(selector)
-    }
-
-    click(selector: string) {
-        this.getElement(selector).click()
-    }
-
-    type(selector: string, text: string){
-        this.getElement(selector).type(text)
-    }
-
-    getText(selector: string){
-        return this.getElement(selector).then(($el) => {
-            return $el.text()
-        })
-    }
+  /** Navigate to an absolute URL. */
+  goto(url: string) {
+    cy.visit(url);
+    return this;
+  }
 }

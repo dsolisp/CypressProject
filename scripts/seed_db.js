@@ -1,4 +1,5 @@
-const sqlite3 = require("sqlite3").verbose();
+import sqlite3pkg from 'sqlite3';
+const sqlite3 = sqlite3pkg.verbose();
 const db = new sqlite3.Database("app.db")
 
 db.serialize(() => {
