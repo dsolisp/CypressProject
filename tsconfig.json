@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "lib": ["es5", "dom"],
-    "types": ["cypress", "node", "cypress-axe"],
+    "types": ["cypress"],
     "module": "esnext",
     "strict": true,
     "skipLibCheck": true,
