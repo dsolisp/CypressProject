@@ -17,7 +17,7 @@ import { UserBuilder } from '../utils/builders/user.builder';
  */
 describe('Hybrid DB Testing Patterns @db', () => {
   before(() => {
-    cy.exec('node scripts/seed_db.js');
+    cy.task('seedDb');
   });
 
   // ── Example 1: Seed → Login (Precondition) ──────────────────────────

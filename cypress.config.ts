@@ -1,7 +1,10 @@
 import { defineConfig } from 'cypress';
 import sqlite3 from 'sqlite3';
+import path from 'path';
 import getCompareSnapshotsPlugin from 'cypress-image-diff-js/plugin';
 import { PATHS, TIMEOUTS } from './cypress/support/constants';
+import { configureTracing, tracer } from './scripts/otel';
+import { seed } from './scripts/seed_db.js';
 
 const db = sqlite3.verbose();
 
@@ -30,10 +33,51 @@ export default defineConfig({
     testIsolation: true,
 
     setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) {
+      configureTracing('CypressProject');
+      const runTracer = tracer();
+      let runSpan: ReturnType<typeof runTracer.startSpan> | null = null;
+
+      on('before:run', (details) => {
+        runSpan = runTracer.startSpan('cypress.run', {
+          attributes: {
+            'cypress.browser': (details as any)?.browser?.name ?? '',
+            'cypress.specs': Array.isArray((details as any)?.specs) ? (details as any).specs.length : 0,
+          },
+        });
+        const ctx = runSpan.spanContext();
+        if (ctx?.traceId) {
+          // Surface trace id for linking in reports.
+          // eslint-disable-next-line no-console
+          console.log(`[otel] trace_id=${ctx.traceId}`);
+          config.env.OTEL_TRACE_ID = ctx.traceId;
+        }
+      });
+
+      on('after:run', () => {
+        if (runSpan) runSpan.end();
+        runSpan = null;
+      });
+
+      // Hermetic DB: generate a unique sqlite file per Cypress spec run and pass to tasks.
+      // NOTE: This isolates across parallel CI nodes; per-test isolation can be layered later.
+      const runDbPath =
+        config.env.DB_PATH ??
+        path.join(config.projectRoot, `test-results/db/${Date.now()}-${Math.random().toString(16).slice(2)}.db`);
+      config.env.DB_PATH = runDbPath;
+
       on('task', {
+        seedDb: async () => {
+          const database = new db.Database(config.env.DB_PATH);
+          try {
+            await seed(database);
+            return true;
+          } finally {
+            database.close();
+          }
+        },
         queryDb: (query: string) => {
           return new Promise((resolve, reject) => {
-            const database = new db.Database(PATHS.DB);
+            const database = new db.Database(config.env.DB_PATH);
             database.all(query, [], (err: Error | null, rows: unknown[]) => {
               if (err) reject(err);
               resolve(rows);

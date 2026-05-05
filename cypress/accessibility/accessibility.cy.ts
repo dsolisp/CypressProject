@@ -1,13 +1,12 @@
 import LoginPage from '../pages/sauce/login.page';
 import InventoryPage from '../pages/sauce/inventory.page';
+import { URLS } from '../support/constants';
 
 describe('Accessibility Tests', () => {
-  describe('Bing Accessibility', () => {
+  describe('Homepage Accessibility', () => {
     it('should not have critical accessibility violations on homepage', () => {
-      cy.visit('https://www.bing.com');
+      cy.visit(URLS.SAUCE_DEMO);
       cy.injectAxe();
-      // We use skipFailures: true to not immediately fail, then assert later
-      // But for simplicity in Cypress we can just check wcag2a and allow some failures
       cy.checkA11y(null, {
         runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
       }, (violations) => {
@@ -15,10 +14,10 @@ describe('Accessibility Tests', () => {
       }, true);
     });
 
-    it('should have accessible search form', () => {
-      cy.visit('https://www.bing.com');
+    it('should have accessible login form labels', () => {
+      cy.visit(URLS.SAUCE_DEMO);
       cy.injectAxe();
-      cy.checkA11y('#sb_form', {
+      cy.checkA11y('#login_button_container', {
         runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] },
       }, (violations) => {
         const labelViolations = violations.filter(v => v.id.includes('label') || v.id.includes('aria'));
@@ -29,7 +28,7 @@ describe('Accessibility Tests', () => {
 
   describe('SauceDemo Accessibility', () => {
     it('should have accessible login form', () => {
-      cy.visit('https://www.saucedemo.com');
+      cy.visit(URLS.SAUCE_DEMO);
       cy.injectAxe();
       cy.checkA11y('#login_button_container', {
         runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] },
@@ -53,7 +52,7 @@ describe('Accessibility Tests', () => {
 
   describe('Color Contrast', () => {
     it('should have sufficient color contrast on homepage', () => {
-      cy.visit('https://www.bing.com');
+      cy.visit(URLS.SAUCE_DEMO);
       cy.injectAxe();
       cy.checkA11y(null, {
         runOnly: { type: 'rule', values: ['color-contrast'] },
@@ -65,7 +64,7 @@ describe('Accessibility Tests', () => {
 
   describe('Keyboard Navigation', () => {
     it('should be navigable with keyboard', () => {
-      cy.visit('https://www.bing.com');
+      cy.visit(URLS.SAUCE_DEMO);
       cy.get('body').focus();
       // Using tab simulation
       cy.focused().type('{tab}', { force: true });

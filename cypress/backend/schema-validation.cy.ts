@@ -1,15 +1,15 @@
 import { URLS } from '../support/constants';
 
 /**
- * API Contract Tests (Cypress)
- * 
- * Validates API schemas and contract stability using JSON Schema validation.
+ * API Schema Validation Tests (Cypress)
+ *
+ * Formerly: contract.cy.ts
  * Equivalent to:
- * - Playwright: tests/api/contract.spec.ts
- * - Python: tests/api/test_contract.py
+ * - Playwright: tests/backend/schema-validation.spec.ts
+ * - Python: tests/backend/test_schema_validation.py
  */
 
-describe('API Contract Tests @api @contract', () => {
+describe('API Schema Validation @api @contract', () => {
   const SWAPI_BASE = URLS.SWAPI;
 
   it('should match expected schema for /people endpoint', () => {
@@ -34,7 +34,7 @@ describe('API Contract Tests @api @contract', () => {
     });
   });
 
-  it('should validate films endpoint contract', () => {
+  it('should validate films endpoint schema', () => {
     cy.request(`${SWAPI_BASE}/films/1/`).then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body).to.have.property('title');
@@ -54,7 +54,7 @@ describe('API Contract Tests @api @contract', () => {
     });
   });
 
-  it('should validate planets endpoint contract', () => {
+  it('should validate planets endpoint schema', () => {
     cy.request(`${SWAPI_BASE}/planets/1/`).then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body).to.have.property('name');
@@ -71,8 +71,7 @@ describe('API Contract Tests @api @contract', () => {
     });
   });
 
-  it('should ensure contract stability — no unexpected fields removed', () => {
-    // Regression protection: if SWAPI changes its contract, this test will catch it
+  it('should ensure schema stability — required fields remain', () => {
     cy.request(`${SWAPI_BASE}/people/1/`).then((response) => {
       const requiredFields = [
         'name',
@@ -103,3 +102,4 @@ describe('API Contract Tests @api @contract', () => {
     });
   });
 });
+

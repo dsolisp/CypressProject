@@ -1,6 +1,8 @@
+import { URLS } from '../support/constants';
+
 describe('Lighthouse-Style Accessibility Audits', () => {
-  it('should have good accessibility score on Bing homepage', () => {
-    cy.visit('https://www.bing.com');
+  it('should have good accessibility score on homepage', () => {
+    cy.visit(URLS.SAUCE_DEMO);
     cy.injectAxe();
     cy.checkA11y(null, {
       runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] }
@@ -13,7 +15,7 @@ describe('Lighthouse-Style Accessibility Audits', () => {
   });
 
   it('should have good accessibility score on SauceDemo login', () => {
-    cy.visit('https://www.saucedemo.com');
+    cy.visit(URLS.SAUCE_DEMO);
     cy.injectAxe();
     cy.checkA11y(null, {
       runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] }
@@ -25,7 +27,7 @@ describe('Lighthouse-Style Accessibility Audits', () => {
   });
 
   it('should report accessibility issues in detail', () => {
-    cy.visit('https://www.bing.com');
+    cy.visit(URLS.SAUCE_DEMO);
     cy.injectAxe();
     cy.checkA11y(null, null, (violations) => {
       const ariaViolations = violations.filter(v => v.id.startsWith('aria'));
@@ -37,7 +39,7 @@ describe('Lighthouse-Style Accessibility Audits', () => {
   });
 
   it('should have no critical accessibility violations', () => {
-    cy.visit('https://www.bing.com');
+    cy.visit(URLS.SAUCE_DEMO);
     cy.injectAxe();
     cy.checkA11y(null, null, (violations) => {
       const critical = violations.filter(v => v.impact === 'critical');

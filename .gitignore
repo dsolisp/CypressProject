@@ -28,6 +28,9 @@ cypress/snapshots/diff/
 allure-results/
 allure-report/
 
+# ── Pact contracts (generated locally / in CI; published to broker) ───────────
+pacts/
+
 # ── Auth state (ADR-009) ──────────────────────────────────────────────────────
 .auth/
 

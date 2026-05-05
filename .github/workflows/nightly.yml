@@ -10,9 +10,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  nightly-tests:
+  unit-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 15
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       HEADLESS: true
@@ -36,61 +36,56 @@ jobs:
         
       - name: Run unit tests
         run: pnpm run test:unit
-        
-      - name: Run Sauce UI tests
-        continue-on-error: true
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          command: pnpm exec cypress run --spec 'cypress/ui/sauce/**/*.cy.ts'
 
-      - name: Run Practice UI tests
-        continue-on-error: true
-        uses: cypress-io/github-action@v6
+  e2e-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    needs: [unit-tests]
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [sauce, practice, backend, visual, accessibility, performance, bdd]
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      HEADLESS: true
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
         with:
-          install: false
-          command: pnpm exec cypress run --spec 'cypress/ui/practice/**/*.cy.ts'
+          version: 9
+          
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Run Backend tests
+      - name: Run Cypress suite (${{ matrix.suite }})
         continue-on-error: true
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          command: pnpm exec cypress run --spec 'cypress/backend/**/*.cy.ts'
-
-      - name: Run Visual tests
-        continue-on-error: true
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          command: pnpm exec cypress run --spec 'cypress/ui/visual/**/*.cy.ts'
-
-      - name: Run Accessibility tests
-        continue-on-error: true
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          command: pnpm exec cypress run --spec 'cypress/accessibility/**/*.cy.ts'
-
-      - name: Run Performance tests
-        continue-on-error: true
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          command: pnpm exec cypress run --spec 'cypress/performance/**/*.cy.ts'
-
-      - name: Run BDD tests
-        continue-on-error: true
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          command: pnpm exec cypress run --spec 'cypress/integration/**/*.feature'
+        run: |
+          case "${{ matrix.suite }}" in
+            sauce)         SPEC="cypress/ui/sauce/**/*.cy.ts" ;;
+            practice)      SPEC="cypress/ui/practice/**/*.cy.ts" ;;
+            backend)       SPEC="cypress/backend/**/*.cy.ts" ;;
+            visual)        SPEC="cypress/ui/visual/**/*.cy.ts" ;;
+            accessibility) SPEC="cypress/accessibility/**/*.cy.ts" ;;
+            performance)   SPEC="cypress/performance/**/*.cy.ts" ;;
+            bdd)           SPEC="cypress/integration/**/*.feature" ;;
+            *) echo "Unknown suite: ${{ matrix.suite }}"; exit 2 ;;
+          esac
+          pnpm exec cypress run --spec "$SPEC"
 
       - name: Upload Allure results (JSON)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results-${{ github.run_id }}
+          name: allure-results-${{ github.run_id }}-${{ matrix.suite }}
           path: allure-results/
 
       - name: Generate Allure Report
@@ -106,10 +101,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
         run: |
-          aws s3 sync allure-report/ s3://qa-portfolio-allure/${{ github.event.repository.name }}/${{ github.run_id }}/ --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          aws s3 sync allure-report/ s3://qa-portfolio-allure/${{ github.event.repository.name }}/${{ github.run_id }}/${{ matrix.suite }}/ --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
 
       - name: Add Report URL to Summary
         if: always()
         run: |
-          echo "### 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
-          echo "[View Full Report](${{ secrets.R2_PUBLIC_URL }}/${{ github.event.repository.name }}/${{ github.run_id }}/index.html)" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Allure Report — ${{ matrix.suite }}" >> $GITHUB_STEP_SUMMARY
+          echo "[View Full Report](${{ secrets.R2_PUBLIC_URL }}/${{ github.event.repository.name }}/${{ github.run_id }}/${{ matrix.suite }}/index.html)" >> $GITHUB_STEP_SUMMARY

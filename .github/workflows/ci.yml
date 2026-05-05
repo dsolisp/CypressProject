@@ -48,6 +48,9 @@ jobs:
         
       - name: Audit (Violations Script)
         run: bash scripts/audit_violations.sh
+
+      - name: Audit (Static Waits)
+        run: bash scripts/audit_static_waits.sh
         
       - name: Run unit tests
         run: pnpm run test:unit
