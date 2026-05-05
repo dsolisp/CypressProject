@@ -1,5 +1,5 @@
+import type { Result } from 'axe-core';
 import LoginPage from '../pages/sauce/login.page';
-import InventoryPage from '../pages/sauce/inventory.page';
 import { URLS } from '../support/constants';
 
 describe('Accessibility Tests', () => {
@@ -7,22 +7,37 @@ describe('Accessibility Tests', () => {
     it('should not have critical accessibility violations on homepage', () => {
       cy.visit(URLS.SAUCE_DEMO);
       cy.injectAxe();
-      cy.checkA11y(null, {
-        runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
-      }, (violations) => {
-        expect(violations.length).to.be.lte(10);
-      }, true);
+      cy.checkA11y(
+        undefined,
+        {
+          runOnly: {
+            type: 'tag',
+            values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'],
+          },
+        },
+        (violations: Result[]) => {
+          expect(violations.length).to.be.lte(10);
+        },
+        true
+      );
     });
 
     it('should have accessible login form labels', () => {
       cy.visit(URLS.SAUCE_DEMO);
       cy.injectAxe();
-      cy.checkA11y('#login_button_container', {
-        runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] },
-      }, (violations) => {
-        const labelViolations = violations.filter(v => v.id.includes('label') || v.id.includes('aria'));
-        expect(labelViolations.length).to.be.lte(3);
-      }, true);
+      cy.checkA11y(
+        '#login_button_container',
+        {
+          runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] },
+        },
+        (violations: Result[]) => {
+          const labelViolations = violations.filter(
+            (v: Result) => v.id.includes('label') || v.id.includes('aria')
+          );
+          expect(labelViolations.length).to.be.lte(3);
+        },
+        true
+      );
     });
   });
 
@@ -30,11 +45,16 @@ describe('Accessibility Tests', () => {
     it('should have accessible login form', () => {
       cy.visit(URLS.SAUCE_DEMO);
       cy.injectAxe();
-      cy.checkA11y('#login_button_container', {
-        runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] },
-      }, (violations) => {
-        expect(violations.length).to.be.lte(5);
-      }, true);
+      cy.checkA11y(
+        '#login_button_container',
+        {
+          runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] },
+        },
+        (violations: Result[]) => {
+          expect(violations.length).to.be.lte(5);
+        },
+        true
+      );
     });
 
     it('should have accessible inventory page', () => {
@@ -42,11 +62,16 @@ describe('Accessibility Tests', () => {
       LoginPage.login('standard_user', 'secret_sauce');
       cy.url().should('include', '/inventory.html');
       cy.injectAxe();
-      cy.checkA11y('.inventory_container', {
-        runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] },
-      }, (violations) => {
-        expect(violations.length).to.be.lte(10);
-      }, true);
+      cy.checkA11y(
+        '.inventory_container',
+        {
+          runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] },
+        },
+        (violations: Result[]) => {
+          expect(violations.length).to.be.lte(10);
+        },
+        true
+      );
     });
   });
 
@@ -54,11 +79,16 @@ describe('Accessibility Tests', () => {
     it('should have sufficient color contrast on homepage', () => {
       cy.visit(URLS.SAUCE_DEMO);
       cy.injectAxe();
-      cy.checkA11y(null, {
-        runOnly: { type: 'rule', values: ['color-contrast'] },
-      }, (violations) => {
-        expect(violations).to.exist;
-      }, true);
+      cy.checkA11y(
+        undefined,
+        {
+          runOnly: { type: 'rule', values: ['color-contrast'] },
+        },
+        (violations: Result[]) => {
+          expect(violations).to.exist;
+        },
+        true
+      );
     });
   });
 
@@ -70,7 +100,9 @@ describe('Accessibility Tests', () => {
       cy.focused().type('{tab}', { force: true });
       cy.focused().type('{tab}', { force: true });
       cy.focused().then(($el) => {
-        expect(['INPUT', 'TEXTAREA', 'BUTTON', 'A', 'DIV', 'BODY']).to.include($el.prop('tagName'));
+        expect(['INPUT', 'TEXTAREA', 'BUTTON', 'A', 'DIV', 'BODY']).to.include(
+          $el.prop('tagName')
+        );
       });
     });
   });

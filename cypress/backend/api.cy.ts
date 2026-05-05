@@ -79,10 +79,24 @@ describe('SWAPI — Comprehensive API Tests @api', () => {
     cy.request(`${BASE_URL}/starships/9`).then((res) => {
       expect(res.status).to.eq(200);
       expect(res.body as SwapiStarship).to.have.all.keys(
-        'name', 'model', 'manufacturer', 'cost_in_credits', 'length',
-        'max_atmosphering_speed', 'crew', 'passengers', 'cargo_capacity',
-        'consumables', 'hyperdrive_rating', 'MGLT', 'starship_class',
-        'pilots', 'films', 'created', 'edited', 'url'
+        'name',
+        'model',
+        'manufacturer',
+        'cost_in_credits',
+        'length',
+        'max_atmosphering_speed',
+        'crew',
+        'passengers',
+        'cargo_capacity',
+        'consumables',
+        'hyperdrive_rating',
+        'MGLT',
+        'starship_class',
+        'pilots',
+        'films',
+        'created',
+        'edited',
+        'url'
       );
     });
   });
@@ -97,14 +111,20 @@ describe('SWAPI — Comprehensive API Tests @api', () => {
 
   // ── Negative Tests ──────────────────────────────────────────────────
   it('Example 6: Verifies 404 for non-existent resource ID', () => {
-    cy.request({ url: `${BASE_URL}/people/99999`, failOnStatusCode: false }).then((res) => {
+    cy.request({
+      url: `${BASE_URL}/people/99999`,
+      failOnStatusCode: false,
+    }).then((res) => {
       expect(res.status).to.eq(404);
       expect(res.body.detail).to.eq('Not found');
     });
   });
 
   it('Example 7: Verifies 404 for invalid endpoint', () => {
-    cy.request({ url: `${BASE_URL}/invalid_endpoint`, failOnStatusCode: false }).then((res) => {
+    cy.request({
+      url: `${BASE_URL}/invalid_endpoint`,
+      failOnStatusCode: false,
+    }).then((res) => {
       expect(res.status).to.eq(404);
     });
   });

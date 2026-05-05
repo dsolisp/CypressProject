@@ -50,7 +50,10 @@ function computeFromAllureResults(allureDir) {
   return { total, passed, failed, broken, skipped, duration_ms: durationMs };
 }
 
-const repo = process.env.REPO_NAME || process.env.GITHUB_REPOSITORY?.split('/').pop() || 'unknown';
+const repo =
+  process.env.REPO_NAME ||
+  process.env.GITHUB_REPOSITORY?.split('/').pop() ||
+  'unknown';
 const runId = process.env.GITHUB_RUN_ID || 'local';
 const timestamp = new Date().toISOString();
 const suite = process.env.TEST_SUITE || 'all';
@@ -68,4 +71,3 @@ const out = {
 
 fs.writeFileSync('summary.json', JSON.stringify(out, null, 2));
 console.log(`✅ Wrote summary.json (${repo} run ${runId})`);
-

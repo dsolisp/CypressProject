@@ -19,21 +19,21 @@ jobs:
       CI: 'true'
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9
-          
+
       - name: Use Node.js 24.x
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: 'pnpm'
-          
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        
+
       - name: Run unit tests
         run: pnpm run test:unit
 
@@ -44,25 +44,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [sauce, practice, backend, visual, accessibility, performance, bdd]
+        suite:
+          [sauce, practice, backend, visual, accessibility, performance, bdd]
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       HEADLESS: true
       CI: 'true'
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9
-          
+
       - name: Use Node.js 24.x
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: 'pnpm'
-          
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 

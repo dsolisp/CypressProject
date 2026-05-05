@@ -11,7 +11,6 @@ import VisualHelper from '../../utils/visual.helper';
  * called HERE in the spec so the intent is visible to every reader.
  */
 describe('Visual Regression Testing @visual', () => {
-
   // ── Login Page visual states ────────────────────────────────────────
   describe('Login Page — Visual States', () => {
     beforeEach(() => {
@@ -20,7 +19,10 @@ describe('Visual Regression Testing @visual', () => {
 
     it('should match baseline for default login page', () => {
       LoginPage.getLoginButton().should('be.visible');
-      cy.compareSnapshot('login-page-default-state', VisualHelper.viewportConfig);
+      cy.compareSnapshot(
+        'login-page-default-state',
+        VisualHelper.viewportConfig
+      );
     });
 
     it('should match baseline for login error state', () => {
@@ -30,7 +32,10 @@ describe('Visual Regression Testing @visual', () => {
     });
 
     it('should match baseline for login form component only', () => {
-      LoginPage.getLoginWrapper().compareSnapshot('login-form-component', VisualHelper.viewportConfig);
+      LoginPage.getLoginWrapper().compareSnapshot(
+        'login-form-component',
+        VisualHelper.viewportConfig
+      );
     });
   });
 
@@ -47,7 +52,10 @@ describe('Visual Regression Testing @visual', () => {
     });
 
     it('should match baseline ignoring cart badge (dynamic content)', () => {
-      cy.compareSnapshot('inventory-page-clean', VisualHelper.withBlackout(['.shopping_cart_badge']));
+      cy.compareSnapshot(
+        'inventory-page-clean',
+        VisualHelper.withBlackout(['.shopping_cart_badge'])
+      );
     });
   });
 
@@ -81,11 +89,17 @@ describe('Visual Regression Testing @visual', () => {
     });
 
     it('should allow minor differences with 10% threshold', () => {
-      cy.compareSnapshot('inventory-flexible-comparison', VisualHelper.withThreshold(0.10));
+      cy.compareSnapshot(
+        'inventory-flexible-comparison',
+        VisualHelper.withThreshold(0.1)
+      );
     });
 
     it('should detect even tiny differences with strict 1% threshold', () => {
-      cy.compareSnapshot('inventory-strict-comparison', VisualHelper.withThreshold(0.01));
+      cy.compareSnapshot(
+        'inventory-strict-comparison',
+        VisualHelper.withThreshold(0.01)
+      );
     });
   });
 
@@ -96,15 +110,24 @@ describe('Visual Regression Testing @visual', () => {
     });
 
     it('should match baseline for login button component', () => {
-      LoginPage.getLoginButton().compareSnapshot('login-button-component', VisualHelper.viewportConfig);
+      LoginPage.getLoginButton().compareSnapshot(
+        'login-button-component',
+        VisualHelper.viewportConfig
+      );
     });
 
     it('should match baseline for username input field', () => {
-      LoginPage.getUsernameInput().compareSnapshot('username-input-component', VisualHelper.viewportConfig);
+      LoginPage.getUsernameInput().compareSnapshot(
+        'username-input-component',
+        VisualHelper.viewportConfig
+      );
     });
 
     it('should match baseline for login logo', () => {
-      LoginPage.getLoginLogo().compareSnapshot('login-logo-component', VisualHelper.viewportConfig);
+      LoginPage.getLoginLogo().compareSnapshot(
+        'login-logo-component',
+        VisualHelper.viewportConfig
+      );
     });
   });
 });

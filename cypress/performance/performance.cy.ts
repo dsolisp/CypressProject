@@ -27,30 +27,35 @@ describe('Performance Tests', () => {
       cy.visit(URLS.SAUCE_DEMO, {
         onBeforeLoad(win) {
           win.performance.mark('start');
-        }
+        },
       });
-      cy.window().then((win) => {
-        return new Cypress.Promise((resolve) => {
-          new win.PerformanceObserver((list) => {
-            const entries = list.getEntries();
-            const lastEntry = entries[entries.length - 1];
-            resolve(lastEntry.startTime);
-          }).observe({ type: 'largest-contentful-paint', buffered: true });
-          setTimeout(() => resolve(-1), 5000);
+      cy.window()
+        .then((win) => {
+          return new Cypress.Promise((resolve) => {
+            new win.PerformanceObserver((list) => {
+              const entries = list.getEntries();
+              const lastEntry = entries[entries.length - 1];
+              resolve(lastEntry.startTime);
+            }).observe({ type: 'largest-contentful-paint', buffered: true });
+            setTimeout(() => resolve(-1), 5000);
+          });
+        })
+        .then((lcp: unknown) => {
+          const ms = typeof lcp === 'number' ? lcp : Number(lcp);
+          cy.log(`LCP: ${ms}ms`);
+          if (ms > 0) {
+            expect(ms).to.be.lessThan(2500);
+          }
         });
-      }).then((lcp) => {
-        cy.log(`LCP: ${lcp}ms`);
-        if (lcp > 0) {
-          expect(lcp).to.be.lessThan(2500);
-        }
-      });
     });
 
     it('should measure First Contentful Paint (FCP)', () => {
       cy.visit(URLS.SAUCE_DEMO);
       cy.window().then((win) => {
         const paintEntries = win.performance.getEntriesByType('paint');
-        const fcpEntry = paintEntries.find((e: any) => e.name === 'first-contentful-paint');
+        const fcpEntry = paintEntries.find(
+          (e: PerformanceEntry) => e.name === 'first-contentful-paint'
+        );
         const fcp = fcpEntry ? fcpEntry.startTime : -1;
         cy.log(`FCP: ${fcp}ms`);
         if (fcp > 0) {
@@ -62,11 +67,13 @@ describe('Performance Tests', () => {
     it('should measure Time to Interactive approximation', () => {
       const startTime = Date.now();
       LoginPage.openLoginPage();
-      cy.get('#login-button').should('be.visible').then(() => {
-        const tti = Date.now() - startTime;
-        cy.log(`Time to Interactive (approx): ${tti}ms`);
-        expect(tti).to.be.lessThan(5000);
-      });
+      cy.get('#login-button')
+        .should('be.visible')
+        .then(() => {
+          const tti = Date.now() - startTime;
+          cy.log(`Time to Interactive (approx): ${tti}ms`);
+          expect(tti).to.be.lessThan(5000);
+        });
     });
   });
 
@@ -85,14 +92,21 @@ describe('Performance Tests', () => {
 
     it('concurrent API requests should be fast', () => {
       const startTime = Date.now();
-      const endpoints = ['/posts/1', '/posts/2', '/posts/3', '/users/1', '/comments?postId=1'];
+      const endpoints = [
+        '/posts/1',
+        '/posts/2',
+        '/posts/3',
+        '/users/1',
+        '/comments?postId=1',
+      ];
 
-      const promises = endpoints.map(ep => cy.request(`${apiBaseUrl}${ep}`));
+      const promises = endpoints.map((ep) => cy.request(`${apiBaseUrl}${ep}`));
 
       Cypress.Promise.all(promises).then((responses) => {
         const totalTime = Date.now() - startTime;
         cy.log(`Concurrent requests time: ${totalTime}ms`);
-        responses.forEach((r: any) => expect(r.status).to.eq(200));
+        const rows = responses as unknown as Cypress.Response<unknown>[];
+        rows.forEach((r) => expect(r.status).to.eq(200));
         expect(totalTime).to.be.lessThan(3000);
       });
     });
@@ -102,8 +116,13 @@ describe('Performance Tests', () => {
     it('should not have excessive resource size', () => {
       cy.visit(URLS.SAUCE_DEMO);
       cy.window().then((win) => {
-        const resources = win.performance.getEntriesByType('resource');
-        const totalSize = resources.reduce((sum, r: any) => sum + (r.transferSize || 0), 0);
+        const resources = win.performance.getEntriesByType(
+          'resource'
+        ) as PerformanceResourceTiming[];
+        const totalSize = resources.reduce(
+          (sum: number, r) => sum + (r.transferSize || 0),
+          0
+        );
         const totalSizeKB = Math.round(totalSize / 1024);
         cy.log(`Total resource size: ${totalSizeKB}KB`);
         expect(totalSize).to.be.lessThan(2 * 1024 * 1024);

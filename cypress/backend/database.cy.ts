@@ -44,11 +44,12 @@ describe('Hybrid DB Testing Patterns @db', () => {
     LoginPage.login(user.username, user.password);
     cy.url().should('include', '/inventory.html');
 
-    cy.dbQuery(`SELECT * FROM users WHERE username="${user.username}"`)
-      .then((rows: unknown[]) => {
+    cy.dbQuery(`SELECT * FROM users WHERE username="${user.username}"`).then(
+      (rows: unknown[]) => {
         expect(rows).to.have.length(1);
         expect((rows[0] as { role: string }).role).to.exist;
-      });
+      }
+    );
   });
 
   // ── Example 3: DB Data → UI Assertion (Data-Driven) ─────────────────
@@ -58,28 +59,30 @@ describe('Hybrid DB Testing Patterns @db', () => {
     LoginPage.login(user.username, user.password);
     cy.url().should('include', '/inventory.html');
 
-    cy.dbQuery('SELECT price FROM products WHERE name="Sauce Labs Backpack"')
-      .then((rows: unknown[]) => {
-        const dbPrice = (rows[0] as { price: string }).price;
-        InventoryPage.getItemPrices()
-          .first()
-          .invoke('text')
-          .should('contain', String(dbPrice));
-      });
+    cy.dbQuery(
+      'SELECT price FROM products WHERE name="Sauce Labs Backpack"'
+    ).then((rows: unknown[]) => {
+      const dbPrice = (rows[0] as { price: string }).price;
+      InventoryPage.getItemPrices()
+        .first()
+        .invoke('text')
+        .should('contain', String(dbPrice));
+    });
   });
 
   // ── Example 4: Data-Driven Login (Iterate from DB) ───────────────────
   it('Example 4: Logs in with every customer-role user from DB', () => {
     const password = new UserBuilder().standard().build().password;
-    cy.dbQuery('SELECT * FROM users WHERE role="customer" AND username != "db_user"')
-      .then((users: unknown[]) => {
-        (users as { username: string }[]).forEach((user) => {
-          LoginPage.openLoginPage();
-          LoginPage.login(user.username, password);
-          cy.url().should('include', '/inventory.html');
-          cy.headerLogout();
-        });
+    cy.dbQuery(
+      'SELECT * FROM users WHERE role="customer" AND username != "db_user"'
+    ).then((users: unknown[]) => {
+      (users as { username: string }[]).forEach((user) => {
+        LoginPage.openLoginPage();
+        LoginPage.login(user.username, password);
+        cy.url().should('include', '/inventory.html');
+        cy.headerLogout();
       });
+    });
   });
 
   // ── Example 5: CRUD Lifecycle ─────────────────────────────────────────
@@ -87,22 +90,28 @@ describe('Hybrid DB Testing Patterns @db', () => {
     const newUserId = 999;
 
     // Create
-    cy.dbQuery(`INSERT OR REPLACE INTO users VALUES (${newUserId}, "test_cleanup_user", "tester")`);
+    cy.dbQuery(
+      `INSERT OR REPLACE INTO users VALUES (${newUserId}, "test_cleanup_user", "tester")`
+    );
 
     // Read
-    cy.dbQuery(`SELECT * FROM users WHERE id=${newUserId}`)
-      .then((rows: unknown[]) => {
+    cy.dbQuery(`SELECT * FROM users WHERE id=${newUserId}`).then(
+      (rows: unknown[]) => {
         expect(rows).to.have.length(1);
-        expect((rows[0] as { username: string }).username).to.eq('test_cleanup_user');
-      });
+        expect((rows[0] as { username: string }).username).to.eq(
+          'test_cleanup_user'
+        );
+      }
+    );
 
     // Delete
     cy.dbQuery(`DELETE FROM users WHERE id=${newUserId}`);
 
     // Verify deletion
-    cy.dbQuery(`SELECT * FROM users WHERE id=${newUserId}`)
-      .then((rows: unknown[]) => {
+    cy.dbQuery(`SELECT * FROM users WHERE id=${newUserId}`).then(
+      (rows: unknown[]) => {
         expect(rows).to.be.empty;
-      });
+      }
+    );
   });
 });

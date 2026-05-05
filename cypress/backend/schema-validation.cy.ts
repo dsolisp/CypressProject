@@ -102,4 +102,3 @@ describe('API Schema Validation @api @contract', () => {
     });
   });
 });
-

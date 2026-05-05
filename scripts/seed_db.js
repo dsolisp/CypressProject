@@ -19,11 +19,23 @@ export async function seed(db) {
   await run(db, 'DROP TABLE IF EXISTS products');
 
   await run(db, 'CREATE TABLE users (id INT, username TEXT, role TEXT)');
-  await run(db, 'INSERT INTO users VALUES (?, ?, ?)', [1, 'standard_user', 'customer']);
-  await run(db, 'INSERT INTO users VALUES (?, ?, ?)', [2, 'admin_user', 'admin']);
+  await run(db, 'INSERT INTO users VALUES (?, ?, ?)', [
+    1,
+    'standard_user',
+    'customer',
+  ]);
+  await run(db, 'INSERT INTO users VALUES (?, ?, ?)', [
+    2,
+    'admin_user',
+    'admin',
+  ]);
 
   await run(db, 'CREATE TABLE products (id INT, name TEXT, price REAL)');
-  await run(db, 'INSERT INTO products VALUES (?, ?, ?)', [1, 'Sauce Labs Backpack', 29.99]);
+  await run(db, 'INSERT INTO products VALUES (?, ?, ?)', [
+    1,
+    'Sauce Labs Backpack',
+    29.99,
+  ]);
 }
 
 export async function seedSqliteFile(dbPath) {
@@ -39,7 +51,6 @@ export async function seedSqliteFile(dbPath) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const dbPath = process.env.DB_PATH ?? 'app.db';
   seedSqliteFile(dbPath).then(() => {
-    // eslint-disable-next-line no-console
     console.log('✅ Database Seeded.');
   });
 }

@@ -38,7 +38,9 @@ describe('Practice App — Iframes @practice', () => {
 
     it('should submit the inner form and show the submitted result', () => {
       IframesPage.submitInnerForm('Alice', 'alice@example.com');
-      IframesPage.getInnerResult().should('contain', 'Alice').and('contain', 'alice@example.com');
+      IframesPage.getInnerResult()
+        .should('contain', 'Alice')
+        .and('contain', 'alice@example.com');
     });
 
     it('should show the result with no name when name is omitted', () => {

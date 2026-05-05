@@ -20,24 +20,32 @@ describe('SauceDemo — Login @auth @smoke', () => {
   it('should show error for locked out user', () => {
     const user = new UserBuilder().locked().build();
     LoginPage.login(user.username, user.password);
-    LoginPage.getErrorMessage().should('be.visible').and('contain', 'locked out');
+    LoginPage.getErrorMessage()
+      .should('be.visible')
+      .and('contain', 'locked out');
   });
 
   it('should show error for invalid credentials', () => {
     const user = new UserBuilder().invalid().build();
     LoginPage.login(user.username, user.password);
-    LoginPage.getErrorMessage().should('be.visible').and('contain', 'do not match');
+    LoginPage.getErrorMessage()
+      .should('be.visible')
+      .and('contain', 'do not match');
   });
 
   it('should show error for empty username', () => {
     LoginPage.login('', 'secret_sauce');
-    LoginPage.getErrorMessage().should('be.visible').and('contain', 'Username is required');
+    LoginPage.getErrorMessage()
+      .should('be.visible')
+      .and('contain', 'Username is required');
   });
 
   it('should show error for empty password', () => {
     const user = new UserBuilder().standard().build();
     LoginPage.login(user.username, '');
-    LoginPage.getErrorMessage().should('be.visible').and('contain', 'Password is required');
+    LoginPage.getErrorMessage()
+      .should('be.visible')
+      .and('contain', 'Password is required');
   });
 });
 
@@ -78,7 +86,9 @@ describe('SauceDemo — Inventory @cart @regression', () => {
   it('should sort products by price low to high', () => {
     InventoryPage.sortBy('lohi');
     InventoryPage.getItemPrices().then(($els) => {
-      const prices = Array.from($els).map((el) => parseFloat((el.textContent ?? '').replace('$', '')));
+      const prices = Array.from($els).map((el) =>
+        parseFloat((el.textContent ?? '').replace('$', ''))
+      );
       const sorted = [...prices].sort((a, b) => a - b);
       expect(prices).to.deep.equal(sorted);
     });

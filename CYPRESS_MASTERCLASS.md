@@ -21,6 +21,7 @@ A robust framework requires a pristine environment. We do not just "install Cypr
 **🎯 ACTION**: Verify you have Node.js installed.
 
 **▶️ Run in Terminal**:
+
 ```bash
 node -v
 ```
@@ -36,6 +37,7 @@ node -v
 **🎯 ACTION**: Create a new directory for your Cypress project.
 
 **▶️ Run in Terminal**:
+
 ```bash
 mkdir CypressMasterclass
 cd CypressMasterclass
@@ -50,6 +52,7 @@ cd CypressMasterclass
 **🎯 ACTION**: Create a `package.json` file.
 
 **▶️ Run in Terminal** (inside `CypressMasterclass/`):
+
 ```bash
 npm init -y
 ```
@@ -67,36 +70,42 @@ npm init -y
 **💡 What are these libraries?**
 
 **Cypress**: The core testing framework
+
 - Modern end-to-end testing tool for web applications
 - Runs tests in real browsers
 - Has automatic waiting, time-travel debugging, and screenshot/video recording
 - 📚 Docs: https://docs.cypress.io
 
 **TypeScript**: Adds type safety to JavaScript
+
 - Catches errors before runtime
 - Better autocomplete/IntelliSense in your editor
 - Optional but highly recommended for large projects
 - 📚 Docs: https://www.typescriptlang.org
 
 **ESLint**: Code quality checker
+
 - Finds problematic patterns in your code
 - Enforces consistent coding style
 - Catches bugs before they happen
 - 📚 Docs: https://eslint.org
 
 **Prettier**: Code formatter
+
 - Automatically formats your code
 - Ensures consistent style across team
 - Integrates with most editors
 - 📚 Docs: https://prettier.io
 
 **@faker-js/faker**: Test data generator
+
 - Creates realistic fake data (names, emails, addresses, etc.)
 - Useful for creating dynamic test data
 - Helps find edge cases with randomized inputs
 - 📚 Docs: https://fakerjs.dev
 
 **sqlite3**: Lightweight database
+
 - File-based SQL database (no server required)
 - Perfect for testing database interactions
 - Used to demonstrate hybrid testing (DB + UI)
@@ -105,6 +114,7 @@ npm init -y
 ---
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev cypress typescript
 npm install --save-dev eslint prettier
@@ -116,12 +126,14 @@ npm install --save-dev @faker-js/faker sqlite3
 **💡 npm commands explained**:
 
 **`npm install --save-dev <package>`**: Install development dependency
+
 - `--save-dev` (or `-D`): Adds to `devDependencies` in package.json
 - Dev dependencies: Only needed for development/testing, not production
 - Alternative: `npm install` (without `--save-dev`) for production dependencies
 - 📚 Docs: https://docs.npmjs.com/cli/v10/commands/npm-install
 
 **`npx <command>`**: Execute package binaries
+
 - Runs commands from locally installed packages
 - Example: `npx cypress open` runs Cypress from node_modules
 - No need to add to package.json scripts
@@ -140,6 +152,7 @@ npm install --save-dev @faker-js/faker sqlite3
 Configuration file for TypeScript that tells the compiler how to process your code.
 
 **Key settings we're using**:
+
 - `target: "es5"` - Compile to ES5 (compatible with older browsers)
 - `types: ["cypress", "node"]` - Enable Cypress and Node.js type definitions
 - `strict: true` - Enable all strict type-checking options
@@ -150,10 +163,12 @@ Configuration file for TypeScript that tells the compiler how to process your co
 ---
 
 **📝 HOW TO CREATE**:
+
 - **Option 1 (VS Code)**: File → New File → Save as `tsconfig.json`
 - **Option 2 (Terminal)**: `touch tsconfig.json` then open in editor
 
 **✂️ Copy This Code Into the File**:
+
 ```json
 {
   "compilerOptions": {
@@ -182,6 +197,7 @@ Configuration file for TypeScript that tells the compiler how to process your co
 ESLint configuration file that defines code quality rules.
 
 **Key settings**:
+
 - `extends: ["eslint:recommended"]` - Uses recommended ESLint rules
 - `env: { browser: true, node: true, es2021: true }` - Defines available globals
 - `parserOptions` - Tells ESLint we're using modern JS/TypeScript
@@ -191,6 +207,7 @@ ESLint configuration file that defines code quality rules.
 ---
 
 **✂️ Copy This Code Into the File**:
+
 ```json
 {
   "extends": ["plugin:cypress/recommended", "prettier"],
@@ -217,6 +234,7 @@ ESLint configuration file that defines code quality rules.
 Prettier configuration file for code formatting preferences.
 
 **Key settings**:
+
 - `singleQuote: true` - Use single quotes instead of double
 - `trailingComma: "es5"` - Add trailing commas where valid in ES5
 - `tabWidth: 2` - Use 2 spaces for indentation
@@ -227,6 +245,7 @@ Prettier configuration file for code formatting preferences.
 ---
 
 **✂️ Copy This Code Into the File**:
+
 ```json
 {
   "semi": true,
@@ -245,11 +264,13 @@ Prettier configuration file for code formatting preferences.
 **🎯 ACTION**: Open Cypress for the first time to create the folder structure.
 
 **▶️ Run in Terminal**:
+
 ```bash
 npx cypress open
 ```
 
 **👀 What Happens**:
+
 1. A Cypress window opens
 2. **Click** "E2E Testing"
 3. **Click** "Continue" (it creates config files)
@@ -258,6 +279,7 @@ npx cypress open
 6. **Close** the browser window (we're done for now)
 
 **✅ Verify**: You should now see these new folders:
+
 ```
 CypressMasterclass/
 ├── cypress/
@@ -280,6 +302,7 @@ CypressMasterclass/
 **📁 Create File**: `CypressMasterclass/setup_env.sh`
 
 **✂️ Copy This Code Into the File**:
+
 ```bash
 #!/bin/bash
 echo "🚀 Initializing Test Environment..."
@@ -289,6 +312,7 @@ echo "✅ Environment Ready."
 ```
 
 **▶️ Make it Executable** (Terminal):
+
 ```bash
 chmod +x setup_env.sh
 ```
@@ -300,6 +324,7 @@ chmod +x setup_env.sh
 ### ✅ Phase 1 Complete!
 
 **🎉 What You've Built**:
+
 - ✅ Node.js project with `package.json`
 - ✅ Cypress installed
 - ✅ TypeScript configured
@@ -307,6 +332,7 @@ chmod +x setup_env.sh
 - ✅ Cypress folder structure created
 
 **📂 Your Project Structure**:
+
 ```
 CypressMasterclass/
 ├── cypress/
@@ -334,19 +360,19 @@ We treat the backend as a first-class citizen. We do not mock everything; we ver
 
 ---
 
-
-
 ---
 
 ## 🎓 Graduation: You are now a Senior Cypress Architect.
 
 You have built a framework that includes:
+
 1.  **Core**: E2E, API, Database Testing
 2.  **Architecture**: Page Object Model, Custom Commands
 3.  **Enterprise**: BDD, Docker, Visual Regression, Accessibility, Resilience
 4.  **DevOps**: CI/CD, Reporting
 
 **Next Steps**:
+
 - Add this project to your portfolio.
 - Use the `README.md` we generated to explain your technical decisions.
 - Go get that job! 🚀
@@ -365,6 +391,7 @@ You have built a framework that includes:
 **🎯 ACTION**: Create a `scripts` folder for database utilities.
 
 **▶️ Run in Terminal** (in `CypressMasterclass/`):
+
 ```bash
 mkdir scripts
 ```
@@ -384,11 +411,13 @@ mkdir scripts
 A script that populates your database with initial test data.
 
 **Why we need it**:
+
 - Creates consistent test data every time
 - Resets database to known state before tests
 - Eliminates manual database setup
 
 **What this script does**:
+
 1. Drops existing `users` table (clean slate)
 2. Creates new `users` table with schema
 3. Inserts 2 test users
@@ -399,22 +428,27 @@ A script that populates your database with initial test data.
 **💡 Node.js concepts in this file**:
 
 **`require('sqlite3')`**: Imports the sqlite3 library
+
 - CommonJS module system (Node.js standard)
 - `.verbose()` enables detailed error messages
 
 **`new sqlite3.Database('app.db')`**: Creates/opens database file
+
 - If `app.db` doesn't exist, it creates it
 - If it exists, it opens it
 
 **`.serialize()`**: Makes operations run in sequence
+
 - Without this, database operations might run in random order
 - Ensures DROP happens before CREATE, CREATE before INSERT
 
 **`.run()`**: Executes SQL that doesn't return rows
+
 - Used for CREATE, DROP, INSERT, UPDATE, DELETE
 - Returns number of affected rows
 
 **`.prepare()` + `.finalize()`**: Efficient multiple inserts
+
 - Prepare compiles SQL once
 - Run it multiple times with different values
 - Finalize closes the prepared statement
@@ -424,32 +458,34 @@ A script that populates your database with initial test data.
 ---
 
 **✂️ Copy This Code Into the File**:
+
 ```javascript
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('app.db');
 
 db.serialize(() => {
-  db.run("DROP TABLE IF EXISTS users");
-  db.run("CREATE TABLE users (id INT, username TEXT, role TEXT)");
-  
-  const stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?)");
+  db.run('DROP TABLE IF EXISTS users');
+  db.run('CREATE TABLE users (id INT, username TEXT, role TEXT)');
+
+  const stmt = db.prepare('INSERT INTO users VALUES (?, ?, ?)');
   stmt.run(1, 'standard_user', 'customer');
   stmt.run(2, 'admin_user', 'admin');
   stmt.finalize();
 
-  db.run("DROP TABLE IF EXISTS products");
-  db.run("CREATE TABLE products (id INT, name TEXT, price REAL)");
-  
-  const stmt2 = db.prepare("INSERT INTO products VALUES (?, ?, ?)");
+  db.run('DROP TABLE IF EXISTS products');
+  db.run('CREATE TABLE products (id INT, name TEXT, price REAL)');
+
+  const stmt2 = db.prepare('INSERT INTO products VALUES (?, ?, ?)');
   stmt2.run(1, 'Sauce Labs Backpack', 29.99);
   stmt2.finalize();
-  
-  console.log("✅ Database Seeded.");
+
+  console.log('✅ Database Seeded.');
 });
 db.close();
 ```
 
 **💡 What This Does**:
+
 - Drops existing `users` table (if it exists)
 - Creates a new `users` table with 3 columns
 - Inserts 2 test users
@@ -462,11 +498,13 @@ db.close();
 **🎯 ACTION**: Execute the seeder to create `app.db`.
 
 **▶️ Run in Terminal** (in `CypressMasterclass/`):
+
 ```bash
 node scripts/seed_db.js
 ```
 
 **✅ Expected Output**:
+
 ```
 ✅ Database Seeded.
 ```
@@ -502,6 +540,7 @@ This function in `cypress.config.js` is where you register tasks and plugins. It
 **📁 Open File**: `CypressMasterclass/cypress.config.js`
 
 **👀 Current content** (default):
+
 ```javascript
 const { defineConfig } = require('cypress');
 
@@ -515,6 +554,7 @@ module.exports = defineConfig({
 ```
 
 **✏️ REPLACE the entire file with this**:
+
 ```javascript
 const { defineConfig } = require('cypress');
 const sqlite3 = require('sqlite3').verbose();
@@ -543,6 +583,7 @@ module.exports = defineConfig({
 ```
 
 **💡 What This Does**:
+
 - Imports SQLite library
 - Creates a custom task called `queryDb`
 - Allows tests to run SQL queries from Cypress
@@ -555,11 +596,13 @@ module.exports = defineConfig({
 **🎯 ACTION**: Create folders for backend tests.
 
 **▶️ Run in Terminal**:
+
 ```bash
 mkdir -p cypress/e2e/api
 ```
 
 **📍 What This Creates**:
+
 ```
 cypress/
 └── e2e/
@@ -579,6 +622,7 @@ cypress/
 **💡 New Cypress commands in this file**:
 
 **`cy.exec(command)`**: Runs system commands
+
 - Executes shell commands from your tests
 - Waits for command to complete
 - Returns: stdout, stderr, exit code
@@ -586,12 +630,14 @@ cypress/
 - 📚 Docs: https://docs.cypress.io/api/commands/exec
 
 **`before(function)`**: Runs once before all tests in describe block
+
 - Setup that only needs to happen once
 - Different from `beforeEach` (which runs before EACH test)
 - Common use: Seed database, login once, set global state
 - 📚 Docs: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Hooks
 
 **`.then(callback)`**: Access previous command's result
+
 - Chains commands together
 - Callback receives yielded value from previous command
 - Allows you to work with the data (store variables, assertions)
@@ -599,24 +645,28 @@ cypress/
 - 📚 Docs: https://docs.cypress.io/api/commands/then
 
 **`expect(value)`**: Assertion library (Chai)
+
 - Makes assertions about values
 - Used inside `.then()` to assert on data
 - Examples: `expect(x).to.equal(5)`, `expect(arr).to.have.length(3)`
 - 📚 Docs: https://docs.cypress.io/guides/references/assertions
 
 **`.contains(text)`**: Find element by text content
+
 - Searches DOM for element containing text
 - More flexible than exact selectors
 - Returns first matching element
 - 📚 Docs: https://docs.cypress.io/api/commands/contains
 
 **`.parents(selector)`**: Get all parent elements
+
 - Traverses up the DOM tree
 - Returns all ancestors matching selector
 - Use `.parent()` (singular) for immediate parent only
 - 📚 Docs: https://docs.cypress.io/api/commands/parents
 
 **`.find(selector)`**: Find descendant elements
+
 - Searches within previous element
 - Only searches children/descendants, not siblings
 - 📚 Docs: https://docs.cypress.io/api/commands/find
@@ -624,6 +674,7 @@ cypress/
 ---
 
 **✂️ Copy This Entire Code Into the File**:
+
 ```javascript
 describe('Hybrid DB Testing Patterns', () => {
   before(() => {
@@ -634,16 +685,20 @@ describe('Hybrid DB Testing Patterns', () => {
   it('Example 1: Seeds a user and logs in', () => {
     // 1. Seed Data via DB
     const testUser = { id: 101, username: 'db_user', password: 'password123' };
-    cy.task('queryDb', `INSERT INTO users VALUES (${testUser.id}, '${testUser.username}', 'customer')`);
+    cy.task(
+      'queryDb',
+      `INSERT INTO users VALUES (${testUser.id}, '${testUser.username}', 'customer')`
+    );
 
     // 2. Use Data in UI
     cy.visit('/');
     cy.get('[data-test="username"]').type(testUser.username);
     cy.get('[data-test="password"]').type(testUser.password);
     cy.get('[data-test="login-button"]').click();
-    
+
     // 3. Verify Login Fails (Expected, since we can't actually seed SauceDemo's real DB)
-    cy.get('[data-test="error"]').should('be.visible')
+    cy.get('[data-test="error"]')
+      .should('be.visible')
       .and('contain', 'Username and password do not match');
   });
 
@@ -654,76 +709,87 @@ describe('Hybrid DB Testing Patterns', () => {
     cy.get('[data-test="username"]').type('standard_user');
     cy.get('[data-test="password"]').type('secret_sauce');
     cy.get('[data-test="login-button"]').click();
-    
+
     // 2. Verify successful login (UI check)
     cy.url().should('include', '/inventory.html');
-    
+
     // 3. Verify user exists in DB (DB verification)
-    cy.task('queryDb', 'SELECT * FROM users WHERE username="standard_user"')
-      .then((rows) => {
-        expect(rows).to.have.length(1);
-        expect(rows[0].username).to.eq('standard_user');
-        expect(rows[0].role).to.exist;
-      });
+    cy.task(
+      'queryDb',
+      'SELECT * FROM users WHERE username="standard_user"'
+    ).then((rows) => {
+      expect(rows).to.have.length(1);
+      expect(rows[0].username).to.eq('standard_user');
+      expect(rows[0].role).to.exist;
+    });
   });
 
   // Example 3: DB Data -> UI Assertion (Data Driven)
   it('Example 3: Verifies UI displays correct product price from DB', () => {
     // 1. Get Truth from DB
-    cy.task('queryDb', 'SELECT price FROM products WHERE name="Sauce Labs Backpack"')
-      .then((rows) => {
-        const dbPrice = rows[0].price; // e.g., 29.99
+    cy.task(
+      'queryDb',
+      'SELECT price FROM products WHERE name="Sauce Labs Backpack"'
+    ).then((rows) => {
+      const dbPrice = rows[0].price; // e.g., 29.99
 
-        // 2. Verify UI matches DB
-        cy.visit('/inventory.html');
-        cy.contains('Sauce Labs Backpack')
-          .parents('.inventory_item')
-          .find('.inventory_item_price')
-          .should('contain', dbPrice);
-      });
+      // 2. Verify UI matches DB
+      cy.visit('/inventory.html');
+      cy.contains('Sauce Labs Backpack')
+        .parents('.inventory_item')
+        .find('.inventory_item_price')
+        .should('contain', dbPrice);
+    });
   });
 
   // Example 4: Data-Driven Testing (Iterate from DB)
   it('Example 4: Data-Driven Login from Database', () => {
     // 1. Get all users with 'customer' role (excluding the fake one from Example 1)
-    cy.task('queryDb', 'SELECT * FROM users WHERE role="customer" AND username != "db_user"')
-      .then((users) => {
-        // 2. Iterate through each user
-        users.forEach((user) => {
-          cy.visit('/');
-          cy.get('[data-test="username"]').type(user.username);
-          cy.get('[data-test="password"]').type('secret_sauce');
-          cy.get('[data-test="login-button"]').click();
-          cy.url().should('include', '/inventory.html');
-          
-          // Logout to reset state for next iteration
-          cy.get('#react-burger-menu-btn').click();
-          cy.get('#logout_sidebar_link').click();
-        });
+    cy.task(
+      'queryDb',
+      'SELECT * FROM users WHERE role="customer" AND username != "db_user"'
+    ).then((users) => {
+      // 2. Iterate through each user
+      users.forEach((user) => {
+        cy.visit('/');
+        cy.get('[data-test="username"]').type(user.username);
+        cy.get('[data-test="password"]').type('secret_sauce');
+        cy.get('[data-test="login-button"]').click();
+        cy.url().should('include', '/inventory.html');
+
+        // Logout to reset state for next iteration
+        cy.get('#react-burger-menu-btn').click();
+        cy.get('#logout_sidebar_link').click();
       });
+    });
   });
 
   // Example 5: CRUD Lifecycle (Create, Read, Delete)
   it('Example 5: Verifies database data persistence and cleanup', () => {
     // 1. Create (Setup)
     const newUserId = 999;
-    cy.task('queryDb', `INSERT INTO users VALUES (${newUserId}, "test_cleanup_user", "tester")`);
+    cy.task(
+      'queryDb',
+      `INSERT INTO users VALUES (${newUserId}, "test_cleanup_user", "tester")`
+    );
 
     // 2. Read (Verify Creation)
-    cy.task('queryDb', `SELECT * FROM users WHERE id=${newUserId}`)
-      .then((rows) => {
+    cy.task('queryDb', `SELECT * FROM users WHERE id=${newUserId}`).then(
+      (rows) => {
         expect(rows).to.have.length(1);
         expect(rows[0].username).to.eq('test_cleanup_user');
-      });
+      }
+    );
 
     // 3. Delete (Teardown/Cleanup)
     cy.task('queryDb', `DELETE FROM users WHERE id=${newUserId}`);
 
     // 4. Verify Deletion
-    cy.task('queryDb', `SELECT * FROM users WHERE id=${newUserId}`)
-      .then((rows) => {
+    cy.task('queryDb', `SELECT * FROM users WHERE id=${newUserId}`).then(
+      (rows) => {
         expect(rows).to.be.empty;
-      });
+      }
+    );
   });
 });
 ```
@@ -733,12 +799,14 @@ describe('Hybrid DB Testing Patterns', () => {
 **🎯 ACTION**: Execute the tests to verify everything works.
 
 **Option 1: Interactive Mode (Visual)**
+
 1. Run `npx cypress open`
 2. Select **E2E Testing** -> **Chrome**
 3. Click on `backend/database.cy.js`
 4. Watch the tests run!
 
 **Option 2: Headless Mode (Terminal)**
+
 ```bash
 npx cypress run --spec "cypress/e2e/api/database.cy.js"
 ```
@@ -766,8 +834,9 @@ npx cypress run --spec "cypress/e2e/api/database.cy.js"
 **📁 Create File**: `CypressMasterclass/cypress/e2e/api/api.cy.js`
 
 **💡 Test Categories**:
+
 - ✅ **Positive** - Valid inputs, expected 200/201 responses
-- ❌ **Negative** - Invalid inputs, expected 404/400 responses  
+- ❌ **Negative** - Invalid inputs, expected 404/400 responses
 - ⚠️ **Boundary** - Edge cases (first/last records, pagination limits)
 
 ---
@@ -777,6 +846,7 @@ npx cypress run --spec "cypress/e2e/api/database.cy.js"
 `cy.request` makes HTTP requests directly from Cypress (bypassing the browser UI).
 
 **Key Features**:
+
 - Makes GET, POST, PUT, DELETE requests to APIs
 - Automatically follows redirects
 - Includes cookies from the browser
@@ -784,6 +854,7 @@ npx cypress run --spec "cypress/e2e/api/database.cy.js"
 - Fails test if status is not 2xx/3xx (unless you set `failOnStatusCode: false`)
 
 **When to use**:
+
 - ✅ API testing (validate endpoints directly)
 - ✅ Setup/teardown (create test data via API before UI test)
 - ✅ Faster than clicking through UI
@@ -793,12 +864,13 @@ npx cypress run --spec "cypress/e2e/api/database.cy.js"
 ---
 
 **✂️ Copy This Entire Code Into the File**:
+
 ```javascript
 describe('SWAPI - Comprehensive API Testing', () => {
   const BASE_URL = 'https://swapi.dev/api';
 
   // ✅ POSITIVE TESTS (Happy Path)
-  
+
   // Example 1: GET Single Resource (Person)
   it('Positive: GET /people/1 (Luke Skywalker)', () => {
     cy.request(`${BASE_URL}/people/1`).then((res) => {
@@ -816,7 +888,7 @@ describe('SWAPI - Comprehensive API Testing', () => {
       expect(res.body.count).to.be.greaterThan(0);
       expect(res.body.next).to.not.be.null; // People has 82+ results, so next exists
       expect(res.body.previous).to.be.null;
-      
+
       // Verify structure of first item
       expect(res.body.results[0]).to.have.property('name');
       expect(res.body.results[0]).to.have.property('gender');
@@ -837,10 +909,24 @@ describe('SWAPI - Comprehensive API Testing', () => {
       expect(res.status).to.eq(200);
       // Validate response structure
       expect(res.body).to.have.all.keys(
-        'name', 'model', 'manufacturer', 'cost_in_credits', 'length',
-        'max_atmosphering_speed', 'crew', 'passengers', 'cargo_capacity',
-        'consumables', 'hyperdrive_rating', 'MGLT', 'starship_class',
-        'pilots', 'films', 'created', 'edited', 'url'
+        'name',
+        'model',
+        'manufacturer',
+        'cost_in_credits',
+        'length',
+        'max_atmosphering_speed',
+        'crew',
+        'passengers',
+        'cargo_capacity',
+        'consumables',
+        'hyperdrive_rating',
+        'MGLT',
+        'starship_class',
+        'pilots',
+        'films',
+        'created',
+        'edited',
+        'url'
       );
     });
   });
@@ -861,7 +947,7 @@ describe('SWAPI - Comprehensive API Testing', () => {
   it('Negative: GET /people/99999 (Non-existent ID)', () => {
     cy.request({
       url: `${BASE_URL}/people/99999`,
-      failOnStatusCode: false // Critical for negative testing
+      failOnStatusCode: false, // Critical for negative testing
     }).then((res) => {
       expect(res.status).to.eq(404);
       expect(res.body.detail).to.eq('Not found');
@@ -872,20 +958,20 @@ describe('SWAPI - Comprehensive API Testing', () => {
   it('Negative: GET /invalid_endpoint (Wrong Path)', () => {
     cy.request({
       url: `${BASE_URL}/invalid_endpoint`,
-      failOnStatusCode: false
+      failOnStatusCode: false,
     }).then((res) => {
       expect(res.status).to.eq(404);
     });
   });
 
-    // Example 8: No Results (Negative)
-    it('Example 8: Handles search with no matches', () => {
-        cy.request(`${BASE_URL}/people?search=xyz_no_match`).then((res) => {
-            expect(res.status).to.eq(200); // SWAPI returns 200 with 0 results
-            expect(res.body.count).to.eq(0);
-            expect(res.body.results).to.be.empty;
-        });
+  // Example 8: No Results (Negative)
+  it('Example 8: Handles search with no matches', () => {
+    cy.request(`${BASE_URL}/people?search=xyz_no_match`).then((res) => {
+      expect(res.status).to.eq(200); // SWAPI returns 200 with 0 results
+      expect(res.body.count).to.eq(0);
+      expect(res.body.results).to.be.empty;
     });
+  });
 
   // ⚠️ BOUNDARY TESTS (Edge Cases)
 
@@ -902,7 +988,7 @@ describe('SWAPI - Comprehensive API Testing', () => {
   it('Boundary: GET /people (Detect Last Page)', () => {
     cy.request(`${BASE_URL}/people`).then((res) => {
       const totalPages = Math.ceil(res.body.count / res.body.results.length);
-      
+
       cy.request(`${BASE_URL}/people?page=${totalPages}`).then((lastPage) => {
         expect(lastPage.status).to.eq(200);
         expect(lastPage.body.next).to.be.null; // No next page
@@ -921,7 +1007,7 @@ it('Advanced: Chain Film → Character Lookup', () => {
   // 1. Get Film
   cy.request(`${BASE_URL}/films/1`).then((filmRes) => {
     const characterUrl = filmRes.body.characters[0]; // Luke's URL
-    
+
     // 2. Get Character from URL
     cy.request(characterUrl).then((charRes) => {
       expect(charRes.body.name).to.eq('Luke Skywalker');
@@ -935,10 +1021,12 @@ it('Advanced: Chain Film → Character Lookup', () => {
 **🎯 ACTION**: Execute the API tests.
 
 **Option 1: Interactive Mode**
+
 1. Run `npx cypress open`
 2. Click on `backend/api.cy.js`
 
 **Option 2: Headless Mode (Fast)**
+
 ```bash
 npx cypress run --spec "cypress/e2e/api/api.cy.js"
 ```
@@ -947,13 +1035,13 @@ npx cypress run --spec "cypress/e2e/api/api.cy.js"
 
 ---
 
-
 ## Phase 4: Professional UI Testing (Page Object Model)
 
 **Goal**: Build a scalable, enterprise-grade test architecture.
 **Concept**: We skip the "messy" code and go straight to industry best practices.
 
 **💡 Cypress Specifics in POM**:
+
 1.  **No `async/await`**: Cypress commands are synchronous-looking but asynchronous in execution.
 2.  **Getters vs Methods**: Cypress recommends methods (`getUser()`) over getters (`get user()`) to ensure the command chain is fresh, but getters are cleaner for static selectors. We will use **Getters** for readability.
 3.  **Chaining**: We return `cy.get()` so we can chain assertions in the test (`Page.element.should('be.visible')`).
@@ -965,6 +1053,7 @@ npx cypress run --spec "cypress/e2e/api/api.cy.js"
 **📁 Create File**: `cypress/pages/BasePage.ts`
 
 **✂️ Copy This Code**:
+
 ```typescript
 export default class BasePage {
   constructor() {
@@ -978,11 +1067,11 @@ export default class BasePage {
   getElement(selector) {
     return cy.get(selector);
   }
-  
+
   click(selector) {
     this.getElement(selector).click();
   }
-  
+
   type(selector, text) {
     this.getElement(selector).type(text);
   }
@@ -996,6 +1085,7 @@ export default class BasePage {
 **📁 Create File**: `cypress/pages/LoginPage.ts`
 
 **✂️ Copy This Code**:
+
 ```typescript
 import BasePage from './BasePage';
 
@@ -1029,6 +1119,7 @@ export default new LoginPage();
 **📁 Create File**: `cypress/pages/InventoryPage.ts`
 
 **✂️ Copy This Code**:
+
 ```typescript
 import BasePage from './BasePage';
 
@@ -1054,6 +1145,7 @@ export default new InventoryPage();
 **📁 Create File**: `cypress/e2e/ui/login_pom.cy.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 import LoginPage from '../../pages/LoginPage';
 import InventoryPage from '../../pages/InventoryPage';
@@ -1070,7 +1162,10 @@ describe('Login Flow (Professional POM)', () => {
 
   it('Fails to login with locked out user', () => {
     LoginPage.login('locked_out_user', 'secret_sauce');
-    LoginPage.getErrorMessage().should('contain', 'Sorry, this user has been locked out.');
+    LoginPage.getErrorMessage().should(
+      'contain',
+      'Sorry, this user has been locked out.'
+    );
   });
 });
 ```
@@ -1078,6 +1173,7 @@ describe('Login Flow (Professional POM)', () => {
 #### Step 4.5: Run Your Tests
 
 **▶️ Run**:
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/login_pom.cy.js"
 ```
@@ -1088,10 +1184,11 @@ npx cypress run --spec "cypress/e2e/ui/login_pom.cy.js"
 
 ### 💡 Pro Tip: Cypress Sessions (Advanced)
 
-**Problem**: Logging in before *every* test is slow.
+**Problem**: Logging in before _every_ test is slow.
 **Solution**: `cy.session()` caches the browser state (cookies, local storage).
 
 **Example Usage**:
+
 ```javascript
 // In your test file
 beforeEach(() => {
@@ -1104,17 +1201,20 @@ beforeEach(() => {
   cy.visit('/inventory.html');
 });
 ```
-*This restores the session instantly instead of re-typing credentials.*
+
+_This restores the session instantly instead of re-typing credentials._
 
 #### Step 4.5: Run Your POM Tests
 
 **🎯 ACTION**: Execute the new POM-based tests.
 
 **Option 1: Interactive Mode**
+
 1. Run `npx cypress open`
 2. Click on `ui/login.cy.js`
 
 **Option 2: Headless Mode**
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/login.cy.js"
 ```
@@ -1122,7 +1222,6 @@ npx cypress run --spec "cypress/e2e/ui/login.cy.js"
 **✅ Expected Result**: Both tests pass. Notice how clean the test code is!
 
 ---
-
 
 **Key Takeaway**: You now import and use `loginPage.login()` instead of writing selectors in every test.
 
@@ -1152,91 +1251,92 @@ Standard tests use `click()` and `type()`. But real users do more: they hover, d
 **📁 Create File**: `cypress/pages/InteractionsPage.ts`
 
 **✂️ Copy This Code**:
+
 ```typescript
 import BasePage from './BasePage';
 
 class InteractionsPage extends BasePage {
-    constructor() {
-        super();
-        // Override BasePage URL for this specific test site
-        this.baseUrl = 'https://the-internet.herokuapp.com';
-    }
+  constructor() {
+    super();
+    // Override BasePage URL for this specific test site
+    this.baseUrl = 'https://the-internet.herokuapp.com';
+  }
 
-    // Selectors
-    hoverFigure: string = '.figure';
-    hoverCaption: string = '.figcaption h5';
-    dragSource: string = '#column-a';
-    dragTarget: string = '#column-b';
-    fileInput: string = '#file-upload';
-    fileSubmit: string = '#file-submit';
-    uploadedFiles: string = 'h3';
-    keyPressTarget: string = '#target';
-    keyPressResult: string = '#result';
-    scrollContent: string = '.jscroll-added';
+  // Selectors
+  hoverFigure: string = '.figure';
+  hoverCaption: string = '.figcaption h5';
+  dragSource: string = '#column-a';
+  dragTarget: string = '#column-b';
+  fileInput: string = '#file-upload';
+  fileSubmit: string = '#file-submit';
+  uploadedFiles: string = 'h3';
+  keyPressTarget: string = '#target';
+  keyPressResult: string = '#result';
+  scrollContent: string = '.jscroll-added';
 
-    // Actions
-    visitHover() {
-        this.open('/hovers');
-    }
+  // Actions
+  visitHover() {
+    this.open('/hovers');
+  }
 
-    hoverOverFigure() {
-        this.getElement(this.hoverFigure).first().trigger('mouseover');
-    }
+  hoverOverFigure() {
+    this.getElement(this.hoverFigure).first().trigger('mouseover');
+  }
 
-    getHoverCaption() {
-        return this.getElement(this.hoverCaption);
-    }
+  getHoverCaption() {
+    return this.getElement(this.hoverCaption);
+  }
 
-    visitDragAndDrop() {
-        this.open('/drag_and_drop');
-    }
+  visitDragAndDrop() {
+    this.open('/drag_and_drop');
+  }
 
-    dragAndDrop() {
-        const dataTransfer = new DataTransfer();
-        this.getElement(this.dragSource).trigger('dragstart', { dataTransfer });
-        this.getElement(this.dragTarget).trigger('drop', { dataTransfer });
-    }
+  dragAndDrop() {
+    const dataTransfer = new DataTransfer();
+    this.getElement(this.dragSource).trigger('dragstart', { dataTransfer });
+    this.getElement(this.dragTarget).trigger('drop', { dataTransfer });
+  }
 
-    visitFileUpload() {
-        this.open('/upload');
-    }
+  visitFileUpload() {
+    this.open('/upload');
+  }
 
-    uploadFile(filePath: string) {
-        this.getElement(this.fileInput).selectFile(filePath);
-        this.click(this.fileSubmit);
-    }
+  uploadFile(filePath: string) {
+    this.getElement(this.fileInput).selectFile(filePath);
+    this.click(this.fileSubmit);
+  }
 
-    getUploadedMessage() {
-        return this.getElement(this.uploadedFiles);
-    }
+  getUploadedMessage() {
+    return this.getElement(this.uploadedFiles);
+  }
 
-    visitInfiniteScroll() {
-        this.open('/infinite_scroll');
-    }
+  visitInfiniteScroll() {
+    this.open('/infinite_scroll');
+  }
 
-    scrollToBottom() {
-        cy.scrollTo('bottom');
-    }
+  scrollToBottom() {
+    cy.scrollTo('bottom');
+  }
 
-    getScrollContent() {
-        return this.getElement(this.scrollContent);
-    }
+  getScrollContent() {
+    return this.getElement(this.scrollContent);
+  }
 
-    visitKeyPresses() {
-        this.open('/key_presses');
-    }
+  visitKeyPresses() {
+    this.open('/key_presses');
+  }
 
-    typeKeyPress(key: string) {
-        this.type(this.keyPressTarget, key);
-    }
+  typeKeyPress(key: string) {
+    this.type(this.keyPressTarget, key);
+  }
 
-    typeGlobal(key: string) {
-        cy.get('body').type(key);
-    }
+  typeGlobal(key: string) {
+    cy.get('body').type(key);
+  }
 
-    getKeyPressResult() {
-        return this.getElement(this.keyPressResult);
-    }
+  getKeyPressResult() {
+    return this.getElement(this.keyPressResult);
+  }
 }
 
 export default new InteractionsPage();
@@ -1249,11 +1349,11 @@ export default new InteractionsPage();
 **📁 Create File**: `cypress/e2e/ui/interactions.cy.ts`
 
 **✂️ Copy This Code**:
+
 ```typescript
 import InteractionsPage from '../../pages/InteractionsPage';
 
 describe('Advanced Interactions (POM)', () => {
-
   // Example 1: Hover (Mouseover)
   it('Interaction 1: Hover reveals hidden content', () => {
     InteractionsPage.visitHover();
@@ -1288,7 +1388,7 @@ describe('Advanced Interactions (POM)', () => {
     InteractionsPage.visitKeyPresses();
     InteractionsPage.typeKeyPress('{enter}');
     InteractionsPage.getKeyPressResult().should('contain', 'ENTER');
-    
+
     InteractionsPage.typeGlobal('{esc}');
   });
 });
@@ -1299,10 +1399,12 @@ describe('Advanced Interactions (POM)', () => {
 **🎯 ACTION**: Execute the advanced interaction tests.
 
 **Option 1: Interactive Mode**
+
 1. Run `npx cypress open`
 2. Click on `interactions.cy.js`
 
 **Option 2: Headless Mode**
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/interactions.cy.js"
 ```
@@ -1316,7 +1418,7 @@ npx cypress run --spec "cypress/e2e/ui/interactions.cy.js"
 **What You'll Accomplish**: Implement visual regression testing and performance monitoring with Lighthouse.
 **Time Required**: 45-60 minutes
 
-Functional tests confirm *if* it works. Specialized tests confirm *how* it looks and performs.
+Functional tests confirm _if_ it works. Specialized tests confirm _how_ it looks and performs.
 
 ---
 
@@ -1328,6 +1430,7 @@ Functional tests confirm *if* it works. Specialized tests confirm *how* it looks
 **Goal**: Catch visual regressions (CSS changes, layout shifts, color inconsistencies) that functional tests miss.
 
 **Why This Matters for Your Portfolio**:
+
 - Demonstrates understanding of comprehensive testing strategies
 - Shows ability to implement enterprise-grade quality assurance
 - TypeScript + POM architecture = professional code structure
@@ -1338,6 +1441,7 @@ Functional tests confirm *if* it works. Specialized tests confirm *how* it looks
 #### The Visual Testing Problem
 
 **Scenario**: A CSS change breaks your login button styling:
+
 - **Before**: Blue button, centered, visible
 - **After**: White button on white background (invisible!)
 
@@ -1353,6 +1457,7 @@ Functional tests confirm *if* it works. Specialized tests confirm *how* it looks
 **We're using**: `cypress-image-diff-js`
 
 **Why?**
+
 - ✅ Free and open-source (no API keys, no vendor lock-in)
 - ✅ Works offline (portfolio can be demoed anywhere)
 - ✅ Actively maintained for Cypress 15
@@ -1360,6 +1465,7 @@ Functional tests confirm *if* it works. Specialized tests confirm *how* it looks
 - ✅ No external dependencies = simpler architecture
 
 **Enterprise Alternatives** (for reference):
+
 - **Percy** by BrowserStack - Cloud-based, cross-browser ($$$)
 - **Applitools** - AI-powered visual testing ($$$)
 - **Chromatic** - Great for Storybook projects ($$$)
@@ -1373,6 +1479,7 @@ Functional tests confirm *if* it works. Specialized tests confirm *how* it looks
 **🎯 ACTION**: Install `cypress-image-diff-js`.
 
 **▶️ Run in Terminal** (in your project root):
+
 ```bash
 npm install --save-dev cypress-image-diff-js
 ```
@@ -1380,6 +1487,7 @@ npm install --save-dev cypress-image-diff-js
 **⏱️ Wait Time**: 20-30 seconds
 
 **✅ Verify**: Check `package.json` - you should see:
+
 ```json
 "devDependencies": {
   "cypress-image-diff-js": "^2.5.0",
@@ -1396,6 +1504,7 @@ npm install --save-dev cypress-image-diff-js
 **📁 Open File**: `cypress.config.ts` (or `cypress.config.js` if not using TypeScript)
 
 **💡 What is this doing?**
+
 - Registers the `cypress-image-diff-js` plugin with Cypress
 - Enables `cy.compareSnapshot()` command in your tests
 - Runs in Node.js environment (setupNodeEvents)
@@ -1403,6 +1512,7 @@ npm install --save-dev cypress-image-diff-js
 ---
 
 **✏️ MODIFY** - Add this import at the TOP of the file:
+
 ```typescript
 import getCompareSnapshotsPlugin from 'cypress-image-diff-js/plugin';
 ```
@@ -1410,22 +1520,24 @@ import getCompareSnapshotsPlugin from 'cypress-image-diff-js/plugin';
 **✏️ THEN** - Update `setupNodeEvents` function:
 
 **👀 Find this section**:
+
 ```typescript
 setupNodeEvents(on, config) {
   // ... your existing code (database tasks, etc.) ...
-  
+
   return config;
 },
 ```
 
 **✏️ ADD** the visual testing plugin **BEFORE** `return config;`:
+
 ```typescript
 setupNodeEvents(on, config) {
   // ... your existing code (database tasks, etc.) ...
-  
+
   // Visual Testing Plugin
   getCompareSnapshotsPlugin(on, config);
-  
+
   return config;
 },
 ```
@@ -1441,11 +1553,13 @@ setupNodeEvents(on, config) {
 **📁 Open File**: `cypress/support/e2e.ts` (or `e2e.js`)
 
 **✏️ ADD** this import at the top:
+
 ```typescript
 import 'cypress-image-diff-js/command';
 ```
 
 **✅ Your file should now look like**:
+
 ```typescript
 import './commands';
 import 'cypress-image-diff-js/command';
@@ -1465,6 +1579,7 @@ import 'cypress-image-diff-js/command';
 
 **❗ Why This Step?**
 The `cypress-image-diff-js` plugin adds the `compareSnapshot` command at runtime, but TypeScript doesn't know about it. Without type declarations, you'll get errors like:
+
 ```
 Property 'compareSnapshot' does not exist on type 'cy & CyEventEmitter'
 ```
@@ -1480,11 +1595,14 @@ declare global {
        * @param name - Name of the screenshot/snapshot
        * @param options - Configuration options for snapshot comparison
        */
-      compareSnapshot(name: string, options?: {
-        errorThreshold?: number;
-        capture?: 'fullPage' | 'viewport' | 'runner';
-        screenshotConfig?: any;
-      }): Chainable<any>;
+      compareSnapshot(
+        name: string,
+        options?: {
+          errorThreshold?: number;
+          capture?: 'fullPage' | 'viewport' | 'runner';
+          screenshotConfig?: any;
+        }
+      ): Chainable<any>;
     }
   }
 }
@@ -1493,7 +1611,8 @@ declare global {
 export {};
 ```
 
-**💡 What This Does**: 
+**💡 What This Does**:
+
 - Extends TypeScript's understanding of Cypress commands
 - Enables autocomplete for `cy.compareSnapshot()` in your IDE
 - Eliminates TypeScript errors
@@ -1510,6 +1629,7 @@ export {};
 **📁 Open/Create File**: `.gitignore` (in project root)
 
 **✏️ ADD** these lines:
+
 ```
 # Visual Testing - Keep baselines, ignore comparisons
 cypress/snapshots/actual/
@@ -1517,6 +1637,7 @@ cypress/snapshots/diff/
 ```
 
 **💡 Why?**
+
 - `cypress/snapshots/base/` = Approved baseline images → **Commit to Git** ✅
 - `cypress/snapshots/actual/` = Current test screenshots → **Ignore** (regenerated each run)
 - `cypress/snapshots/diff/` = Highlighted differences → **Ignore** (only created when tests fail)
@@ -1533,6 +1654,7 @@ cypress/snapshots/diff/
 
 **💡 Why a Page Object for Visual Testing?**
 This isn't a "real page" like LoginPage, but we're following the same architecture pattern:
+
 - Encapsulates visual testing logic
 - Reusable snapshot methods
 - TypeScript typed for safety
@@ -1541,7 +1663,7 @@ This isn't a "real page" like LoginPage, but we're following the same architectu
 
 ---
 
-**But First - Update LoginPage and InventoryPage!** 
+**But First - Update LoginPage and InventoryPage!**
 
 Before we create VisualTestingPage, we need to add visual testing helper methods to our existing Page Objects. This maintains **strict POM encapsulation** - tests should NEVER use `cy.get()` or know about selectors!
 
@@ -1552,63 +1674,64 @@ Before we create VisualTestingPage, we need to add visual testing helper methods
 **✏️ MODIFY** - Update to make selectors private and add helper methods:
 
 ```typescript
-import BasePage from './BasePage'
+import BasePage from './BasePage';
 
 class LoginPage extends BasePage {
-    private usernameInput: string = '[data-test="username"]';
-    private passwordInput: string = '[data-test="password"]';
-    private loginButton: string = '[data-test="login-button"]';
-    private errorMessage: string = '[data-test="error"]';
-    private loginWrapper: string = '.login_wrapper';
-    private loginLogo: string = '.login_logo';
+  private usernameInput: string = '[data-test="username"]';
+  private passwordInput: string = '[data-test="password"]';
+  private loginButton: string = '[data-test="login-button"]';
+  private errorMessage: string = '[data-test="error"]';
+  private loginWrapper: string = '.login_wrapper';
+  private loginLogo: string = '.login_logo';
 
-    constructor() {
-        super()
-    }
+  constructor() {
+    super();
+  }
 
-    waitForPageToLoad() {
-        this.getElement(this.loginButton).should('be.visible');
-    }
+  waitForPageToLoad() {
+    this.getElement(this.loginButton).should('be.visible');
+  }
 
-    login(username: string, password: string) {
-        this.type(this.usernameInput, username)
-        this.type(this.passwordInput, password)
-        this.click(this.loginButton)
-    }
+  login(username: string, password: string) {
+    this.type(this.usernameInput, username);
+    this.type(this.passwordInput, password);
+    this.click(this.loginButton);
+  }
 
-    clickLoginButton() {
-        this.click(this.loginButton);
-    }
+  clickLoginButton() {
+    this.click(this.loginButton);
+  }
 
-    waitForErrorMessage() {
-        this.getElement(this.errorMessage).should('be.visible');
-    }
+  waitForErrorMessage() {
+    this.getElement(this.errorMessage).should('be.visible');
+  }
 
-    getErrorMessage() {
-        return this.getElement(this.errorMessage)
-    }
+  getErrorMessage() {
+    return this.getElement(this.errorMessage);
+  }
 
-    getLoginWrapper() {
-        return this.getElement(this.loginWrapper);
-    }
+  getLoginWrapper() {
+    return this.getElement(this.loginWrapper);
+  }
 
-    getLoginButton() {
-        return this.getElement(this.loginButton);
-    }
+  getLoginButton() {
+    return this.getElement(this.loginButton);
+  }
 
-    getUsernameInput() {
-        return this.getElement(this.usernameInput);
-    }
+  getUsernameInput() {
+    return this.getElement(this.usernameInput);
+  }
 
-    getLoginLogo() {
-        return this.getElement(this.loginLogo);
-    }
+  getLoginLogo() {
+    return this.getElement(this.loginLogo);
+  }
 }
 
-export default new LoginPage
+export default new LoginPage();
 ```
 
 **💡 Key POM Improvements**:
+
 - ✅ **Private selectors** - tests can't access them
 - ✅ **Self-documenting function names** - no comments needed
 - ✅ **Clean code** - SOLID principles, functions explain themselves
@@ -1668,6 +1791,7 @@ export default new InventoryPage();
 **📁 Create New File**: `cypress/pages/VisualTestingPage.ts`
 
 **✂️ Copy This Code Into the File**:
+
 ```typescript
 import BasePage from './BasePage';
 
@@ -1712,7 +1836,10 @@ class VisualTestingPage extends BasePage {
     });
   }
 
-  takeElementSnapshotFromChainable(elementChainable: Cypress.Chainable<JQuery<HTMLElement>>, name: string) {
+  takeElementSnapshotFromChainable(
+    elementChainable: Cypress.Chainable<JQuery<HTMLElement>>,
+    name: string
+  ) {
     elementChainable.compareSnapshot(name, this.defaultSnapshotConfig);
   }
 
@@ -1739,6 +1866,7 @@ export default new VisualTestingPage();
 ```
 
 **💡 What This Does**:
+
 - Extends `BasePage` (same pattern as LoginPage, InventoryPage)
 - Provides 9 reusable visual testing methods
 - TypeScript typed for IDE autocomplete
@@ -1756,6 +1884,7 @@ export default new VisualTestingPage();
 **📁 Create New File**: `cypress/e2e/ui/visual-regression.cy.ts`
 
 **💡 Test Strategy**:
+
 1. Test different page states (default, error, success)
 2. Test responsive layouts (mobile, tablet, desktop)
 3. Test full-page vs viewport snapshots
@@ -1767,13 +1896,13 @@ export default new VisualTestingPage();
 ---
 
 **✂️ Copy This Code Into the File** (PROPER POM VERSION!):
+
 ```typescript
 import LoginPage from '../../pages/LoginPage';
 import InventoryPage from '../../pages/InventoryPage';
 import VisualTestingPage from '../../pages/VisualTestingPage';
 
 describe('Visual Regression Testing', () => {
-  
   describe('Login Page - Visual States', () => {
     beforeEach(() => {
       LoginPage.open('/');
@@ -1811,10 +1940,9 @@ describe('Visual Regression Testing', () => {
     });
 
     it('Should match baseline ignoring cart badge (dynamic content)', () => {
-      VisualTestingPage.takeSnapshotIgnoringElements(
-        'inventory-page-clean',
-        ['.shopping_cart_badge']
-      );
+      VisualTestingPage.takeSnapshotIgnoringElements('inventory-page-clean', [
+        '.shopping_cart_badge',
+      ]);
     });
   });
 
@@ -1844,11 +1972,17 @@ describe('Visual Regression Testing', () => {
     });
 
     it('Should allow minor differences with 10% threshold', () => {
-      VisualTestingPage.takeFlexibleSnapshot('inventory-flexible-comparison', 0.10);
+      VisualTestingPage.takeFlexibleSnapshot(
+        'inventory-flexible-comparison',
+        0.1
+      );
     });
 
     it('Should detect even tiny differences with strict 1% threshold', () => {
-      VisualTestingPage.takeFlexibleSnapshot('inventory-strict-comparison', 0.01);
+      VisualTestingPage.takeFlexibleSnapshot(
+        'inventory-strict-comparison',
+        0.01
+      );
     });
   });
 
@@ -1878,11 +2012,11 @@ describe('Visual Regression Testing', () => {
       );
     });
   });
-
 });
 ```
 
 **💡 What These Tests Demonstrate (TRUE POM PRINCIPLES!)**:
+
 - ✅ **NO direct `cy.get()` calls** - All element access through Page Objects
 - ✅ **NO exposed selectors** - Tests don't know about CSS selectors
 - ✅ **Strict encapsulation** - `LoginPage.waitForPageToLoad()` instead of `cy.get(...).should('be.visible')`
@@ -1898,6 +2032,7 @@ describe('Visual Regression Testing', () => {
 **Portfolio Value**: 18 comprehensive visual tests showing **enterprise-level quality assurance AND architectural discipline**.
 
 **🎓 POM Principle Reminder**:
+
 - **BAD**: `cy.get('[data-test="login-button"]').should('be.visible')` ❌
 - **GOOD**: `LoginPage.waitForPageToLoad()` ✅
 - **WHY**: Tests should describe WHAT to do, not HOW. Implementation details belong in Page Objects!
@@ -1909,6 +2044,7 @@ describe('Visual Regression Testing', () => {
 **🎯 ACTION**: Run tests to create baseline images.
 
 **💡 How Visual Testing Works**:
+
 1. **First Run**: Creates baseline screenshots in `cypress/snapshots/base/`
 2. **Future Runs**: Compares current screenshots against baselines
 3. **If Different**: Test fails, diff image created in `cypress/snapshots/diff/`
@@ -1918,11 +2054,13 @@ describe('Visual Regression Testing', () => {
 **Option 1: Interactive Mode (Recommended for First Run)**
 
 **▶️ Run in Terminal**:
+
 ```bash
 npx cypress open
 ```
 
 **Then**:
+
 1. Click **E2E Testing**
 2. Choose **Chrome**
 3. Click on `visual-regression.cy.ts`
@@ -1933,6 +2071,7 @@ npx cypress open
 **Option 2: Headless Mode (CI/CD)**
 
 **▶️ Run in Terminal**:
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 ```
@@ -1942,26 +2081,28 @@ npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 ---
 
 **✅ Expected Result** (First Run):
+
 ```
   Visual Regression Testing
     Login Page - Visual States
       ✓ Should match baseline for default login page (453ms)
       ✓ Should match baseline for login error state (312ms)
       ✓ Should match baseline for login form component only (287ms)
-    
+
     Inventory Page - Full Page Capture
       ✓ Should match baseline for inventory page full scroll (651ms)
       ✓ Should match baseline ignoring cart badge (378ms)
-    
+
     Responsive Layout - Cross-Device
       ✓ Should match baseline for mobile view (iPhone X) (445ms)
       ✓ Should match baseline for tablet view (iPad) (423ms)
       ✓ Should match baseline for desktop view (1920x1080) (489ms)
-    
+
     18 passing (8s)
 ```
 
 **✅ Baselines Created**: Check `cypress/snapshots/base/` folder:
+
 ```
 cypress/snapshots/base/
 ├── login-page-default-state.png
@@ -1979,6 +2120,7 @@ cypress/snapshots/base/
 **🎯 ACTION**: Run tests again to verify snapshot comparison works.
 
 **▶️ Run in Terminal**:
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 ```
@@ -1986,6 +2128,7 @@ npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 **✅ Expected Result**: All 18 tests pass (no visual changes detected)
 
 **💡 What Happened**:
+
 - Cypress took new screenshots
 - Compared them pixel-by-pixel against baselines
 - Found 0 differences (within 5% threshold)
@@ -2002,23 +2145,26 @@ npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 **📁 Open File**: `cypress/e2e/ui/visual-regression.cy.ts`
 
 **✏️ TEMPORARILY ADD** this code to the first test:
+
 ```typescript
 it('Should match baseline for default login page', () => {
   cy.get('[data-test="login-button"]').should('be.visible');
-  
+
   // 🔥 SIMULATE CSS BUG: Make login button invisible
   cy.get('[data-test="login-button"]').invoke('css', 'opacity', '0');
-  
+
   VisualTestingPage.takeViewportSnapshot('login-page-default-state');
 });
 ```
 
 **▶️ Run the Test**:
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 ```
 
 **❌ Expected Result**: Test FAILS!
+
 ```
   1) Should match baseline for default login page
      AssertionError: Screenshot comparison failed!
@@ -2050,24 +2196,29 @@ npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 **How to Update Baselines**:
 
 **Option 1: Delete All Baselines (Nuclear Approach)**
+
 ```bash
 rm -rf cypress/snapshots/base/
 npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 ```
+
 ✅ All new baselines created
 
 ---
 
 **Option 2: Delete Specific Baseline (Surgical Approach)**
+
 ```bash
 rm cypress/snapshots/base/login-page-default-state.png
 npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 ```
+
 ✅ Only deleted baseline recreated
 
 ---
 
 **💡 Professional Workflow**:
+
 1. Make intentional UI change
 2. Run visual tests → they fail (expected)
 3. Review diff images to verify changes are correct
@@ -2083,18 +2234,21 @@ npx cypress run --spec "cypress/e2e/ui/visual-regression.cy.ts"
 **🎯 ACTION**: Add baselines to version control.
 
 **▶️ Run in Terminal**:
+
 ```bash
 git add cypress/snapshots/base/
 git commit -m "chore: Add visual regression test baselines"
 ```
 
 **💡 Why Commit Baselines?**
+
 - Team members get same baselines
 - CI/CD uses same baselines
 - Baseline changes tracked in Git history
 - Portfolio reviewers can see your baselines
 
 **✅ What NOT to Commit** (already in .gitignore):
+
 - `cypress/snapshots/actual/` (temporary)
 - `cypress/snapshots/diff/` (only created when tests fail)
 
@@ -2105,12 +2259,14 @@ git commit -m "chore: Add visual regression test baselines"
 **🎉 What You Built** (Portfolio-Quality Achievement):
 
 ✅ **Production-Ready Visual Testing**
+
 - 18 comprehensive visual regression tests
 - TypeScript-based implementation
 - Page Object Model architecture (VisualTestingPage.ts)
 - Professional baseline management with Git
 
 ✅ **Enterprise Testing Patterns**
+
 - Page state testing (default, error, success)
 - Responsive testing (mobile, tablet, desktop)
 - Component-level snapshots
@@ -2118,6 +2274,7 @@ git commit -m "chore: Add visual regression test baselines"
 - Flexible comparison thresholds
 
 ✅ **Technical Skills Demonstrated**
+
 - TypeScript advanced patterns (generics, const assertions)
 - Cypress plugin configuration
 - Git workflow for test artifacts
@@ -2127,6 +2284,7 @@ git commit -m "chore: Add visual regression test baselines"
 ---
 
 **📂 Your Project Structure Now**:
+
 ```
 CypressProject/
 ├── cypress/
@@ -2184,6 +2342,7 @@ When discussing this in interviews:
 ---
 
 **🚀 Next Steps**:
+
 - Run your visual tests regularly as you develop
 - Update baselines when UI changes are intentional
 - Add visual tests for new pages you create
@@ -2205,7 +2364,8 @@ When discussing this in interviews:
 
 **When to Use Percy**: Multi-browser testing, distributed teams, need visual approval workflows.
 
-**Prerequisites**: 
+**Prerequisites**:
+
 - Sign up at [percy.io](https://percy.io)
 - Create a project
 - Get your `PERCY_TOKEN`
@@ -2217,6 +2377,7 @@ When discussing this in interviews:
 **🎯 ACTION**: Install Percy packages.
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev @percy/cli @percy/cypress
 ```
@@ -2232,22 +2393,23 @@ npm install --save-dev @percy/cli @percy/cypress
 **📁 Create File**: `.percy.yml` (project root)
 
 **✂️ Copy This Advanced Config**:
+
 ```yaml
 version: 2
 # Percy Configuration - Enterprise Settings
 snapshot:
   # Test across 3 viewport sizes (mobile, tablet, desktop)
-  widths: 
-    - 375   # Mobile (iPhone X)
-    - 768   # Tablet (iPad)
-    - 1280  # Desktop
-  
+  widths:
+    - 375 # Mobile (iPhone X)
+    - 768 # Tablet (iPad)
+    - 1280 # Desktop
+
   # Minimum height for full-page captures
   min-height: 1024
-  
+
   # Enable Percy CSS for dynamic content control
   enable-javascript: true
-  
+
   # Percy-specific CSS to hide dynamic elements globally
   percy-css: |
     .timestamp,
@@ -2266,7 +2428,8 @@ discovery:
     - www.saucedemo.com
 ```
 
-**💡 What This Shows (Portfolio)**: 
+**💡 What This Shows (Portfolio)**:
+
 - Multi-viewport responsiveness testing
 - Dynamic content management
 - Cross-browser configuration knowledge
@@ -2279,6 +2442,7 @@ discovery:
 **📁 Open File**: `cypress/support/e2e.ts`
 
 **✏️ ADD** this import:
+
 ```typescript
 import '@percy/cypress';
 ```
@@ -2292,6 +2456,7 @@ import '@percy/cypress';
 **📁 Create New File**: `cypress/e2e/ui/visual-percy.cy.ts`
 
 **✂️ Copy This Portfolio-Quality Code**:
+
 ```typescript
 import LoginPage from '../../pages/LoginPage';
 import InventoryPage from '../../pages/InventoryPage';
@@ -2302,7 +2467,6 @@ import InventoryPage from '../../pages/InventoryPage';
  * Features: Responsive testing, Percy CSS, cross-browser snapshots
  */
 describe('Percy Visual Testing - Enterprise Patterns', () => {
-  
   /**
    * Example 1: Responsive Cross-Viewport Testing
    * Takes snapshots at mobile, tablet, and desktop sizes in ONE test
@@ -2311,10 +2475,10 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
     it('Should capture login page across all viewports', () => {
       LoginPage.open('/');
       cy.get('[data-test="login-button"]').should('be.visible');
-      
+
       // Percy automatically captures at all widths defined in .percy.yml
       cy.percySnapshot('Login Page - All Viewports', {
-        widths: [375, 768, 1280] // Mobile, Tablet, Desktop
+        widths: [375, 768, 1280], // Mobile, Tablet, Desktop
       });
     });
 
@@ -2322,10 +2486,10 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
       cy.url().should('include', '/inventory.html');
-      
+
       // Custom viewport configuration for specific test
       cy.percySnapshot('Inventory Page - Responsive', {
-        widths: [375, 768, 1024, 1920]  // 4 viewport sizes
+        widths: [375, 768, 1024, 1920], // 4 viewport sizes
       });
     });
   });
@@ -2339,7 +2503,7 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
       cy.url().should('include', '/inventory.html');
-      
+
       // Percy CSS hides elements ONLY in Percy snapshots,
       // not in actual test execution
       cy.percySnapshot('Inventory - Clean', {
@@ -2351,23 +2515,23 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
             /* Blur prices for demo purposes */
             filter: blur(5px);
           }
-        `
+        `,
       });
     });
 
     it('Should compare with and without dynamic elements', () => {
       LoginPage.open('/');
-      
+
       // Snapshot 1: With all elements
       cy.percySnapshot('Login - With All Elements');
-      
+
       // Snapshot 2: Hide error container for clean comparison
       cy.percySnapshot('Login - Clean UI', {
         percyCSS: `
           [data-test="error"] {
             visibility: hidden;
           }
-        `
+        `,
       });
     });
   });
@@ -2379,18 +2543,18 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
   describe('Component Snapshots', () => {
     it('Should snapshot login form component only', () => {
       LoginPage.open('/');
-      
+
       // Scope Percy snapshot to specific element
       cy.get('.login-box').percySnapshot('Login Form Component', {
         scope: '.login-box',
-        widths: [320, 768] // Component at different sizes
+        widths: [320, 768], // Component at different sizes
       });
     });
 
     it('Should snapshot product card components', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       // Snapshot first product card
       cy.get('.inventory_item').first().percySnapshot('Product Card Component');
     });
@@ -2404,7 +2568,7 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
     it('Should capture viewport only (above-the-fold)', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       // Default: Captures only visible viewport
       cy.percySnapshot('Inventory - Viewport Only');
     });
@@ -2412,10 +2576,10 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
     it('Should capture full page with scroll', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       // Full-page: Captures entire scrollable area
       cy.percySnapshot('Inventory - Full Page', {
-        fullPage: true
+        fullPage: true,
       });
     });
   });
@@ -2427,30 +2591,30 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
   describe('Advanced Percy Features', () => {
     it('Should use minimum height for consistent captures', () => {
       LoginPage.open('/');
-      
+
       cy.percySnapshot('Login - Fixed Height', {
-        minHeight: 1080,  // Ensures consistent height
-        widths: [1920]
+        minHeight: 1080, // Ensures consistent height
+        widths: [1920],
       });
     });
 
     it('Should enable JavaScript for dynamic rendering', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       // Wait for dynamic content to render
       cy.get('.inventory_list').should('be.visible');
-      
+
       cy.percySnapshot('Inventory - With JS Rendered Content', {
-        enableJavaScript: true
+        enableJavaScript: true,
       });
     });
 
     it('Should use custom snapshot name with environment', () => {
       const environment = Cypress.env('ENV') || 'staging';
-      
+
       LoginPage.open('/');
-      
+
       // Dynamic snapshot names for different environments
       cy.percySnapshot(`Login Page - ${environment.toUpperCase()}`);
     });
@@ -2463,7 +2627,7 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
   describe('Cross-Browser (Enterprise)', () => {
     it('Should demonstrate cross-browser snapshot syntax', () => {
       LoginPage.open('/');
-      
+
       // Percy handles cross-browser automatically via dashboard config
       // This snapshot will be tested in Chrome, Firefox, Edge (if configured)
       cy.percySnapshot('Login - Cross Browser Test', {
@@ -2473,11 +2637,11 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
       });
     });
   });
-
 });
 ```
 
 **💡 What This Demonstrates (Portfolio)**:
+
 - ✅ Responsive testing across 4+ viewport sizes
 - ✅ Percy CSS for dynamic content control
 - ✅ Component-level vs full-page snapshots
@@ -2494,16 +2658,19 @@ describe('Percy Visual Testing - Enterprise Patterns', () => {
 **🎯 ACTION**: Execute Percy visual tests.
 
 **▶️ Set Environment Variable**:
+
 ```bash
 export PERCY_TOKEN=your_percy_token_here
 ```
 
 **▶️ Run Percy**:
+
 ```bash
 npx percy exec -- cypress run --spec "cypress/e2e/ui/visual-percy.cy.ts"
 ```
 
 **✅ Expected Output**:
+
 ```
 [percy] Percy has started!
 [percy] Created build #1: https://percy.io/your-org/your-project/builds/123
@@ -2514,6 +2681,7 @@ npx percy exec -- cypress run --spec "cypress/e2e/ui/visual-percy.cy.ts"
 ```
 
 **📊 View Results**: Open the Percy dashboard link to see:
+
 - Side-by-side comparisons across viewports
 - Cross-browser diffs
 - Visual approval workflow
@@ -2521,6 +2689,7 @@ npx percy exec -- cypress run --spec "cypress/e2e/ui/visual-percy.cy.ts"
 ---
 
 **💼 Percy Portfolio Talking Points**:
+
 1. "Cross-browser visual testing across Chrome, Firefox, Edge"
 2. "Responsive testing at 4 viewport sizes simultaneously"
 3. "Percy CSS for dynamic content management"
@@ -2533,6 +2702,7 @@ npx percy exec -- cypress run --spec "cypress/e2e/ui/visual-percy.cy.ts"
 **When to Use Applitools**: Need intelligent visual validation, layout testing, dynamic content handling with AI.
 
 **Prerequisites**:
+
 - Sign up at [applitools.com](https://applitools.com)
 - Get your `APPLITOOLS_API_KEY`
 
@@ -2543,6 +2713,7 @@ npx percy exec -- cypress run --spec "cypress/e2e/ui/visual-percy.cy.ts"
 **🎯 ACTION**: Install Applitools Eyes for Cypress.
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev @applitools/eyes-cypress
 ```
@@ -2556,18 +2727,20 @@ npm install --save-dev @applitools/eyes-cypress
 **📁 Open File**: `cypress.config.ts`
 
 **✏️ ADD** import at top:
+
 ```typescript
 import { eyesPlugin } from '@applitools/eyes-cypress';
 ```
 
 **✏️ UPDATE** setupNodeEvents:
+
 ```typescript
 setupNodeEvents(on, config) {
   // ... your existing code (database, visual testing) ...
-  
+
   // Applitools Eyes Plugin
   eyesPlugin(on, config);
-  
+
   return config;
 },
 ```
@@ -2575,6 +2748,7 @@ setupNodeEvents(on, config) {
 **📁 Open File**: `cypress/support/e2e.ts`
 
 **✏️ ADD** import:
+
 ```typescript
 import '@applitools/eyes-cypress/commands';
 ```
@@ -2586,42 +2760,43 @@ import '@applitools/eyes-cypress/commands';
 **📁 Create File**: `applitools.config.js` (project root)
 
 **✂️ Copy This Advanced Config**:
+
 ```javascript
 module.exports = {
   // Applitools Advanced Configuration
-  
+
   // Test concurrency (parallel tests)
   testConcurrency: 5,
-  
+
   // Browser configurations for cross-browser testing
   browser: [
     { width: 1920, height: 1080, name: 'chrome' },
     { width: 1920, height: 1080, name: 'firefox' },
     { width: 1920, height: 1080, name: 'edgechromium' },
     { deviceName: 'iPhone X', screenOrientation: 'portrait' },
-    { deviceName: 'iPad Pro', screenOrientation: 'landscape' }
+    { deviceName: 'iPad Pro', screenOrientation: 'landscape' },
   ],
-  
+
   // Batch configuration
   batchName: 'Cypress Visual Tests - Applitools',
-  
+
   // Match level (how strict the comparison is)
   matchLevel: 'Strict', // Options: Strict, Content, Layout, Exact
-  
+
   // Ignore changes in these regions
   ignoreDisplacements: true,
-  
+
   // Save images for debugging
   saveDebugData: true,
-  
+
   // Server URL (optional, for on-premise)
   // serverUrl: 'https://your-applitools-server.com',
-  
+
   // Accessibility validation
   accessibilityValidation: {
     level: 'AA',
-    guidelinesVersion: 'WCAG_2_1'
-  }
+    guidelinesVersion: 'WCAG_2_1',
+  },
 };
 ```
 
@@ -2634,6 +2809,7 @@ module.exports = {
 **📁 Create File**: `cypress/e2e/ui/visual-applitools.cy.ts`
 
 **✂️ Copy This Advanced Code**:
+
 ```typescript
 import LoginPage from '../../pages/LoginPage';
 import InventoryPage from '../../pages/InventoryPage';
@@ -2647,7 +2823,6 @@ import InventoryPage from '../../pages/InventoryPage';
  * - Cross-browser/device testing
  */
 describe('Applitools Visual Testing - AI-Powered', () => {
-  
   // Open Eyes before each test
   beforeEach(() => {
     cy.eyesOpen({
@@ -2656,8 +2831,8 @@ describe('Applitools Visual Testing - AI-Powered', () => {
       browser: [
         { width: 1920, height: 1080, name: 'chrome' },
         { width: 1280, height: 1024, name: 'firefox' },
-        { deviceName: 'iPhone X' }
-      ]
+        { deviceName: 'iPhone X' },
+      ],
     });
   });
 
@@ -2674,24 +2849,24 @@ describe('Applitools Visual Testing - AI-Powered', () => {
     it('Should validate login page with AI visual recognition', () => {
       LoginPage.open('/');
       cy.get('[data-test="login-button"]').should('be.visible');
-      
+
       // Applitools AI checks entire window
       cy.eyesCheckWindow({
         tag: 'Login Page - Full Window',
         target: 'window',
-        fully: true  // Full-page scroll capture
+        fully: true, // Full-page scroll capture
       });
     });
 
     it('Should validate inventory with scrolling', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       cy.eyesCheckWindow({
         tag: 'Inventory Page - Full Scroll',
         target: 'window',
         fully: true,
-        scrollRootElement: '.inventory_list'
+        scrollRootElement: '.inventory_list',
       });
     });
   });
@@ -2704,7 +2879,7 @@ describe('Applitools Visual Testing - AI-Powered', () => {
     it('Should ignore shopping cart badge (dynamic)', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       cy.eyesCheckWindow({
         tag: 'Inventory - Ignore Cart Badge',
         target: 'window',
@@ -2712,20 +2887,20 @@ describe('Applitools Visual Testing - AI-Powered', () => {
         // AI ignores these elements during comparison
         ignoreRegions: [
           { selector: '.shopping_cart_badge' },
-          { selector: '.inventory_item_price' }  // Prices might change
-        ]
+          { selector: '.inventory_item_price' }, // Prices might change
+        ],
       });
     });
 
     it('Should ignore regions by coordinates', () => {
       LoginPage.open('/');
-      
+
       cy.eyesCheckWindow({
         tag: 'Login - Ignore Footer',
         ignoreRegions: [
           // Ignore footer area by pixel coordinates
-          { left: 0, top: 500, width: 1920, height: 200 }
-        ]
+          { left: 0, top: 500, width: 1920, height: 200 },
+        ],
       });
     });
   });
@@ -2738,15 +2913,15 @@ describe('Applitools Visual Testing - AI-Powered', () => {
     it('Should validate layout structure only (not exact pixels)', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       cy.eyesCheckWindow({
         tag: 'Inventory - Layout Validation',
         target: 'window',
         // Layout regions: AI checks structure, allows content changes
         layoutRegions: [
-          { selector: '.inventory_list' },      // Product list layout
-          { selector: '.header_secondary_container' }  // Filter/sort bar
-        ]
+          { selector: '.inventory_list' }, // Product list layout
+          { selector: '.header_secondary_container' }, // Filter/sort bar
+        ],
       });
     });
   });
@@ -2758,30 +2933,30 @@ describe('Applitools Visual Testing - AI-Powered', () => {
   describe('Match Levels - Comparison Strictness', () => {
     it('Should use STRICT match (pixel-perfect)', () => {
       LoginPage.open('/');
-      
+
       cy.eyesCheckWindow({
         tag: 'Login - Strict Match',
         target: 'window',
-        matchLevel: 'Strict'  // Pixel-perfect comparison
+        matchLevel: 'Strict', // Pixel-perfect comparison
       });
     });
 
     it('Should use LAYOUT match (structure only)', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       cy.eyesCheckWindow({
         tag: 'Inventory - Layout Match',
-        matchLevel: 'Layout'  // Only validates layout structure
+        matchLevel: 'Layout', // Only validates layout structure
       });
     });
 
     it('Should use CONTENT match (ignore colors/fonts)', () => {
       LoginPage.open('/');
-      
+
       cy.eyesCheckWindow({
         tag: 'Login - Content Match',
-        matchLevel: 'Content'  // Ignores styling, checks content
+        matchLevel: 'Content', // Ignores styling, checks content
       });
     });
   });
@@ -2794,7 +2969,7 @@ describe('Applitools Visual Testing - AI-Powered', () => {
     it('Should allow header to float within max offset', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       cy.eyesCheckWindow({
         tag: 'Inventory - Floating Header',
         floatingRegions: [
@@ -2803,9 +2978,9 @@ describe('Applitools Visual Testing - AI-Powered', () => {
             maxUpOffset: 10,
             maxDownOffset: 10,
             maxLeftOffset: 5,
-            maxRightOffset: 5
-          }
-        ]
+            maxRightOffset: 5,
+          },
+        ],
       });
     });
   });
@@ -2817,15 +2992,15 @@ describe('Applitools Visual Testing - AI-Powered', () => {
   describe('Accessibility Validation', () => {
     it('Should validate WCAG 2.1 AA compliance with visual check', () => {
       LoginPage.open('/');
-      
+
       cy.eyesCheckWindow({
         tag: 'Login - With Accessibility Check',
         target: 'window',
         // Enable accessibility validation
         accessibilitySettings: {
           level: 'AA',
-          guidelinesVersion: 'WCAG_2_1'
-        }
+          guidelinesVersion: 'WCAG_2_1',
+        },
       });
     });
   });
@@ -2837,24 +3012,24 @@ describe('Applitools Visual Testing - AI-Powered', () => {
   describe('Component Visual Validation', () => {
     it('Should check login form component only', () => {
       LoginPage.open('/');
-      
+
       // Check specific element instead of full window
       cy.get('.login-box').eyesCheckWindow({
         tag: 'Login Form Component',
         target: 'region',
-        selector: '.login-box'
+        selector: '.login-box',
       });
     });
 
     it('Should check each product card', () => {
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       // Check first product card
       cy.get('.inventory_item').first().eyesCheckWindow({
         tag: 'Product Card Component',
         target: 'region',
-        selector: '.inventory_item:first-child'
+        selector: '.inventory_item:first-child',
       });
     });
   });
@@ -2867,12 +3042,12 @@ describe('Applitools Visual Testing - AI-Powered', () => {
     it('Should validate across Chrome, Firefox, and iPhone X', () => {
       // Browser configuration from beforeEach applies here
       LoginPage.open('/');
-      
+
       cy.eyesCheckWindow({
         tag: 'Login - Cross Browser',
-        target: 'window'
+        target: 'window',
       });
-      
+
       // Applitools will test this in:
       // - Chrome Desktop (1920x1080)
       // - Firefox Desktop (1280x1024)
@@ -2888,21 +3063,21 @@ describe('Applitools Visual Testing - AI-Powered', () => {
     it('Should be part of named batch', () => {
       // Batch name configured in applitools.config.js
       // All tests run together appear in same batch in dashboard
-      
+
       LoginPage.open('/');
       LoginPage.login('standard_user', 'secret_sauce');
-      
+
       cy.eyesCheckWindow({
         tag: 'Inventory - Batched Test',
-        target: 'window'
+        target: 'window',
       });
     });
   });
-
 });
 ```
 
 **💡 What This Demonstrates (Portfolio)**:
+
 - ✅ AI-powered visual validation (intelligent comparison)
 - ✅ Ignore regions for dynamic content
 - ✅ Layout regions for flexible validation
@@ -2920,16 +3095,19 @@ describe('Applitools Visual Testing - AI-Powered', () => {
 **🎯 ACTION**: Execute Applitools visual tests.
 
 **▶️ Set API Key**:
+
 ```bash
 export APPLITOOLS_API_KEY=your_applitools_key_here
 ```
 
 **▶️ Run Tests**:
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.ts"
 ```
 
 **✅ Expected Output**:
+
 ```
 [Eyes] Test Started: Login Page - Full Window
 [Eyes] Check Window: Login Page - Full Window
@@ -2938,6 +3116,7 @@ npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.ts"
 ```
 
 **📊 View Results**: Open the Applitools dashboard to see:
+
 - AI-powered visual differences
 - Layout vs Content vs Strict comparisons
 - Cross-browser/device results
@@ -2946,6 +3125,7 @@ npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.ts"
 ---
 
 **💼 Applitools Portfolio Talking Points**:
+
 1. "AI-powered visual validation with intelligent diff detection"
 2. "Multiple match levels: Strict pixel-perfect vs Layout structure"
 3. "Ignore/Layout/Floating regions for dynamic content handling"
@@ -2959,10 +3139,12 @@ npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.ts"
 **🎉 What You've Learned**:
 
 **Primary Implementation** (Production-Ready):
+
 - ✅ **cypress-image-diff-js**: 18 comprehensive tests, TypeScript + POM, Git workflows
 - Portfolio Value: Shows you can build production testing infrastructure
 
 **Enterprise Tools** (Advanced Knowledge):
+
 - ✅ **Percy**: Responsive testing, Percy CSS, cross-browser snapshots
 - ✅ **Applitools**: AI-powered validation, match levels, accessibility testing
 - Portfolio Value: Shows awareness of enterprise-scale solutions
@@ -2971,28 +3153,29 @@ npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.ts"
 
 **📊 Compare Your Options**:
 
-| Feature | cypress-image-diff-js | Percy | Applitools |
-|---------|----------------------|-------|------------|
-| **Cost** | Free | Paid (5k snapshots/mo free) | Paid (Free trial) |
-| **Setup** | 5 min | 10 min | 15 min |
-| **Tests You Wrote** | 18 tests | 12 tests | 18 tests |
-| **Cross-Browser** | No (local only) | Yes (Chrome, Firefox, Edge) | Yes (Chrome, Firefox, Edge, Mobile) |
-| **AI Detection** | No | No | Yes |
-| **Portfolio Value** | ⭐⭐⭐⭐⭐ (hands-on implementation) | ⭐⭐⭐⭐ (industry tool) | ⭐⭐⭐⭐⭐ (cutting-edge AI) |
+| Feature             | cypress-image-diff-js                | Percy                       | Applitools                          |
+| ------------------- | ------------------------------------ | --------------------------- | ----------------------------------- |
+| **Cost**            | Free                                 | Paid (5k snapshots/mo free) | Paid (Free trial)                   |
+| **Setup**           | 5 min                                | 10 min                      | 15 min                              |
+| **Tests You Wrote** | 18 tests                             | 12 tests                    | 18 tests                            |
+| **Cross-Browser**   | No (local only)                      | Yes (Chrome, Firefox, Edge) | Yes (Chrome, Firefox, Edge, Mobile) |
+| **AI Detection**    | No                                   | No                          | Yes                                 |
+| **Portfolio Value** | ⭐⭐⭐⭐⭐ (hands-on implementation) | ⭐⭐⭐⭐ (industry tool)    | ⭐⭐⭐⭐⭐ (cutting-edge AI)        |
 
 ---
 
 **💼 Your Complete Portfolio Story** (All 3 Tools):
 
-*"For visual regression testing in my Cypress project, I implemented a comprehensive multi-tool approach:*
+_"For visual regression testing in my Cypress project, I implemented a comprehensive multi-tool approach:_
 
-1. ***Local Foundation** (cypress-image-diff-js): Built a production-ready visual testing framework with 18 TypeScript tests using Page Object Model architecture. Managed baselines in Git, implemented responsive testing across 3 viewports, and created reusable visual testing utilities.*
+1. **\*Local Foundation** (cypress-image-diff-js): Built a production-ready visual testing framework with 18 TypeScript tests using Page Object Model architecture. Managed baselines in Git, implemented responsive testing across 3 viewports, and created reusable visual testing utilities.\*
 
-2. ***Enterprise Cross-Browser** (Percy): Integrated Percy for scalable visual testing across Chrome, Firefox, and Edge browsers. Configured responsive snapshots at 4 viewport sizes and used Percy CSS for dynamic content management.*
+2. **\*Enterprise Cross-Browser** (Percy): Integrated Percy for scalable visual testing across Chrome, Firefox, and Edge browsers. Configured responsive snapshots at 4 viewport sizes and used Percy CSS for dynamic content management.\*
 
-3. ***AI-Powered Validation** (Applitools): Implemented intelligent visual testing with AI-powered diff detection. Utilized advanced features including layout regions, match levels (Strict/Layout/Content), and WCAG 2.1 AA accessibility validation."*
+3. **\*AI-Powered Validation** (Applitools): Implemented intelligent visual testing with AI-powered diff detection. Utilized advanced features including layout regions, match levels (Strict/Layout/Content), and WCAG 2.1 AA accessibility validation."\*
 
-**This demonstrates**: 
+**This demonstrates**:
+
 - Deep technical implementation skills (cypress-image-diff-js)
 - Enterprise tool proficiency (Percy)
 - Cutting-edge technology awareness (Applitools AI)
@@ -3010,15 +3193,16 @@ npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.ts"
 
 ---
 
-| Tool | Type | Pricing | Best For |
-|------|------|---------|----------|
-| **Percy** | Cloud | Free tier + Paid | Enterprise teams |
-| **Applitools** | Cloud | Free tier + Paid | AI-powered testing |
-| **Happo** | Cloud | Free tier + Paid | Cross-browser testing |
-| **Chromatic** | Cloud | Free tier + Paid | Storybook users |
-| **cypress-image-diff-js** | Local | Free | Offline/learning |
+| Tool                      | Type  | Pricing          | Best For              |
+| ------------------------- | ----- | ---------------- | --------------------- |
+| **Percy**                 | Cloud | Free tier + Paid | Enterprise teams      |
+| **Applitools**            | Cloud | Free tier + Paid | AI-powered testing    |
+| **Happo**                 | Cloud | Free tier + Paid | Cross-browser testing |
+| **Chromatic**             | Cloud | Free tier + Paid | Storybook users       |
+| **cypress-image-diff-js** | Local | Free             | Offline/learning      |
 
 **Choose based on your needs:**
+
 - **Need enterprise features?** → Percy or Applitools
 - **Using Storybook?** → Chromatic
 - **Free solution?** → cypress-image-diff-js
@@ -3033,6 +3217,7 @@ npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.ts"
 **🎯 ACTION**: Install Percy for Cypress.
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev @percy/cli @percy/cypress
 ```
@@ -3046,6 +3231,7 @@ npm install --save-dev @percy/cli @percy/cypress
 **📁 Open File**: `CypressMasterclass/cypress/support/e2e.js`
 
 **✏️ ADD This Import**:
+
 ```javascript
 import '@percy/cypress';
 ```
@@ -3053,6 +3239,7 @@ import '@percy/cypress';
 **📁 Create File**: `CypressMasterclass/.percy.yml`
 
 **✂️ Copy This Config**:
+
 ```yaml
 version: 2
 snapshot:
@@ -3063,7 +3250,8 @@ snapshot:
   min-height: 1024
 ```
 
-**💡 What This Does**: 
+**💡 What This Does**:
+
 - Adds `cy.percySnapshot()` command to Cypress
 - Configures responsive testing (mobile, tablet, desktop)
 
@@ -3074,6 +3262,7 @@ snapshot:
 **📁 Create File**: `CypressMasterclass/cypress/e2e/ui/visual-percy.cy.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 describe('Visual Testing with Percy', () => {
   beforeEach(() => {
@@ -3088,7 +3277,7 @@ describe('Visual Testing with Percy', () => {
   // Example 2: Responsive Snapshots
   it('Example 2: Responsive Login', () => {
     cy.percySnapshot('Login Page - Responsive', {
-      widths: [375, 768, 1280]
+      widths: [375, 768, 1280],
     });
   });
 
@@ -3121,16 +3310,19 @@ describe('Visual Testing with Percy', () => {
 **1. Sign up**: Visit [percy.io](https://percy.io)  
 **2. Create project**: Get your `PERCY_TOKEN`  
 **3. Export token**:
+
 ```bash
 export PERCY_TOKEN=your_token_here
 ```
 
 **4. Run tests**:
+
 ```bash
 npx percy exec -- cypress run --spec "cypress/e2e/ui/visual-percy.cy.js"
 ```
 
-**✅ Expected Result**: 
+**✅ Expected Result**:
+
 - Screenshots uploaded to Percy dashboard
 - Visual comparisons shown in web UI
 - First run creates baselines
@@ -3142,6 +3334,7 @@ npx percy exec -- cypress run --spec "cypress/e2e/ui/visual-percy.cy.js"
 ### Step 6.1B: Install Applitools
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev @applitools/eyes-cypress
 ```
@@ -3153,18 +3346,20 @@ npm install --save-dev @applitools/eyes-cypress
 **📁 Open File**: `CypressMasterclass/cypress.config.js`
 
 **✏️ MODIFY** - Add import at top:
+
 ```javascript
 const { eyesPlugin } = require('@applitools/eyes-cypress');
 ```
 
 **✏️ UPDATE** - Modify setupNodeEvents:
+
 ```javascript
 setupNodeEvents(on, config) {
   // ... existing code ...
-  
+
   // Add Applitools
   eyesPlugin(on, config);
-  
+
   return config;
 },
 ```
@@ -3172,6 +3367,7 @@ setupNodeEvents(on, config) {
 **📁 Open File**: `CypressMasterclass/cypress/support/e2e.js`
 
 **✏️ ADD**:
+
 ```javascript
 import '@applitools/eyes-cypress/commands';
 ```
@@ -3183,6 +3379,7 @@ import '@applitools/eyes-cypress/commands';
 **📁 Create File**: `CypressMasterclass/cypress/e2e/ui/visual-applitools.cy.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 describe('Visual Testing with Applitools', () => {
   beforeEach(() => {
@@ -3207,7 +3404,7 @@ describe('Visual Testing with Applitools', () => {
       tag: 'Login Clean',
       target: 'window',
       fully: true,
-      ignoreRegions: ['.dynamic-element']
+      ignoreRegions: ['.dynamic-element'],
     });
   });
 
@@ -3219,6 +3416,7 @@ describe('Visual Testing with Applitools', () => {
 ```
 
 **▶️ Run**:
+
 ```bash
 export APPLITOOLS_API_KEY=your_key_here
 npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.js"
@@ -3231,6 +3429,7 @@ npx cypress run --spec "cypress/e2e/ui/visual-applitools.cy.js"
 ### Step 6.1C: Install Happo
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev happo.io happo-cypress
 ```
@@ -3242,6 +3441,7 @@ npm install --save-dev happo.io happo-cypress
 **📁 Create File**: `CypressMasterclass/.happo.js`
 
 **✂️ Copy This Config**:
+
 ```javascript
 const { RemoteBrowserTarget } = require('happo.io');
 
@@ -3249,10 +3449,10 @@ module.exports = {
   apiKey: process.env.HAPPO_API_KEY,
   apiSecret: process.env.HAPPO_API_SECRET,
   project: 'cypress-masterclass',
-  
+
   targets: {
-    'chrome': new RemoteBrowserTarget('chrome', { viewport: '1024x768' }),
-    'firefox': new RemoteBrowserTarget('firefox', { viewport: '1024x768' }),
+    chrome: new RemoteBrowserTarget('chrome', { viewport: '1024x768' }),
+    firefox: new RemoteBrowserTarget('firefox', { viewport: '1024x768' }),
   },
 };
 ```
@@ -3260,6 +3460,7 @@ module.exports = {
 **📁 Open File**: `CypressMasterclass/cypress/support/e2e.js`
 
 **✏️ ADD**:
+
 ```javascript
 import 'happo-cypress';
 ```
@@ -3271,6 +3472,7 @@ import 'happo-cypress';
 **📁 Create File**: `CypressMasterclass/cypress/e2e/ui/visual-happo.cy.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 describe('Visual Testing with Happo', () => {
   it('Example 1: Login Page', () => {
@@ -3287,7 +3489,7 @@ describe('Visual Testing with Happo', () => {
     cy.visit('/');
     cy.viewport(375, 667);
     cy.happoScreenshot({ component: 'Mobile Login' });
-    
+
     cy.viewport(1280, 720);
     cy.happoScreenshot({ component: 'Desktop Login' });
   });
@@ -3295,6 +3497,7 @@ describe('Visual Testing with Happo', () => {
 ```
 
 **▶️ Run**:
+
 ```bash
 export HAPPO_API_KEY=your_key
 export HAPPO_API_SECRET=your_secret
@@ -3308,6 +3511,7 @@ npx happo-ci-cypress
 ### Step 6.1D: Install Chromatic
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev chromatic @chromatic-com/cypress
 ```
@@ -3319,11 +3523,13 @@ npm install --save-dev chromatic @chromatic-com/cypress
 **📁 Open File**: `CypressMasterclass/cypress.config.js`
 
 **✏️ ADD** import:
+
 ```javascript
 const { installPlugin } = require('@chromatic-com/cypress');
 ```
 
 **✏️ UPDATE** setupNodeEvents:
+
 ```javascript
 setupNodeEvents(on, config) {
   // ... existing code ...
@@ -3335,6 +3541,7 @@ setupNodeEvents(on, config) {
 **📁 Open File**: `CypressMasterclass/cypress/support/e2e.js`
 
 **✏️ ADD**:
+
 ```javascript
 import { installPlugin } from '@chromatic-com/cypress';
 installPlugin();
@@ -3347,6 +3554,7 @@ installPlugin();
 **📁 Create File**: `CypressMasterclass/cypress/e2e/ui/visual-chromatic.cy.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 describe('Visual Testing with Chromatic', () => {
   it('Example 1: Full Page', () => {
@@ -3362,13 +3570,14 @@ describe('Visual Testing with Chromatic', () => {
   it('Example 3: Custom Clip', () => {
     cy.visit('/');
     cy.takeSnapshot('Login Header', {
-      clip: { x: 0, y: 0, width: 1280, height: 200 }
+      clip: { x: 0, y: 0, width: 1280, height: 200 },
     });
   });
 });
 ```
 
 **▶️ Run**:
+
 ```bash
 export CHROMATIC_PROJECT_TOKEN=your_token
 CYPRESS_ENABLE_CHROMATIC=1 npx cypress run --spec "cypress/e2e/ui/visual-chromatic.cy.js"
@@ -3384,6 +3593,7 @@ npx chromatic --cypress
 ### Step 6.1E: Install cypress-image-diff-js
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev cypress-image-diff-js
 ```
@@ -3397,18 +3607,20 @@ npm install --save-dev cypress-image-diff-js
 **📁 Open File**: `CypressMasterclass/cypress.config.js`
 
 **✏️ MODIFY** - Add import at top:
+
 ```javascript
 const getCompareSnapshotsPlugin = require('cypress-image-diff-js/plugin');
 ```
 
 **✏️ UPDATE** - Modify setupNodeEvents:
+
 ```javascript
 setupNodeEvents(on, config) {
   // ... existing database task code ...
-  
+
   // Add visual testing plugin
   getCompareSnapshotsPlugin(on, config);
-  
+
   return config;
 },
 ```
@@ -3416,11 +3628,13 @@ setupNodeEvents(on, config) {
 **📁 Open File**: `CypressMasterclass/cypress/support/e2e.js`
 
 **✏️ ADD This Import**:
+
 ```javascript
 import 'cypress-image-diff-js/command';
 ```
 
-**💡 What This Does**: 
+**💡 What This Does**:
+
 - Adds `cy.compareSnapshot()` command to Cypress
 - Enables local screenshot comparison without cloud services
 
@@ -3431,11 +3645,13 @@ import 'cypress-image-diff-js/command';
 **📁 Create File**: `CypressMasterclass/cypress/e2e/ui/visual.cy.js`
 
 **💡 How It Works**:
+
 1. **First run**: Takes screenshot → saves as "baseline" in `cypress/snapshots/base/`
 2. **Future runs**: Compares current screenshot to baseline → Fails if pixels differ beyond threshold
 3. **Diff images**: Saved to `cypress/snapshots/diff/` when differences found
 
 **✂️ Copy This Code Into the File**:
+
 ```javascript
 describe('Visual Regression Patterns', () => {
   beforeEach(() => {
@@ -3449,7 +3665,9 @@ describe('Visual Regression Patterns', () => {
 
   // Example 2: Component Level
   it('Example 2: Login Button State', () => {
-    cy.get('[data-test="login-button"]').compareSnapshot('login-button-default');
+    cy.get('[data-test="login-button"]').compareSnapshot(
+      'login-button-default'
+    );
   });
 
   // Example 3: Error State
@@ -3475,8 +3693,8 @@ describe('Visual Regression Patterns', () => {
   it('Example 6: Ignore Dynamic Content', () => {
     cy.compareSnapshot('login-clean', {
       screenshotConfig: {
-        blackout: ['.timestamp', '.dynamic-ad']
-      }
+        blackout: ['.timestamp', '.dynamic-ad'],
+      },
     });
   });
 
@@ -3484,7 +3702,7 @@ describe('Visual Regression Patterns', () => {
   it('Example 7: Full Page Capture', () => {
     cy.visit('/inventory.html');
     cy.compareSnapshot('inventory-full', {
-      capture: 'fullPage'
+      capture: 'fullPage',
     });
   });
 
@@ -3500,14 +3718,15 @@ describe('Visual Regression Patterns', () => {
 ```
 
 **💡 Configuration Options**:
+
 ```javascript
 cy.compareSnapshot('test-name', {
-  errorThreshold: 0.1,        // Allow 10% difference
-  capture: 'fullPage',        // 'fullPage', 'viewport', or 'base'
+  errorThreshold: 0.1, // Allow 10% difference
+  capture: 'fullPage', // 'fullPage', 'viewport', or 'base'
   screenshotConfig: {
-    blackout: ['.ads'],       // Hide elements
-    clip: { x: 0, y: 0, width: 800, height: 600 }
-  }
+    blackout: ['.ads'], // Hide elements
+    clip: { x: 0, y: 0, width: 800, height: 600 },
+  },
 });
 ```
 
@@ -3518,19 +3737,23 @@ cy.compareSnapshot('test-name', {
 **🎯 ACTION**: Execute the visual regression tests.
 
 **Option 1: Interactive Mode (Visual)**
+
 ```bash
 npx cypress open
 ```
+
 1. Select **E2E Testing** → **Chrome**
 2. Click on `visual.cy.js`
 3. Watch the tests run!
 
 **Option 2: Headless Mode (Terminal)**
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/visual.cy.js"
 ```
 
 **✅ Expected Result**:
+
 - **First Run**: All tests PASS (Baselines created in `cypress/snapshots/base/`)
 - **Second Run**: All tests PASS (Compared against baselines, no changes)
 - **Diff Location**: `cypress/snapshots/diff/` (only created when differences found)
@@ -3540,6 +3763,7 @@ npx cypress run --spec "cypress/e2e/ui/visual.cy.js"
 ### Step 6.5E: Update Baseline (When Intentional Changes Made)
 
 **💡 When to update baselines**:
+
 - You intentionally changed the UI design
 - Updated CSS, layout, or colors
 - Fixed a visual bug
@@ -3547,6 +3771,7 @@ npx cypress run --spec "cypress/e2e/ui/visual.cy.js"
 **🎯 ACTION**: Delete old baselines to create new ones.
 
 **▶️ Run in Terminal**:
+
 ```bash
 # Delete all baselines
 rm -rf cypress/snapshots/base/
@@ -3556,6 +3781,7 @@ npx cypress run --spec "cypress/e2e/ui/visual.cy.js"
 ```
 
 **Alternative**: Delete specific snapshots:
+
 ```bash
 rm cypress/snapshots/base/login-page-desktop.png
 ```
@@ -3574,6 +3800,7 @@ rm cypress/snapshots/base/login-page-desktop.png
    - **Diff**: `cypress/snapshots/diff/test-name.png` (highlighted differences)
 
 **💡 Pro Tip**: Add to `.gitignore`:
+
 ```
 cypress/snapshots/actual/
 cypress/snapshots/diff/
@@ -3586,36 +3813,42 @@ Keep only `base/` in version control!
 ## Summary: Which Tool Should You Use?
 
 ### Use **Percy** if:
+
 ✅ You need enterprise-grade visual testing  
 ✅ Cross-browser support is critical  
-✅ Budget allows for paid service  
+✅ Budget allows for paid service
 
 ### Use **Applitools** if:
+
 ✅ You need AI-powered smart diffing  
 ✅ Complex UIs with dynamic content  
-✅ Want to reduce false positives  
+✅ Want to reduce false positives
 
 ### Use **Happo** if:
+
 ✅ Straightforward cross-browser testing  
 ✅ Good CI integration needed  
-✅ Moderate budget  
+✅ Moderate budget
 
 ### Use **Chromatic** if:
+
 ✅ Already using Storybook  
 ✅ Component + E2E testing in one place  
-✅ Want interactive debugging  
+✅ Want interactive debugging
 
 ### Use **cypress-image-diff-js** if:
+
 ✅ You want a free solution  
 ✅ Can work offline  
 ✅ Learning/POC projects  
-✅ Comfortable managing baselines in Git  
+✅ Comfortable managing baselines in Git
 
 ---
 
 ## Best Practices (All Tools)
 
 ### 1. Wait for Content to Load
+
 ```javascript
 cy.visit('/');
 cy.get('.main-content').should('be.visible');
@@ -3624,21 +3857,23 @@ cy.compareSnapshot('page-loaded'); // or cy.percySnapshot(), etc.
 ```
 
 ### 2. Handle Dynamic Content
+
 ```javascript
 // Option 1: Blackout elements
 cy.compareSnapshot('dashboard', {
   screenshotConfig: {
-    blackout: ['.timestamp', '.live-counter']
-  }
+    blackout: ['.timestamp', '.live-counter'],
+  },
 });
 
 // Option 2: Percy CSS hiding
 cy.percySnapshot('Dashboard', {
-  percyCSS: '.timestamp { opacity: 0; }'
+  percyCSS: '.timestamp { opacity: 0; }',
 });
 ```
 
 ### 3. Use Consistent Viewport Sizes
+
 ```javascript
 beforeEach(() => {
   cy.viewport(1280, 720); // Desktop standard
@@ -3646,6 +3881,7 @@ beforeEach(() => {
 ```
 
 ### 4. Organize Snapshots with Descriptive Names
+
 ```javascript
 cy.compareSnapshot('login-page-empty-state');
 cy.compareSnapshot('login-page-with-error');
@@ -3653,6 +3889,7 @@ cy.compareSnapshot('login-page-success');
 ```
 
 ### 5. Run Visual Tests in CI
+
 ```yaml
 # Example GitHub Actions (.github/workflows/visual-tests.yml)
 - name: Run Visual Tests
@@ -3666,12 +3903,14 @@ cy.compareSnapshot('login-page-success');
 ### ✅ Chapter 6 Complete!
 
 **🎉 What You've Learned**:
+
 - ✅ 5 modern visual testing tools for Cypress 15
 - ✅ How to choose the right tool for your needs
 - ✅ Configuration and setup for each option
 - ✅ Best practices for visual regression testing
 
 **📊 Comparison**:
+
 - **Cloud Services** (Percy, Applitools, Happo, Chromatic): Best for teams, cross-browser, requires budget
 - **Local Tools** (cypress-image-diff-js): Best for learning, free, offline-capable
 
@@ -3680,7 +3919,6 @@ cy.compareSnapshot('login-page-success');
 **➡️ Next**: Proceed to Chapter 7 (Mobile & Performance)
 
 ---
-
 
 ### Chapter 7: Mobile & Performance
 
@@ -3696,6 +3934,7 @@ cy.compareSnapshot('login-page-success');
 **🎯 ACTION**: Install the Cypress Audit library.
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev cypress-audit
 ```
@@ -3711,15 +3950,17 @@ npm install --save-dev cypress-audit
 **📁 Open File**: `CypressMasterclass/cypress.config.js`
 
 **✏️ ADD** this import at the top:
+
 ```javascript
 const { lighthouse, prepareAudit } = require('cypress-audit');
 ```
 
 **✏️ MODIFY** the `setupNodeEvents` section:
+
 ```javascript
 setupNodeEvents(on, config) {
   // ... existing code (database, visual regression) ...
-  
+
   // Lighthouse Setup
   on('before:browser:launch', (browser = {}, launchOptions) => {
     prepareAudit(launchOptions);
@@ -3745,6 +3986,7 @@ setupNodeEvents(on, config) {
 **📁 Open File**: `CypressMasterclass/cypress/support/commands.js`
 
 **✏️ ADD** this line at the end:
+
 ```javascript
 import 'cypress-audit/commands';
 ```
@@ -3765,84 +4007,87 @@ import 'cypress-audit/commands';
 import LoginPage from '../../pages/LoginPage';
 
 describe('Performance & Mobile Patterns', () => {
-  // Example 1: Mobile Viewport Emulation
-  it('Example 1: iPhone X Viewport', () => {
-    cy.viewport('iphone-x');
-    LoginPage.open('/');
-    cy.get('.login_logo').should('be.visible');
-  });
-
-  // Example 2: Lighthouse Audit (Performance Score)
-  it('Example 2: Lighthouse Performance > 90', () => {
-    LoginPage.open('/');
-    cy.lighthouse({
-      performance: 90,
-      accessibility: 90,
-      'best-practices': 90,
-      seo: 90,
-    });
-  });
-
-  // Example 3: First Contentful Paint (Threshold)
-  it('Example 3: FCP < 2000ms', () => {
-    LoginPage.open('/');
-    cy.lighthouse(
-      {
-        performance: 85,
-      },
-      {
-        formFactor: 'desktop',
-        screenEmulation: {
-          mobile: false,
-          width: 1350,
-          height: 940,
-          deviceScaleFactor: 1,
-          disabled: false,
-        },
-      }
-    );
-  });
-
-  // Example 4: PWA Validation
-  it('Example 4: Validates PWA standards', () => {
-    LoginPage.open('/');
-    cy.lighthouse({
-      pwa: 50, // Threshold
-    });
-  });
-
-  **💡 Network interception**:
-
-  **`cy.intercept(method, url, response)`**: Stub or spy on network requests
-  - **Stub**: Mock API responses for testing
-  - **Spy**: Watch requests without modifying them
-  - **Modify**: Add delays, change responses, simulate errors
-  - Supports wildcards: `**/*.jpg` matches all JPG files
-  - 📚 Docs: https://docs.cypress.io/api/commands/intercept
-
-  **`.as(aliasName)`**: Create alias for later reference
-  - Name a route/element/value for reuse
-  - Access later with `@aliasName`
-  - Used with: `cy.intercept().as('api')` then `cy.wait('@api')`
-  - 📚 Docs: https://docs.cypress.io/api/commands/as
-
-  ---
-
-  // Example 5: Custom Network Throttling (CDP)
-  it('Example 5: Slow 3G Simulation', () => {
-    cy.visit('/', {
-      onBeforeLoad: (win) => {
-        // Access Chrome DevTools Protocol directly
-        // Note: Requires advanced setup or plugins like cypress-cdp
-      }
-    });
-    // Alternatively, use cy.intercept to delay requests
-    cy.intercept('GET', '**/*.jpg', { delay: 2000 }).as('slowImages');
-    cy.visit('/inventory.html');
-    cy.wait('@slowImages');
-  });
+// Example 1: Mobile Viewport Emulation
+it('Example 1: iPhone X Viewport', () => {
+cy.viewport('iphone-x');
+LoginPage.open('/');
+cy.get('.login_logo').should('be.visible');
 });
-```
+
+// Example 2: Lighthouse Audit (Performance Score)
+it('Example 2: Lighthouse Performance > 90', () => {
+LoginPage.open('/');
+cy.lighthouse({
+performance: 90,
+accessibility: 90,
+'best-practices': 90,
+seo: 90,
+});
+});
+
+// Example 3: First Contentful Paint (Threshold)
+it('Example 3: FCP < 2000ms', () => {
+LoginPage.open('/');
+cy.lighthouse(
+{
+performance: 85,
+},
+{
+formFactor: 'desktop',
+screenEmulation: {
+mobile: false,
+width: 1350,
+height: 940,
+deviceScaleFactor: 1,
+disabled: false,
+},
+}
+);
+});
+
+// Example 4: PWA Validation
+it('Example 4: Validates PWA standards', () => {
+LoginPage.open('/');
+cy.lighthouse({
+pwa: 50, // Threshold
+});
+});
+
+**💡 Network interception**:
+
+**`cy.intercept(method, url, response)`**: Stub or spy on network requests
+
+- **Stub**: Mock API responses for testing
+- **Spy**: Watch requests without modifying them
+- **Modify**: Add delays, change responses, simulate errors
+- Supports wildcards: `**/*.jpg` matches all JPG files
+- 📚 Docs: https://docs.cypress.io/api/commands/intercept
+
+**`.as(aliasName)`**: Create alias for later reference
+
+- Name a route/element/value for reuse
+- Access later with `@aliasName`
+- Used with: `cy.intercept().as('api')` then `cy.wait('@api')`
+- 📚 Docs: https://docs.cypress.io/api/commands/as
+
+---
+
+// Example 5: Custom Network Throttling (CDP)
+it('Example 5: Slow 3G Simulation', () => {
+cy.visit('/', {
+onBeforeLoad: (win) => {
+// Access Chrome DevTools Protocol directly
+// Note: Requires advanced setup or plugins like cypress-cdp
+}
+});
+// Alternatively, use cy.intercept to delay requests
+cy.intercept('GET', '\*_/_.jpg', { delay: 2000 }).as('slowImages');
+cy.visit('/inventory.html');
+cy.wait('@slowImages');
+});
+});
+
+````
 
 #### Step 7.5: Run Your Performance Tests
 
@@ -3855,13 +4100,15 @@ describe('Performance & Mobile Patterns', () => {
 **Option 2: Headless Mode**
 ```bash
 npx cypress run --spec "cypress/e2e/ui/performance.cy.js"
-```
+````
 
 **✅ Expected Result**:
+
 - Tests pass if metrics are within thresholds
 - Check the console/terminal for Lighthouse scores!
 
 ---
+
 ```
 
 ---
@@ -3965,38 +4212,45 @@ ENTRYPOINT ["npx", "cypress", "run"]
 ```
 
 #### 8.2 GitHub Actions (Matrix Strategy)
+
 Create `.github/workflows/main.yml`.
 
 **💡 GitHub Actions YAML syntax**:
 
 **`runs-on: <os>`**: Which OS to run job on
+
 - Common values: `ubuntu-latest`, `windows-latest`, `macos-latest`
 - GitHub-hosted runners (free for public repos)
 - 📚 Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
 **`strategy: matrix:`**: Run job multiple times with different values
+
 - Creates parallel jobs with different parameters
 - Example: Test on Chrome, Firefox, Edge simultaneously
 - Saves time vs sequential testing
 - 📚 Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix
 
 **`uses: <action>`**: Use a pre-built GitHub Action
+
 - Reusable workflow steps from marketplace
 - Example: `actions/checkout@v4` clones your repo
 - `cypress-io/github-action@v6` runs Cypress tests
 - 📚 Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsuses
 
 **`with:`**: Pass parameters to action
+
 - Configuration for the action
 - Example: `browser: chrome`, `record: true`
 - 📚 Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepswith
 
 **`run:`**: Execute shell command
+
 - Runs any command in the workflow
 - Multi-line with `run: |`
 - 📚 Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
 
 **`${{ matrix.browser }}`**: Access matrix values
+
 - Template syntax for variables
 - Replaced with actual matrix value at runtime
 
@@ -4020,6 +4274,7 @@ jobs:
 ```
 
 #### 8.3 Allure Reporting
+
 1.  **Install**: `npm install --save-dev @shelex/cypress-allure-plugin`
 2.  **Config**: Add to `cypress.config.js`.
 3.  **Run**: `npx cypress run --env allure=true`
@@ -4049,11 +4304,13 @@ jobs:
 **🎯 ACTION**: Initialize Cypress Component Testing.
 
 **▶️ Run in Terminal**:
+
 ```bash
 npx cypress open
 ```
 
 **👀 In the Cypress UI**:
+
 1. Click **"Component Testing"**
 2. Click **"Continue"** (auto-detects framework)
 3. Choose your framework (or "Other" if standalone)
@@ -4068,6 +4325,7 @@ npx cypress open
 **🎯 ACTION**: Create folders for component tests.
 
 **▶️ Run in Terminal**:
+
 ```bash
 mkdir -p cypress/component/pages
 ```
@@ -4084,45 +4342,46 @@ mkdir -p cypress/component/pages
 import LoginPage from '../../pages/LoginPage';
 
 describe('LoginPage Unit Tests', () => {
-  beforeEach(() => {
-    // Mount a mock HTML structure
-    cy.document().then((doc) => {
-      doc.body.innerHTML = `
-        <input data-test="username" />
+beforeEach(() => {
+// Mount a mock HTML structure
+cy.document().then((doc) => {
+doc.body.innerHTML = `         <input data-test="username" />
         <input data-test="password" type="password" />
         <button data-test="login-button">Login</button>
         <div data-test="error" style="display:none;">Error</div>
       `;
-    });
-  });
+});
+});
 
-  // Unit Test 1: Verify getters return correct elements
-  it('username getter returns input element', () => {
-    LoginPage.username.should('have.attr', 'data-test', 'username');
-  });
+// Unit Test 1: Verify getters return correct elements
+it('username getter returns input element', () => {
+LoginPage.username.should('have.attr', 'data-test', 'username');
+});
 
-  it('password getter returns password input', () => {
-    LoginPage.password.should('have.attr', 'type', 'password');
-  });
+it('password getter returns password input', () => {
+LoginPage.password.should('have.attr', 'type', 'password');
+});
 
-  // Unit Test 2: Test login method logic
-  it('login() types credentials and clicks button', () => {
-    const username = 'test_user';
-    const password = 'test_pass';
+// Unit Test 2: Test login method logic
+it('login() types credentials and clicks button', () => {
+const username = 'test_user';
+const password = 'test_pass';
 
     LoginPage.login(username, password);
 
     // Verify the method executed correctly
     LoginPage.username.should('have.value', username);
     LoginPage.password.should('have.value', password);
-  });
 
-  // Unit Test 3: Verify error message getter
-  it('errorMsg getter finds error element', () => {
-    LoginPage.errorMsg.should('have.attr', 'data-test', 'error');
-  });
 });
-```
+
+// Unit Test 3: Verify error message getter
+it('errorMsg getter finds error element', () => {
+LoginPage.errorMsg.should('have.attr', 'data-test', 'error');
+});
+});
+
+````
 
 ---
 
@@ -4156,14 +4415,19 @@ export const getQueryParam = (url, param) => {
   const urlObj = new URL(url);
   return urlObj.searchParams.get(param);
 };
-```
+````
 
 #### 8.6.2 Unit Test Utilities
 
 **What We're Creating**: `cypress/component/utils.spec.js` (NEW FILE)
 
 ```javascript
-import { formatCurrency, isValidEmail, randomString, getQueryParam } from '../support/utils';
+import {
+  formatCurrency,
+  isValidEmail,
+  randomString,
+  getQueryParam,
+} from '../support/utils';
 
 describe('Utility Functions Unit Tests', () => {
   // Test 1: Currency Formatter
@@ -4295,7 +4559,7 @@ describe('Custom Command Unit Tests', () => {
 
   it('performLogin types credentials', () => {
     performLogin('admin', 'pass123');
-    
+
     cy.get('[data-test="username"]').should('have.value', 'admin');
     cy.get('[data-test="password"]').should('have.value', 'pass123');
   });
@@ -4317,19 +4581,21 @@ describe('Custom Command Unit Tests', () => {
 export const buildSelectQuery = (table, conditions = {}) => {
   let query = `SELECT * FROM ${table}`;
   const keys = Object.keys(conditions);
-  
+
   if (keys.length > 0) {
-    const whereClause = keys.map(key => `${key}="${conditions[key]}"`).join(' AND ');
+    const whereClause = keys
+      .map((key) => `${key}="${conditions[key]}"`)
+      .join(' AND ');
     query += ` WHERE ${whereClause}`;
   }
-  
+
   return query;
 };
 
 // Helper: Build INSERT query
 export const buildInsertQuery = (table, data) => {
   const keys = Object.keys(data);
-  const values = keys.map(k => `"${data[k]}"`).join(', ');
+  const values = keys.map((k) => `"${data[k]}"`).join(', ');
   return `INSERT INTO ${table} (${keys.join(', ')}) VALUES (${values})`;
 };
 ```
@@ -4367,7 +4633,9 @@ describe('Database Helper Unit Tests', () => {
     it('builds INSERT query', () => {
       const data = { name: 'John', email: 'john@test.com' };
       const query = buildInsertQuery('users', data);
-      expect(query).to.eq('INSERT INTO users (name, email) VALUES ("John", "john@test.com")');
+      expect(query).to.eq(
+        'INSERT INTO users (name, email) VALUES ("John", "john@test.com")'
+      );
     });
   });
 });
@@ -4378,12 +4646,14 @@ describe('Database Helper Unit Tests', () => {
 ### Chapter 8.9: Summary of Unit Testing Benefits
 
 **What We've Achieved**:
+
 1. ✅ **Page Object Tests**: Validate selectors and methods work correctly
 2. ✅ **Utility Tests**: Pure function testing (fast, no browser)
 3. ✅ **Command Tests**: Validate custom command logic
 4. ✅ **DB Helper Tests**: Ensure query builders are correct
 
 **Testing Pyramid**:
+
 ```
         /\
        /E2E\      <- Cypress E2E Tests (cypress/e2e/ui/)
@@ -4395,13 +4665,12 @@ describe('Database Helper Unit Tests', () => {
 ```
 
 **Run Unit Tests**:
+
 ```bash
 npx cypress run --component
 ```
 
 ---
-
-
 
 ---
 
@@ -4426,6 +4695,7 @@ npx cypress run --component
 **🎯 ACTION**: Install cypress-axe and axe-core.
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev cypress-axe axe-core
 ```
@@ -4437,6 +4707,7 @@ npm install --save-dev cypress-axe axe-core
 **📁 Open File**: `cypress/support/commands.ts`
 
 **✏️ ADD** this line:
+
 ```typescript
 import 'cypress-axe';
 ```
@@ -4445,12 +4716,13 @@ import 'cypress-axe';
 
 **🎯 ACTION**: Create tests for accessibility violations.
 
-**📁 Create Directory**: 
+**📁 Create Directory**:
 **▶️ Run**: `mkdir -p cypress/e2e/ui/a11y`
 
 **📁 Create File**: `cypress/e2e/ui/a11y/accessibility.cy.js`
 
 **✂️ Copy This Code Into the File**:
+
 ```javascript
 describe('Accessibility (A11y) Testing', () => {
   beforeEach(() => {
@@ -4473,9 +4745,10 @@ describe('Accessibility (A11y) Testing', () => {
     cy.checkA11y(null, {
       runOnly: {
         type: 'tag',
-        values: ['wcag2aa', 'wcag21aa']
-      }
-    });});
+        values: ['wcag2aa', 'wcag21aa'],
+      },
+    });
+  });
 });
 ```
 
@@ -4484,6 +4757,7 @@ describe('Accessibility (A11y) Testing', () => {
 **🎯 ACTION**: Execute the accessibility audit.
 
 **▶️ Run**:
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/a11y/accessibility.cy.js"
 ```
@@ -4500,11 +4774,13 @@ npx cypress run --spec "cypress/e2e/ui/a11y/accessibility.cy.js"
 **🎯 ACTION**: Install the Faker library (already installed in Phase 1, but verify).
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm list @faker-js/faker  # Check if installed
 ```
 
 **✅ If not installed**:
+
 ```bash
 npm install --save-dev @faker-js/faker
 ```
@@ -4520,6 +4796,7 @@ npm install --save-dev @faker-js/faker
 **📁 Create File**: `cypress/e2e/ui/data/faker_demo.cy.js`
 
 **✂️ Copy This Code Into the File**:
+
 ```javascript
 import { faker } from '@faker-js/faker';
 import LoginPage from '../../pages/LoginPage';
@@ -4543,7 +4820,7 @@ describe('Data Generation with Faker', () => {
     const user = {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      zipCode: faker.location.zipCode()
+      zipCode: faker.location.zipCode(),
     };
 
     // 3. Fill Form
@@ -4557,7 +4834,7 @@ describe('Data Generation with Faker', () => {
   it('Creates a user via API with fake data', () => {
     const user = {
       name: faker.person.fullName(),
-      job: faker.person.jobTitle()
+      job: faker.person.jobTitle(),
     };
 
     // Use ReqRes API (Real testing API)
@@ -4573,6 +4850,7 @@ describe('Data Generation with Faker', () => {
 **💡 Test structure explained (Mocha syntax)**:
 
 **`describe(name, function)`**: Test suite grouping
+
 - Groups related tests together
 - Can be nested for organization
 - Runs all `it()` blocks inside
@@ -4580,12 +4858,14 @@ describe('Data Generation with Faker', () => {
 - 📚 Docs: https://mochajs.org/#getting-started
 
 **`it(name, function)`**: Individual test case
+
 - Also called a "spec" or "test"
 - Should test ONE thing
 - Name should describe expected behavior
 - Cypress automatically screenshots/videos each test
 
 **`beforeEach(function)`**: Runs before each test
+
 - Common setup code (visit page, login, reset state)
 - Runs before EVERY `it()` in the `describe()`
 - Alternative: `before()` runs once before all tests
@@ -4596,16 +4876,19 @@ describe('Data Generation with Faker', () => {
 **💡 Faker.js explained**:
 
 **`import { faker } from '@faker-js/faker'`**: Import Faker library
+
 - Modern ES6 module syntax
 - Destructures `faker` object from the library
 
 **What Faker does**: Generates realistic fake data
+
 - Names, emails, addresses, phone numbers, etc.
 - Randomized but realistic
 - Helps find edge cases (different name lengths, special characters)
 - 📚 Docs: https://fakerjs.dev/api/
 
 **Common Faker methods**:
+
 - `faker.person.fullName()` - Random full name
 - `faker.internet.email()` - Random email
 - `faker.phone.number()` - Random phone
@@ -4618,10 +4901,12 @@ describe('Data Generation with Faker', () => {
 **🎯 ACTION**: Execute the data generation tests.
 
 **Option 1: Interactive Mode**
+
 1. Run `npx cypress open`
 2. Click on `data/faker_demo.cy.js`
 
 **Option 2: Headless Mode**
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/data/faker_demo.cy.js"
 ```
@@ -4629,7 +4914,8 @@ npx cypress run --spec "cypress/e2e/ui/data/faker_demo.cy.js"
 **✅ Expected Result**: Tests pass. Each run generates unique names and data!
 
 ---
-```
+
+````
 
 ---
 
@@ -4649,7 +4935,7 @@ npx cypress run --spec "cypress/e2e/ui/data/faker_demo.cy.js"
 **▶️ Run in Terminal**:
 ```bash
 npm install --save-dev @cypress/code-coverage nyc istanbul-lib-coverage
-```
+````
 
 ---
 
@@ -4660,11 +4946,13 @@ npm install --save-dev @cypress/code-coverage nyc istanbul-lib-coverage
 **📁 Open File**: `CypressMasterclass/cypress.config.js`
 
 **✏️ ADD** this import:
+
 ```javascript
 const codeCoverageTask = require('@cypress/code-coverage/task');
 ```
 
 **✏️ MODIFY** `setupNodeEvents`:
+
 ```javascript
 setupNodeEvents(on, config) {
   // ... existing code ...
@@ -4682,6 +4970,7 @@ setupNodeEvents(on, config) {
 **📁 Open File**: `CypressMasterclass/cypress/support/e2e.js`
 
 **✏️ ADD** this line:
+
 ```javascript
 import '@cypress/code-coverage/support';
 ```
@@ -4704,6 +4993,7 @@ import '@cypress/code-coverage/support';
 **💡 What is cypress-grep?**
 
 **cypress-grep**: Tag-based test filtering plugin
+
 - Run only tests with specific tags (@smoke, @regression, etc.)
 - Filter by test title using grep patterns
 - Save time by running subsets of tests
@@ -4711,11 +5001,13 @@ import '@cypress/code-coverage/support';
 - 📚 Docs: https://github.com/cypress-io/cypress-grep
 
 **Why tag tests?**
+
 - **CI/CD optimization**: Run smoke tests first (5 min), full regression later (2 hours)
 - **Focus testing**: Only run @api tests when changing backend
 - **Debugging**: Isolate flaky tests with @flaky tag
 
 **Common tag patterns**:
+
 - `@smoke` - Critical path tests (must pass before deploy)
 - `@regression` - Full test suite
 - `@api` - API-only tests
@@ -4726,6 +5018,7 @@ import '@cypress/code-coverage/support';
 ---
 
 **▶️ Run in Terminal**:
+
 ```bash
 npm install --save-dev cypress-grep
 ```
@@ -4739,11 +5032,13 @@ npm install --save-dev cypress-grep
 **📁 Open File**: `CypressMasterclass/cypress.config.js`
 
 **✏️ ADD** this import:
+
 ```javascript
 const registerCypressGrep = require('cypress-grep/src/plugin');
 ```
 
 **✏️ MODIFY** `setupNodeEvents`:
+
 ```javascript
 setupNodeEvents(on, config) {
   // ... existing code ...
@@ -4772,6 +5067,7 @@ it('updates profile', { tags: '@regression' }, () => {
 ```
 
 **▶️ Run Tagged Tests**:
+
 ```bash
 # Run only smoke tests
 npx cypress run --env grepTags=@smoke
@@ -4786,8 +5082,9 @@ npx cypress run --env grepTags="@api,@critical"
 
 **🎯 ACTION**: Automate test execution on GitHub.
 
-**📁 Create Directory**: 
+**📁 Create Directory**:
 **▶️ Run**:
+
 ```bash
 mkdir -p .github/workflows
 ```
@@ -4821,6 +5118,7 @@ mkdir -p .github/workflows
 **🎯 ACTION**: Create folder for security tests.
 
 **▶️ Run in Terminal**:
+
 ```bash
 mkdir -p cypress/e2e/ui/security
 ```
@@ -4834,6 +5132,7 @@ mkdir -p cypress/e2e/ui/security
 **📁 Create File**: `CypressMasterclass/cypress/e2e/ui/security/owasp.cy.js`
 
 **✂️ Copy This Code Into the File**:
+
 ```javascript
 import LoginPage from '../../pages/LoginPage';
 import InteractionsPage from '../../pages/InteractionsPage';
@@ -4845,11 +5144,11 @@ describe('Security Testing (OWASP Top 10)', () => {
   it('Security 1: Prevents XSS injection', () => {
     LoginPage.open('/');
     const xssPayload = '<script>alert("XSS")</script>';
-    
+
     // We use the raw element here to inject the payload directly
     LoginPage.getElement(LoginPage.usernameInput).type(xssPayload);
     LoginPage.click(LoginPage.loginButton);
-    
+
     // Should be sanitized - script tag should not execute or appear in DOM
     cy.get('body').should('not.contain', '<script>');
     cy.on('window:alert', () => {
@@ -4860,7 +5159,7 @@ describe('Security Testing (OWASP Top 10)', () => {
   // Example 2: SQL Injection Prevention (Simulated)
   it('Security 2: API handles SQL injection attempts gracefully', () => {
     const sqlInjection = "' OR '1'='1";
-    
+
     // Using Restful Booker (Real API)
     cy.request({
       method: 'POST',
@@ -4884,7 +5183,7 @@ describe('Security Testing (OWASP Top 10)', () => {
     });
   });
 
-  // Example 4: Authentication & Session Security  
+  // Example 4: Authentication & Session Security
 
   **💡 Session management commands**:
 
@@ -4905,10 +5204,10 @@ describe('Security Testing (OWASP Top 10)', () => {
   it('Security 4: Validates session expiration', () => {
     LoginPage.open('/');
     LoginPage.login('standard_user', 'secret_sauce');
-    
+
     // Clear session cookie
     cy.clearCookies();
-    
+
     // Try to access protected page
     cy.visit('/inventory.html');
     cy.url().should('not.include', '/inventory.html'); // Should redirect to login
@@ -4918,13 +5217,13 @@ describe('Security Testing (OWASP Top 10)', () => {
   it('Security 5: Validates file upload restrictions', () => {
     // Use The-Internet for file upload test
     InteractionsPage.visitFileUpload();
-    
+
     // Create a dummy file
     cy.writeFile('cypress/fixtures/malicious.exe', 'FAKE EXE CONTENT');
-    
+
     // Upload it
     InteractionsPage.uploadFile('cypress/fixtures/malicious.exe');
-    
+
     // Verify it was handled (The-Internet actually accepts it, but we verify the flow)
     InteractionsPage.getUploadedMessage().should('contain', 'File Uploaded!');
   });
@@ -4948,12 +5247,13 @@ describe('Security Testing (OWASP Top 10)', () => {
 ### Chapter 11: Code Coverage
 
 > [!IMPORTANT]
-> **Note on Code Coverage**: Code coverage requires **instrumenting the application source code** (inserting counters into the JS). 
-> Since we are testing a third-party site (SauceDemo), we **cannot** generate a real coverage report for it. 
+> **Note on Code Coverage**: Code coverage requires **instrumenting the application source code** (inserting counters into the JS).
+> Since we are testing a third-party site (SauceDemo), we **cannot** generate a real coverage report for it.
 > The steps below describe how you would set this up for **your own application**.
 
 **Goal**: Track which lines of application code are exercised by tests.
 **💡 What This Tests**:
+
 - XSS vulnerability protection
 - SQL injection prevention
 - Security header configuration
@@ -4967,15 +5267,18 @@ describe('Security Testing (OWASP Top 10)', () => {
 **🎯 ACTION**: Execute the security suite.
 
 **Option 1: Interactive Mode**
+
 1. Run `npx cypress open`
 2. Click on `security/owasp.cy.js`
 
 **Option 2: Headless Mode**
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/security/owasp.cy.js"
 ```
 
 **✅ Expected Result**:
+
 - Tests pass (simulated vulnerabilities are blocked/handled)
 - Note: Real security testing often involves failing tests (finding bugs!)
 
@@ -4997,6 +5300,7 @@ npx cypress run --spec "cypress/e2e/ui/security/owasp.cy.js"
 **💡 What is k6?**
 
 **k6**: Modern load testing tool for developers
+
 - Open-source (created by Grafana Labs)
 - Write tests in JavaScript (familiar for Cypress users)
 - Measures performance under load (hundreds/thousands of users)
@@ -5004,17 +5308,20 @@ npx cypress run --spec "cypress/e2e/ui/security/owasp.cy.js"
 - 📚 Docs: https://k6.io/docs/
 
 **What is load testing?**
+
 - Simulates many users accessing your app simultaneously
 - Measures: Response times, throughput, error rates
 - Finds breaking points before users do
 
 **Key k6 concepts**:
+
 - **VUs (Virtual Users)**: Simulated concurrent users
 - **Stages**: Ramp up/down pattern (0→100→0 users)
 - **Thresholds**: Pass/fail criteria (95% requests < 500ms)
 - **Metrics**: http_req_duration, http_req_failed, etc.
 
 **When to use k6 vs Lighthouse?**
+
 - **k6**: Backend/API load testing (can it handle 1000 users?)
 - **Lighthouse**: Frontend performance (how fast does page load?)
 - **Both together**: Complete performance picture
@@ -5022,16 +5329,19 @@ npx cypress run --spec "cypress/e2e/ui/security/owasp.cy.js"
 ---
 
 **▶️ Run in Terminal** (Mac):
+
 ```bash
 brew install k6
 ```
 
 **Windows**:
+
 ```bash
 choco install k6
 ```
 
 **Linux**:
+
 ```bash
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
 echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
@@ -5040,6 +5350,7 @@ sudo apt-get install k6
 ```
 
 **✅ Verify**:
+
 ```bash
 k6 version
 ```
@@ -5051,6 +5362,7 @@ k6 version
 **🎯 ACTION**: Create k6 scripts directory and test file.
 
 **▶️ Run**:
+
 ```bash
 mkdir k6_scripts
 ```
@@ -5060,6 +5372,7 @@ mkdir k6_scripts
 **💡 k6 Script Structure & Functions**:
 
 **k6 script anatomy**:
+
 - `import` statements - Load k6 modules
 - `export const options = {...}` - Test configuration
 - `export default function() {...}` - Main test function (runs per VU)
@@ -5067,31 +5380,37 @@ mkdir k6_scripts
 **k6 Functions**:
 
 **`import http from 'k6/http'`**: HTTP client module
+
 - Makes HTTP requests in load tests
 - 📚 Docs: https://k6.io/docs/javascript-api/k6-http/
 
 **`http.get(url)`**: Make GET request
+
 - Returns response object with: status, body, timings, headers
 - Similar to cy.request() but for load testing
 - 📚 Docs: https://k6.io/docs/javascript-api/k6-http/get/
 
 **`check(value, tests)`**: Assertions that don't stop test
+
 - Validates responses without failing the test
 - Records pass/fail rates
 - Different from Cypress expects - doesn't halt execution
 - 📚 Docs: https://k6.io/docs/javascript-api/k6/check/
 
 **`sleep(seconds)`**: Pause for specified seconds
+
 - Simulates user "think time" between requests
 - Helps realistic load simulation
 - 📚 Docs: https://k6.io/docs/javascript-api/k6/sleep/
 
 **`options.stages`**: Load test phases
+
 - Array of {duration, target} objects
 - Ramps VUs up/down over time
 - Example: 0→100→0 users over 2 minutes
 
 **`options.thresholds`**: Pass/fail criteria
+
 - Define SLAs for metrics
 - Test fails if thresholds not met
 - Example: `'p(95)<500'` = 95th percentile < 500ms
@@ -5100,32 +5419,33 @@ mkdir k6_scripts
 ---
 
 **✂️ Copy This Code**:
+
 ```javascript
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 export let options = {
   stages: [
-    { duration: '30s', target: 20 },  // Ramp up to 20 users
-    { duration: '1m', target: 100 },  // Stay at 100 users
-    { duration: '30s', target: 0 },   // Ramp down
+    { duration: '30s', target: 20 }, // Ramp up to 20 users
+    { duration: '1m', target: 100 }, // Stay at 100 users
+    { duration: '30s', target: 0 }, // Ramp down
   ],
   thresholds: {
     http_req_duration: ['p(95)<500'], // 95% of requests < 500ms
-    http_req_failed: ['rate<0.01'],   // <1% failure rate
+    http_req_failed: ['rate<0.01'], // <1% failure rate
   },
 };
 
 export default function () {
   // Test SWAPI endpoint
   const res = http.get('https://swapi.dev/api/people/1');
-  
+
   check(res, {
     'status is 200': (r) => r.status === 200,
     'response time < 500ms': (r) => r.timings.duration < 500,
     'has valid data': (r) => r.json().name === 'Luke Skywalker',
   });
-  
+
   sleep(1);
 }
 ```
@@ -5139,24 +5459,25 @@ export default function () {
 **📁 Open File**: `CypressMasterclass/cypress.config.js`
 
 **✏️ ADD** this task to `setupNodeEvents`:
+
 ```javascript
 const { execSync } = require('child_process');
 
 setupNodeEvents(on, config) {
   // ... existing tasks ...
-  
+
   on('task', {
     // ... existing tasks ...
-    
+
     runK6Test: (options) => {
       const { script, vus = 10, duration = '30s' } = options;
-      
+
       try {
         const output = execSync(
           `k6 run --vus ${vus} --duration ${duration} --out json=${script}.json ${script}`,
           { encoding: 'utf-8' }
         );
-        
+
         // Parse k6 output
         const results = JSON.parse(require('fs').readFileSync(`${script}.json`, 'utf-8'));
         return results;
@@ -5165,7 +5486,7 @@ setupNodeEvents(on, config) {
       }
     },
   });
-  
+
   return config;
 },
 ```
@@ -5177,6 +5498,7 @@ setupNodeEvents(on, config) {
 **📁 Create File**: `CypressMasterclass/cypress/e2e/ui/performance/k6-load.cy.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 describe('Load Testing with k6', () => {
 
@@ -5198,12 +5520,12 @@ describe('Load Testing with k6', () => {
     }).then((results) => {
       // Verify load test passed
       expect(results).to.not.have.property('error');
-      
+
       // You can parse k6 JSON output and assert metrics
       cy.log('Load test completed successfully');
     });
   });
-  
+
   it('Load Test: Verify performance thresholds', () => {
     // Run smaller load test
     cy.exec('k6 run --vus 50 --duration 30s k6_scripts/api_load_test.js').then((result) => {
@@ -5218,21 +5540,25 @@ describe('Load Testing with k6', () => {
 **🎯 ACTION**: Execute the load test suite.
 
 **Option 1: Interactive Mode**
+
 1. Run `npx cypress open`
 2. Click on `performance/k6-load.cy.js`
 
 **Option 2: Headless Mode**
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/performance/k6-load.cy.js"
 ```
 
 **✅ Expected Result**:
+
 - Cypress test passes
 - k6 output JSON is generated
 - Logs show "Load test completed successfully"
 
 ---
-```
+
+````
 
 ---
 
@@ -5283,11 +5609,12 @@ curl -LO https://raw.githubusercontent.com/reportportal/reportportal/master/dock
 
 # Start ReportPortal
 docker-compose -p reportportal up -d
-```
+````
 
 **⏱️ Wait**: 2-3 minutes for services to start
 
 **✅ Verify**: Open http://localhost:8080
+
 - **Username**: `superadmin`
 - **Password**: `erebus`
 
@@ -5296,6 +5623,7 @@ docker-compose -p reportportal up -d
 #### Step 15.2: Install Cypress Agent
 
 **▶️ Run**:
+
 ```bash
 npm install --save-dev @reportportal/agent-js-cypress
 ```
@@ -5307,6 +5635,7 @@ npm install --save-dev @reportportal/agent-js-cypress
 **📁 Create File**: `CypressMasterclass/reportportal.config.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 module.exports = {
   token: 'your-api-token-from-reportportal',
@@ -5324,6 +5653,7 @@ module.exports = {
 **📁 Open**: `cypress.config.js`
 
 **✏️ ADD**:
+
 ```javascript
 const registerReportPortalPlugin = require('@reportportal/agent-js-cypress/lib/plugin');
 
@@ -5337,6 +5667,7 @@ setupNodeEvents(on, config) {
 **📁 Open**: `cypress/support/e2e.js`
 
 **✏️ ADD**:
+
 ```javascript
 require('@reportportal/agent-js-cypress/lib/commands/reportPortalCommands');
 ```
@@ -5346,6 +5677,7 @@ require('@reportportal/agent-js-cypress/lib/commands/reportPortalCommands');
 #### Step 15.4: Run Tests with ReportPortal
 
 **▶️ Run**:
+
 ```bash
 npx cypress run
 ```
@@ -5353,6 +5685,7 @@ npx cypress run
 **✅ View Results**: http://localhost:8080 → Launches
 
 **💡 Features You Get**:
+
 - Historical test trends
 - Failure pattern detection
 - Auto-categorization of failures
@@ -5374,6 +5707,7 @@ npx cypress run
 **💡 What is Currents.dev?**
 
 **Currents**: Open-source alternative to Cypress Cloud (Dashboard)
+
 - Free tier for open-source projects
 - Parallel test execution across machines
 - Test recording and playback
@@ -5382,16 +5716,19 @@ npx cypress run
 - 📚 Docs: https://currents.dev/readme
 
 **Why parallelization matters?**
+
 - **Without**: 100 tests × 30 sec = 50 minutes
 - **With 4 machines**: 100 tests / 4 = 12.5 minutes (4x faster!)
 
 **How it works**:
+
 1. Currents orchestrates test distribution
 2. Each machine gets a subset of tests
 3. Results are aggregated in dashboard
 4. Smart load balancing (faster machines get more tests)
 
 **Currents vs Cypress Cloud?**
+
 - **Currents**: Free for OSS, self-hostable, open-source
 - **Cypress Cloud**: Official, paid tiers, managed service
 - **Both**: Same features (parallelization, recording, analytics)
@@ -5410,6 +5747,7 @@ npx cypress run
 #### Step 16.2: Install Currents CLI
 
 **▶️ Run**:
+
 ```bash
 npm install --save-dev @currents/cli
 ```
@@ -5421,6 +5759,7 @@ npm install --save-dev @currents/cli
 **📁 Create File**: `CypressMasterclass/currents.config.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 module.exports = {
   projectId: 'your-project-id',
@@ -5430,6 +5769,7 @@ module.exports = {
 ```
 
 **Add to `.gitignore`**:
+
 ```bash
 echo "currents.config.js" >> .gitignore
 ```
@@ -5439,6 +5779,7 @@ echo "currents.config.js" >> .gitignore
 #### Step 16.4: Run Parallel Tests
 
 **▶️ Local Parallel Execution**:
+
 ```bash
 # Run on 4 machines in parallel
 npx cypress-cloud run --parallel --record --key <your-key> --ci-build-id $(date +%s)
@@ -5449,6 +5790,7 @@ npx cypress-cloud run --parallel --record --key <your-key> --ci-build-id $(date 
 **📁 Update**: `.github/workflows/main.yml`
 
 **✏️ ADD parallel strategy**:
+
 ```yaml
 jobs:
   test:
@@ -5469,6 +5811,7 @@ jobs:
 ```
 
 **💡 What You Get**:
+
 - 4x faster test execution
 - Dashboard with test results
 - Flaky test detection
@@ -5497,6 +5840,7 @@ jobs:
 **🎯 ACTION**: Install the preprocessor.
 
 **▶️ Run**:
+
 ```bash
 npm install --save-dev @badeball/cypress-cucumber-preprocessor @bahmutov/cypress-esbuild-preprocessor
 ```
@@ -5508,19 +5852,23 @@ npm install --save-dev @badeball/cypress-cucumber-preprocessor @bahmutov/cypress
 **📁 Open File**: `cypress.config.ts`
 
 **✏️ UPDATE `setupNodeEvents`**:
+
 ```typescript
-import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
-import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
-import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esbuild";
+import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
+import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild';
 
 export default defineConfig({
   e2e: {
-    specPattern: "**/*.feature", // Look for .feature files
+    specPattern: '**/*.feature', // Look for .feature files
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
-      on("file:preprocessor", createBundler({
-        plugins: [createEsbuildPlugin(config)],
-      }));
+      on(
+        'file:preprocessor',
+        createBundler({
+          plugins: [createEsbuildPlugin(config)],
+        })
+      );
       return config;
     },
   },
@@ -5534,6 +5882,7 @@ export default defineConfig({
 **📁 Create File**: `cypress/e2e/ui/bdd/login.feature`
 
 **✂️ Copy This Code**:
+
 ```gherkin
 Feature: Login Functionality
 
@@ -5550,24 +5899,26 @@ Feature: Login Functionality
 **📁 Create File**: `cypress/e2e/ui/bdd/login.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import LoginPage from '../../pages/LoginPage';
 
-Given("I open the login page", () => {
+Given('I open the login page', () => {
   LoginPage.open('/');
 });
 
-When("I login as {string} with password {string}", (user, pass) => {
+When('I login as {string} with password {string}', (user, pass) => {
   LoginPage.login(user, pass);
 });
 
-Then("I should see the inventory page", () => {
+Then('I should see the inventory page', () => {
   cy.url().should('include', '/inventory.html');
 });
 ```
 
 **▶️ Run**:
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/bdd/login.feature"
 ```
@@ -5586,6 +5937,7 @@ npx cypress run --spec "cypress/e2e/ui/bdd/login.feature"
 **🎯 ACTION**: Install the Allure adapter.
 
 **▶️ Run**:
+
 ```bash
 npm install --save-dev allure-cypress
 ```
@@ -5597,14 +5949,15 @@ npm install --save-dev allure-cypress
 **📁 Open File**: `cypress.config.ts`
 
 **✏️ UPDATE `setupNodeEvents`**:
+
 ```typescript
-import { allureCypress } from "allure-cypress/reporter";
+import { allureCypress } from 'allure-cypress/reporter';
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       allureCypress(on, config, {
-        resultsDir: "allure-results",
+        resultsDir: 'allure-results',
       });
       return config;
     },
@@ -5615,8 +5968,9 @@ export default defineConfig({
 **📁 Open File**: `cypress/support/e2e.ts`
 
 **✏️ ADD**:
+
 ```typescript
-import "allure-cypress/commands";
+import 'allure-cypress/commands';
 ```
 
 #### Step 18.3: Run Tests & Generate Report
@@ -5624,11 +5978,13 @@ import "allure-cypress/commands";
 **🎯 ACTION**: Run tests and view the dashboard.
 
 **▶️ Run**:
+
 ```bash
 npx cypress run --env allure=true
 ```
 
 **▶️ Generate Report**:
+
 ```bash
 # Install Allure Commandline (if not installed)
 npm install -g allure-commandline
@@ -5655,6 +6011,7 @@ allure serve allure-results
 **📁 Create File**: `Dockerfile`
 
 **✂️ Copy This Code**:
+
 ```dockerfile
 # Use the official Cypress image (includes Node, Chrome, Firefox)
 FROM cypress/included:13.6.0
@@ -5682,6 +6039,7 @@ CMD ["npx", "cypress", "run"]
 **📁 Create File**: `docker-compose.yml`
 
 **✂️ Copy This Code**:
+
 ```yaml
 version: '3.8'
 services:
@@ -5700,6 +6058,7 @@ services:
 **🎯 ACTION**: Build and run the container.
 
 **▶️ Run**:
+
 ```bash
 # Build the image
 docker-compose build
@@ -5730,17 +6089,17 @@ We will **intercept** the network request and **stub** a fake response (e.g., a 
 **📁 Create File**: `cypress/e2e/ui/api/resilience.cy.js`
 
 **✂️ Copy This Code**:
+
 ```javascript
 import LoginPage from '../../pages/LoginPage';
 
 describe('Resilience Testing (Mocking Failures)', () => {
-  
   // Scenario 1: Server returns 500 Error
   it('Handles 500 Server Error gracefully', () => {
     // 1. Intercept the login request and force a 500 error
     cy.intercept('POST', '**/login', {
       statusCode: 500,
-      body: { error: 'Internal Server Error' }
+      body: { error: 'Internal Server Error' },
     }).as('loginFail');
 
     // 2. Attempt to login
@@ -5751,7 +6110,8 @@ describe('Resilience Testing (Mocking Failures)', () => {
     cy.wait('@loginFail');
 
     // 4. Verify UI shows a user-friendly error (not a crash)
-    LoginPage.getErrorMessage().should('be.visible')
+    LoginPage.getErrorMessage()
+      .should('be.visible')
       .and('contain', 'Epic sadface'); // SauceDemo's generic error
   });
 
@@ -5760,14 +6120,14 @@ describe('Resilience Testing (Mocking Failures)', () => {
     // 1. Force a 5-second delay
     cy.intercept('POST', '**/login', {
       delay: 5000, // 5 seconds
-      statusCode: 200
+      statusCode: 200,
     }).as('slowLogin');
 
     LoginPage.open('/');
     LoginPage.login('standard_user', 'secret_sauce');
 
     // 2. Verify loading spinner appears (if app has one)
-    // cy.get('.spinner').should('be.visible'); 
+    // cy.get('.spinner').should('be.visible');
 
     cy.wait('@slowLogin');
   });
@@ -5777,6 +6137,7 @@ describe('Resilience Testing (Mocking Failures)', () => {
 #### Step 20.3: Run Resilience Tests
 
 **▶️ Run**:
+
 ```bash
 npx cypress run --spec "cypress/e2e/ui/api/resilience.cy.js"
 ```
@@ -5790,29 +6151,35 @@ npx cypress run --spec "cypress/e2e/ui/api/resilience.cy.js"
 You have built a framework that demonstrates **enterprise-grade testing maturity** with **98% feature parity** to your Python Selenium project:
 
 ### **Backend (Foundation)**:
+
 1. ✅ **Seeds a Real DB** (SQLite with hybrid tests)
 2. ✅ **Validates APIs** (SWAPI - 10 comprehensive examples: Positive/Negative/Boundary)
 
 ### **Frontend (UI Layer)**:
+
 3. ✅ **Architect-Level POM** (BasePage + 5 Pages with before/after examples)
 4. ✅ **Handles Complex Interactions** (Hover, Drag, Upload, Scroll, Keyboard)
 
 ### **Quality Assurance**:
+
 5. ✅ **Unit Tests** (Page Objects, Utilities, Commands, DB Helpers)
 6. ✅ **Visual Regression** (cypress-image-snapshot with 10% threshold - matches Python!)
 7. ✅ **Performance Testing** (Lighthouse integration with thresholds)
 8. ✅ **Accessibility Testing** (cypress-axe for WCAG 2.1 compliance)
 
 ### **Advanced Patterns**:
+
 9. ✅ **Data Generation** (Faker.js for dynamic test data)
 10. ✅ **Code Coverage** (@cypress/code-coverage)
 11. ✅ **Test Organization** (cypress-grep for tagging)
 
 ### **DevOps**:
+
 12. ✅ **Runs in Docker/CI** (Multi-stage builds, GitHub Actions matrix)
 13. ✅ **Allure Reporting** (HTML reports with history)
 
 ### **🆕 Enterprise Features** (Phase 9):
+
 14. ✅ **Security Testing** (OWASP Top 10 - XSS, SQL Injection, Headers, CSRF, Session)
 15. ✅ **Load Testing** (k6 integration for API stress testing)
 16. ✅ **Test Management** (ReportPortal - ML-powered failure analysis)
@@ -5826,20 +6193,20 @@ You have built a framework that demonstrates **enterprise-grade testing maturity
 
 ## 📊 Feature Comparison: Python vs Cypress
 
-| Feature | Python Project | Cypress Masterclass | Status |
-|---------|---------------|---------------------|--------|
-| Web Automation + POM | ✅ Selenium/Playwright | ✅ Cypress + POM | **Match** |
-| API Testing | ✅ REST validation | ✅ SWAPI (10 tests) | **Match** |
-| Visual Regression | ✅ pytest-playwright-visual | ✅ cypress-image-snapshot (10%) | **Match** |
-| Database Testing | ✅ SQLite | ✅ SQLite (Hybrid) | **Match** |
-| Security Testing | ✅ SSL, custom checks | ✅ OWASP Top 10 | **Match** |
-| Load Testing | ✅ Locust | ✅ k6 integration | **Match** |
-| Performance Monitoring | ✅ Custom monitoring | ✅ Lighthouse + k6 | **Match** |
-| Test Management | ✅ Custom analytics | ✅ ReportPortal | **Match** |
-| Parallel Execution | ✅ pytest-xdist | ✅ Currents.dev | **Match** |
-| Code Quality | ✅ ruff, mypy, bandit | ✅ ESLint, Prettier | **Match** |
-| CI/CD | ✅ GitHub Actions | ✅ GitHub Actions + Docker | **Match** |
-| ML Analysis | ❌ Python-specific | ⚠️ ReportPortal AI | **Partial** |
+| Feature                | Python Project              | Cypress Masterclass             | Status      |
+| ---------------------- | --------------------------- | ------------------------------- | ----------- |
+| Web Automation + POM   | ✅ Selenium/Playwright      | ✅ Cypress + POM                | **Match**   |
+| API Testing            | ✅ REST validation          | ✅ SWAPI (10 tests)             | **Match**   |
+| Visual Regression      | ✅ pytest-playwright-visual | ✅ cypress-image-snapshot (10%) | **Match**   |
+| Database Testing       | ✅ SQLite                   | ✅ SQLite (Hybrid)              | **Match**   |
+| Security Testing       | ✅ SSL, custom checks       | ✅ OWASP Top 10                 | **Match**   |
+| Load Testing           | ✅ Locust                   | ✅ k6 integration               | **Match**   |
+| Performance Monitoring | ✅ Custom monitoring        | ✅ Lighthouse + k6              | **Match**   |
+| Test Management        | ✅ Custom analytics         | ✅ ReportPortal                 | **Match**   |
+| Parallel Execution     | ✅ pytest-xdist             | ✅ Currents.dev                 | **Match**   |
+| Code Quality           | ✅ ruff, mypy, bandit       | ✅ ESLint, Prettier             | **Match**   |
+| CI/CD                  | ✅ GitHub Actions           | ✅ GitHub Actions + Docker      | **Match**   |
+| ML Analysis            | ❌ Python-specific          | ⚠️ ReportPortal AI              | **Partial** |
 
 **Coverage**: **98%** ✅
 
@@ -5862,6 +6229,7 @@ You have built a framework that demonstrates **enterprise-grade testing maturity
 ## 📈 Total Test Count
 
 **By Category**:
+
 - **UI Tests**: 15+ (POM-based, interactions)
 - **API Tests**: 10 (SWAPI comprehensive)
 - **Database Tests**: 5 (Hybrid DB+UI)
@@ -5900,6 +6268,7 @@ You have built a framework that demonstrates **enterprise-grade testing maturity
 ## 🎯 What This Demonstrates
 
 ### **As a Portfolio Project**:
+
 - ✅ **Full-Stack QA Skills**: Frontend (Cypress/JS) + Backend (Python)
 - ✅ **Architectural Expertise**: SOLID, DRY, Page Object Model
 - ✅ **Security Awareness**: OWASP Top 10 testing
@@ -5909,7 +6278,9 @@ You have built a framework that demonstrates **enterprise-grade testing maturity
 - ✅ **Testing Maturity**: Unit → Integration → E2E pyramid
 
 ### **Career Impact**:
+
 This tutorial proves you can:
+
 1. ✅ Design test frameworks from scratch
 2. ✅ Integrate modern tooling ecosystems
 3. ✅ Write maintainable, scalable test code
@@ -5931,5 +6302,3 @@ This tutorial proves you can:
 ---
 
 **Congratulations on completing the Cypress Architect Masterclass!** 🎉
-
-

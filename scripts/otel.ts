@@ -1,4 +1,9 @@
-import { diag, DiagConsoleLogger, DiagLogLevel, trace } from '@opentelemetry/api';
+import {
+  diag,
+  DiagConsoleLogger,
+  DiagLogLevel,
+  trace,
+} from '@opentelemetry/api';
 import { Resource } from '@opentelemetry/resources';
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
 import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
@@ -41,7 +46,12 @@ export function configureTracing(serviceName: string) {
   if (endpoint) {
     const headers = parseOtelHeaders(process.env.OTEL_EXPORTER_OTLP_HEADERS);
     provider.addSpanProcessor(
-      new BatchSpanProcessor(new OTLPTraceExporter({ url: endpoint, headers: Object.keys(headers).length ? headers : undefined }))
+      new BatchSpanProcessor(
+        new OTLPTraceExporter({
+          url: endpoint,
+          headers: Object.keys(headers).length ? headers : undefined,
+        })
+      )
     );
   }
 
@@ -57,4 +67,3 @@ export function configureTracing(serviceName: string) {
 export function tracer() {
   return trace.getTracer('cypress');
 }
-
