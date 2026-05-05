@@ -10,8 +10,12 @@ describe('Practice App — Selector Playground @practice @selectors', () => {
   });
 
   it('S1 · id & name: should locate inputs by data-test (mirrors id/name)', () => {
-    SelectorsPage.getUsernameInput().should('be.visible').and('have.attr', 'id', 'username-field');
-    SelectorsPage.getPasswordInput().should('be.visible').and('have.attr', 'name', 'password');
+    SelectorsPage.getUsernameInput()
+      .should('be.visible')
+      .and('have.attr', 'id', 'username-field');
+    SelectorsPage.getPasswordInput()
+      .should('be.visible')
+      .and('have.attr', 'name', 'password');
   });
 
   it('S2 · CSS class: should locate primary and secondary buttons', () => {
@@ -31,7 +35,11 @@ describe('Practice App — Selector Playground @practice @selectors', () => {
   });
 
   it('S3 · link text: should locate link by aria-label', () => {
-    SelectorsPage.getAriaLink().should('have.attr', 'aria-label', 'Download the PDF document');
+    SelectorsPage.getAriaLink().should(
+      'have.attr',
+      'aria-label',
+      'Download the PDF document'
+    );
   });
 
   it('S4 · ARIA: should locate input by role and aria-label', () => {
@@ -72,8 +80,16 @@ describe('Practice App — Selector Playground @practice @selectors', () => {
   });
 
   it('S8 · title attribute: should locate buttons by title', () => {
-    SelectorsPage.getSaveButton().should('have.attr', 'title', 'Save your current progress');
-    SelectorsPage.getDeleteButton().should('have.attr', 'title', 'Delete this record permanently');
+    SelectorsPage.getSaveButton().should(
+      'have.attr',
+      'title',
+      'Save your current progress'
+    );
+    SelectorsPage.getDeleteButton().should(
+      'have.attr',
+      'title',
+      'Delete this record permanently'
+    );
   });
 
   it('S8 · title attribute: should locate abbr elements by title', () => {

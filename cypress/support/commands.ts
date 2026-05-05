@@ -19,11 +19,14 @@ declare global {
       /**
        * Custom command from cypress-image-diff-js to compare visual snapshots.
        */
-      compareSnapshot(name: string, options?: {
-        errorThreshold?: number;
-        capture?: 'fullPage' | 'viewport' | 'runner';
-        screenshotConfig?: Record<string, unknown>;
-      }): Chainable<void>;
+      compareSnapshot(
+        name: string,
+        options?: {
+          errorThreshold?: number;
+          capture?: 'fullPage' | 'viewport' | 'runner';
+          screenshotConfig?: Record<string, unknown>;
+        }
+      ): Chainable<void>;
 
       /**
        * Execute a SQL query against the SQLite database.
@@ -49,7 +52,7 @@ Cypress.Commands.add('loginAs', (username: string, password: string) => {
       cy.get(LoginLocators.loginButton).click();
       cy.url().should('include', '/inventory.html');
     },
-    { cacheAcrossSpecs: true },
+    { cacheAcrossSpecs: true }
   );
 });
 

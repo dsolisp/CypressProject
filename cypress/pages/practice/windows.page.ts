@@ -28,9 +28,7 @@ export class WindowsPage extends BasePage {
    * in the same tab, then clicks it.
    */
   openNewTabViaLink() {
-    cy.get(WindowsLocators.openTabLink)
-      .invoke('removeAttr', 'target')
-      .click();
+    cy.get(WindowsLocators.openTabLink).invoke('removeAttr', 'target').click();
     return this;
   }
 

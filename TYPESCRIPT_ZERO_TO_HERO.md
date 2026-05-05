@@ -22,6 +22,7 @@ Guía completa de TypeScript enfocada en entrevistas técnicas. Cubre los concep
 TypeScript es un **superset** de JavaScript que añade **tipado estático opcional**.
 
 **¿Por qué usarlo?**
+
 - ✅ Detecta errores en tiempo de compilación
 - ✅ Mejor autocompletado y IntelliSense
 - ✅ Código más mantenible y documentado
@@ -32,13 +33,13 @@ TypeScript es un **superset** de JavaScript que añade **tipado estático opcion
 function suma(a, b) {
   return a + b;
 }
-suma(5, "10"); // "510" 😱
+suma(5, '10'); // "510" 😱
 
 // TypeScript
 function suma(a: number, b: number): number {
   return a + b;
 }
-suma(5, "10"); // ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
+suma(5, '10'); // ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
 ```
 
 ---
@@ -49,7 +50,7 @@ suma(5, "10"); // ❌ Error: Argument of type 'string' is not assignable to para
 
 ```typescript
 // String
-let nombre: string = "Daniel";
+let nombre: string = 'Daniel';
 
 // Number
 let edad: number = 25;
@@ -59,13 +60,13 @@ let precio: number = 99.99;
 let activo: boolean = true;
 
 // Any (evitar en producción)
-let cualquierCosa: any = "texto";
+let cualquierCosa: any = 'texto';
 cualquierCosa = 42; // ✅ OK
 
 // Unknown (más seguro que any)
-let desconocido: unknown = "texto";
+let desconocido: unknown = 'texto';
 // desconocido.toUpperCase(); // ❌ Error
-if (typeof desconocido === "string") {
+if (typeof desconocido === 'string') {
   desconocido.toUpperCase(); // ✅ OK
 }
 
@@ -92,17 +93,17 @@ let numeros: number[] = [1, 2, 3];
 let numeros2: Array<number> = [1, 2, 3]; // sintaxis genérica
 
 // Array de strings
-let nombres: string[] = ["Ana", "Luis"];
+let nombres: string[] = ['Ana', 'Luis'];
 
 // Array mixto (union type)
-let mixto: (string | number)[] = [1, "dos", 3];
+let mixto: (string | number)[] = [1, 'dos', 3];
 ```
 
 ### Tuplas
 
 ```typescript
 // Tupla: array con tipos fijos en posiciones específicas
-let persona: [string, number] = ["Daniel", 25];
+let persona: [string, number] = ['Daniel', 25];
 
 // Desestructuración
 let [nombre, edad] = persona;
@@ -116,19 +117,19 @@ let coordenada: [number, number, number?] = [10, 20];
 ```typescript
 // Enum numérico
 enum Direccion {
-  Arriba,    // 0
-  Abajo,     // 1
+  Arriba, // 0
+  Abajo, // 1
   Izquierda, // 2
-  Derecha    // 3
+  Derecha, // 3
 }
 
 let dir: Direccion = Direccion.Arriba;
 
 // Enum de strings
 enum Estado {
-  Activo = "ACTIVE",
-  Inactivo = "INACTIVE",
-  Pendiente = "PENDING"
+  Activo = 'ACTIVE',
+  Inactivo = 'INACTIVE',
+  Pendiente = 'PENDING',
 }
 
 let estadoUsuario: Estado = Estado.Activo;
@@ -138,15 +139,15 @@ let estadoUsuario: Estado = Estado.Activo;
 
 ```typescript
 // Solo acepta valores específicos
-let semaforo: "rojo" | "amarillo" | "verde";
-semaforo = "rojo"; // ✅
+let semaforo: 'rojo' | 'amarillo' | 'verde';
+semaforo = 'rojo'; // ✅
 // semaforo = "azul"; // ❌ Error
 
 // Números literales
 let dado: 1 | 2 | 3 | 4 | 5 | 6;
 
 // Combinado con tipos
-type Respuesta = "si" | "no" | number;
+type Respuesta = 'si' | 'no' | number;
 ```
 
 ---
@@ -167,9 +168,9 @@ interface Usuario {
 
 const usuario: Usuario = {
   id: 1,
-  nombre: "Daniel",
-  email: "daniel@example.com",
-  dni: "12345678"
+  nombre: 'Daniel',
+  email: 'daniel@example.com',
+  dni: '12345678',
 };
 
 // usuario.dni = "87654321"; // ❌ Error: readonly
@@ -182,11 +183,11 @@ interface Admin extends Usuario {
 
 const admin: Admin = {
   id: 2,
-  nombre: "Ana",
-  email: "ana@example.com",
-  dni: "87654321",
-  permisos: ["read", "write", "delete"],
-  nivel: 5
+  nombre: 'Ana',
+  email: 'ana@example.com',
+  dni: '87654321',
+  permisos: ['read', 'write', 'delete'],
+  nivel: 5,
 };
 
 // Interfaces para funciones
@@ -202,8 +203,8 @@ interface Diccionario {
 }
 
 const traducciones: Diccionario = {
-  hello: "hola",
-  bye: "adiós"
+  hello: 'hola',
+  bye: 'adiós',
 };
 ```
 
@@ -219,7 +220,7 @@ type Punto = {
 };
 
 // Union types
-type Resultado = "exito" | "error" | "pendiente";
+type Resultado = 'exito' | 'error' | 'pendiente';
 
 // Intersection types
 type Empleado = {
@@ -236,9 +237,9 @@ type EmpleadoCompleto = Empleado & Departamento;
 
 const empleado: EmpleadoCompleto = {
   id: 1,
-  nombre: "Carlos",
-  departamento: "IT",
-  jefe: "Ana"
+  nombre: 'Carlos',
+  departamento: 'IT',
+  jefe: 'Ana',
 };
 ```
 
@@ -259,7 +260,7 @@ interface Persona {
 }
 
 // Type: preferible para unions, intersections, primitivos
-type Color = "rojo" | "verde" | "azul";
+type Color = 'rojo' | 'verde' | 'azul';
 type Coordenada = [number, number];
 type Callback = (data: string) => void;
 ```
@@ -304,14 +305,14 @@ sumarTodos(1, 2, 3, 4, 5); // 15
 function procesar(x: string): string;
 function procesar(x: number): number;
 function procesar(x: string | number): string | number {
-  if (typeof x === "string") {
+  if (typeof x === 'string') {
     return x.toUpperCase();
   }
   return x * 2;
 }
 
-procesar("hola"); // "HOLA"
-procesar(5);      // 10
+procesar('hola'); // "HOLA"
+procesar(5); // 10
 ```
 
 ### This en funciones
@@ -328,12 +329,12 @@ interface Mazo {
 
 let mazo: Mazo = {
   tarjetas: [{ valor: 1 }],
-  crearBarajar: function(this: Mazo) {
+  crearBarajar: function (this: Mazo) {
     return () => {
       // this es Mazo
       console.log(this.tarjetas);
     };
-  }
+  },
 };
 ```
 
@@ -361,16 +362,16 @@ function identidad<T>(arg: T): T {
 }
 
 let numero = identidad<number>(42);
-let texto = identidad<string>("hola");
-let auto = identidad({ marca: "Toyota" }); // inferencia automática
+let texto = identidad<string>('hola');
+let auto = identidad({ marca: 'Toyota' }); // inferencia automática
 
 // Generic con arrays
 function primerElemento<T>(arr: T[]): T | undefined {
   return arr[0];
 }
 
-primerElemento([1, 2, 3]);     // number
-primerElemento(["a", "b"]);    // string
+primerElemento([1, 2, 3]); // number
+primerElemento(['a', 'b']); // string
 ```
 
 ### Interfaces Genéricas
@@ -388,15 +389,15 @@ interface Usuario {
 }
 
 const respuestaUsuario: Respuesta<Usuario> = {
-  data: { id: 1, nombre: "Ana" },
+  data: { id: 1, nombre: 'Ana' },
   error: null,
-  timestamp: Date.now()
+  timestamp: Date.now(),
 };
 
 const respuestaNumeros: Respuesta<number[]> = {
   data: [1, 2, 3],
   error: null,
-  timestamp: Date.now()
+  timestamp: Date.now(),
 };
 ```
 
@@ -424,7 +425,7 @@ colaNumeros.agregar(1);
 colaNumeros.agregar(2);
 
 const colaStrings = new Cola<string>();
-colaStrings.agregar("primero");
+colaStrings.agregar('primero');
 ```
 
 ### Constraints (Restricciones)
@@ -440,8 +441,8 @@ function logLongitud<T extends ConLongitud>(arg: T): T {
   return arg;
 }
 
-logLongitud("hola");        // ✅ string tiene length
-logLongitud([1, 2, 3]);     // ✅ array tiene length
+logLongitud('hola'); // ✅ string tiene length
+logLongitud([1, 2, 3]); // ✅ array tiene length
 // logLongitud(42);         // ❌ number no tiene length
 
 // Keyof constraint
@@ -449,8 +450,8 @@ function getPropiedad<T, K extends keyof T>(obj: T, key: K): T[K] {
   return obj[key];
 }
 
-let persona = { nombre: "Ana", edad: 30 };
-getPropiedad(persona, "nombre"); // ✅ "Ana"
+let persona = { nombre: 'Ana', edad: 30 };
+getPropiedad(persona, 'nombre'); // ✅ "Ana"
 // getPropiedad(persona, "email"); // ❌ Error
 ```
 
@@ -478,7 +479,7 @@ class Persona {
   }
 }
 
-const persona = new Persona("Daniel", 25);
+const persona = new Persona('Daniel', 25);
 console.log(persona.saludar());
 ```
 
@@ -486,9 +487,9 @@ console.log(persona.saludar());
 
 ```typescript
 class CuentaBancaria {
-  public titular: string;           // accesible desde cualquier lugar
-  private saldo: number;             // solo dentro de la clase
-  protected numeroCuenta: string;    // clase y subclases
+  public titular: string; // accesible desde cualquier lugar
+  private saldo: number; // solo dentro de la clase
+  protected numeroCuenta: string; // clase y subclases
 
   constructor(titular: string, saldoInicial: number) {
     this.titular = titular;
@@ -511,7 +512,7 @@ class CuentaBancaria {
   }
 }
 
-const cuenta = new CuentaBancaria("Ana", 1000);
+const cuenta = new CuentaBancaria('Ana', 1000);
 cuenta.depositar(500);
 console.log(cuenta.getSaldo()); // 1500
 // console.log(cuenta.saldo); // ❌ Error: private
@@ -553,7 +554,7 @@ class Usuario {
   }
 
   cambiarNombre(nuevoNombre: string): void {
-    this.nombre = nuevoNombre;  // ✅
+    this.nombre = nuevoNombre; // ✅
     // this.id = 123;           // ❌ Error: readonly
   }
 }
@@ -572,17 +573,17 @@ class Animal {
 
 class Perro extends Animal {
   ladrar(): void {
-    console.log("¡Guau guau!");
+    console.log('¡Guau guau!');
   }
 
   // Override
   moverse(distancia: number = 5): void {
-    console.log("Corriendo...");
+    console.log('Corriendo...');
     super.moverse(distancia);
   }
 }
 
-const perro = new Perro("Rex");
+const perro = new Perro('Rex');
 perro.ladrar();
 perro.moverse(10);
 ```
@@ -603,7 +604,10 @@ abstract class Forma {
 }
 
 class Circulo extends Forma {
-  constructor(color: string, public radio: number) {
+  constructor(
+    color: string,
+    public radio: number
+  ) {
     super(color);
   }
 
@@ -613,7 +617,7 @@ class Circulo extends Forma {
 }
 
 // const forma = new Forma("rojo"); // ❌ Error: no se puede instanciar
-const circulo = new Circulo("rojo", 5);
+const circulo = new Circulo('rojo', 5);
 console.log(circulo.calcularArea());
 ```
 
@@ -629,7 +633,7 @@ class Empleado {
 
   set salario(nuevoSalario: number) {
     if (nuevoSalario < 0) {
-      throw new Error("Salario no puede ser negativo");
+      throw new Error('Salario no puede ser negativo');
     }
     this._salario = nuevoSalario;
   }
@@ -678,8 +682,8 @@ function actualizarUsuario(id: number, cambios: Partial<Usuario>): void {
   // cambios puede tener solo algunas propiedades
 }
 
-actualizarUsuario(1, { nombre: "Ana" }); // ✅
-actualizarUsuario(2, { email: "nuevo@example.com" }); // ✅
+actualizarUsuario(1, { nombre: 'Ana' }); // ✅
+actualizarUsuario(2, { email: 'nuevo@example.com' }); // ✅
 ```
 
 ### Required&lt;T&gt;
@@ -693,8 +697,8 @@ interface Config {
 }
 
 const config: Required<Config> = {
-  host: "localhost",
-  port: 3000
+  host: 'localhost',
+  port: 3000,
   // Ambas propiedades son requeridas
 };
 ```
@@ -725,12 +729,12 @@ interface Usuario {
   password: string;
 }
 
-type UsuarioPublico = Pick<Usuario, "id" | "nombre" | "email">;
+type UsuarioPublico = Pick<Usuario, 'id' | 'nombre' | 'email'>;
 
 const usuarioPublico: UsuarioPublico = {
   id: 1,
-  nombre: "Ana",
-  email: "ana@example.com"
+  nombre: 'Ana',
+  email: 'ana@example.com',
   // password no está permitido
 };
 ```
@@ -747,12 +751,12 @@ interface Usuario {
   password: string;
 }
 
-type UsuarioSinPassword = Omit<Usuario, "password">;
+type UsuarioSinPassword = Omit<Usuario, 'password'>;
 
 const usuario: UsuarioSinPassword = {
   id: 1,
-  nombre: "Ana",
-  email: "ana@example.com"
+  nombre: 'Ana',
+  email: 'ana@example.com',
   // password no está permitido
 };
 ```
@@ -762,20 +766,20 @@ const usuario: UsuarioSinPassword = {
 Crea un tipo objeto con claves K y valores T.
 
 ```typescript
-type Rol = "admin" | "usuario" | "invitado";
+type Rol = 'admin' | 'usuario' | 'invitado';
 
 const permisos: Record<Rol, string[]> = {
-  admin: ["read", "write", "delete"],
-  usuario: ["read", "write"],
-  invitado: ["read"]
+  admin: ['read', 'write', 'delete'],
+  usuario: ['read', 'write'],
+  invitado: ['read'],
 };
 ```
 
 ### Exclude&lt;T, U&gt; y Extract&lt;T, U&gt;
 
 ```typescript
-type T1 = "a" | "b" | "c";
-type T2 = "a" | "e";
+type T1 = 'a' | 'b' | 'c';
+type T2 = 'a' | 'e';
 
 type Excluido = Exclude<T1, T2>; // "b" | "c"
 type Extraido = Extract<T1, T2>; // "a"
@@ -787,7 +791,7 @@ Obtiene el tipo de retorno de una función.
 
 ```typescript
 function obtenerUsuario() {
-  return { id: 1, nombre: "Ana" };
+  return { id: 1, nombre: 'Ana' };
 }
 
 type Usuario = ReturnType<typeof obtenerUsuario>;
@@ -814,6 +818,7 @@ type Params = Parameters<typeof crearUsuario>;
 ### 1. ¿Cuál es la diferencia entre `interface` y `type`?
 
 **Respuesta:**
+
 - **Interface**: mejor para objetos y clases, soporta fusión de declaraciones, extends más natural
 - **Type**: más flexible, soporta unions, intersections, primitivos, tuplas
 
@@ -823,27 +828,32 @@ type ID = string | number;
 type Punto = [number, number];
 
 // Interface soporta fusión
-interface Usuario { nombre: string; }
-interface Usuario { edad: number; } // ✅ se fusionan
+interface Usuario {
+  nombre: string;
+}
+interface Usuario {
+  edad: number;
+} // ✅ se fusionan
 
 // Type no se puede redeclarar
-type Animal = { especie: string; }
+type Animal = { especie: string };
 // type Animal = { nombre: string; } // ❌ Error
 ```
 
 ### 2. ¿Qué es `any` vs `unknown`?
 
 **Respuesta:**
+
 - **any**: desactiva type-checking completamente (inseguro)
 - **unknown**: tipo seguro para valores desconocidos, requiere type-checking antes de usar
 
 ```typescript
-let valorAny: any = "texto";
+let valorAny: any = 'texto';
 valorAny.toUpperCase(); // ✅ compila pero puede fallar en runtime
 
-let valorUnknown: unknown = "texto";
+let valorUnknown: unknown = 'texto';
 // valorUnknown.toUpperCase(); // ❌ Error
-if (typeof valorUnknown === "string") {
+if (typeof valorUnknown === 'string') {
   valorUnknown.toUpperCase(); // ✅ OK después de verificar
 }
 ```
@@ -855,11 +865,17 @@ Los generics permiten crear componentes reutilizables que trabajan con múltiple
 
 ```typescript
 // Sin generics: necesitas funciones separadas
-function imprimirString(valor: string): string { return valor; }
-function imprimirNumber(valor: number): number { return valor; }
+function imprimirString(valor: string): string {
+  return valor;
+}
+function imprimirNumber(valor: number): number {
+  return valor;
+}
 
 // Con generics: una sola función
-function imprimir<T>(valor: T): T { return valor; }
+function imprimir<T>(valor: T): T {
+  return valor;
+}
 ```
 
 ### 4. ¿Qué es el `type narrowing`?
@@ -870,15 +886,19 @@ Es el proceso de refinar tipos a través de checks condicionales.
 ```typescript
 function procesarValor(valor: string | number) {
   // Type narrowing con typeof
-  if (typeof valor === "string") {
+  if (typeof valor === 'string') {
     return valor.toUpperCase(); // TS sabe que es string
   }
   return valor.toFixed(2); // TS sabe que es number
 }
 
 // Con clases (instanceof)
-class Perro { ladrar() {} }
-class Gato { maullar() {} }
+class Perro {
+  ladrar() {}
+}
+class Gato {
+  maullar() {}
+}
 
 function hacerSonido(animal: Perro | Gato) {
   if (animal instanceof Perro) {
@@ -892,6 +912,7 @@ function hacerSonido(animal: Perro | Gato) {
 ### 5. ¿Qué es `readonly` vs `const`?
 
 **Respuesta:**
+
 - **const**: para variables, no se puede reasignar
 - **readonly**: para propiedades de objetos/clases, no se puede modificar
 
@@ -913,6 +934,7 @@ class Usuario {
 ### 6. ¿Cuándo usar `null` vs `undefined`?
 
 **Respuesta:**
+
 - **undefined**: ausencia de valor (no inicializado)
 - **null**: ausencia intencional de valor
 
@@ -922,8 +944,8 @@ let sinValor: string | null = null;
 
 // Configuración
 interface Config {
-  timeout?: number;  // undefined = no configurado
-  cache: number | null;  // null = deshabilitado intencionalmente
+  timeout?: number; // undefined = no configurado
+  cache: number | null; // null = deshabilitado intencionalmente
 }
 ```
 
@@ -933,8 +955,12 @@ interface Config {
 Funciones que ayudan a TypeScript a inferir tipos más específicos.
 
 ```typescript
-interface Pez { nadar(): void; }
-interface Ave { volar(): void; }
+interface Pez {
+  nadar(): void;
+}
+interface Ave {
+  volar(): void;
+}
 
 // Type guard personalizado
 function esPez(animal: Pez | Ave): animal is Pez {
@@ -968,31 +994,32 @@ function obtenerValor<T, K extends keyof T>(obj: T, key: K): T[K] {
   return obj[key];
 }
 
-const persona: Persona = { nombre: "Ana", edad: 30, email: "ana@test.com" };
-obtenerValor(persona, "nombre"); // ✅ "Ana"
+const persona: Persona = { nombre: 'Ana', edad: 30, email: 'ana@test.com' };
+obtenerValor(persona, 'nombre'); // ✅ "Ana"
 // obtenerValor(persona, "telefono"); // ❌ Error
 ```
 
 ### 9. ¿Diferencia entre `public`, `private`, y `protected`?
 
 **Respuesta:**
+
 ```typescript
 class Ejemplo {
-  public publico: string;      // accesible desde cualquier lugar
-  private privado: string;     // solo dentro de esta clase
+  public publico: string; // accesible desde cualquier lugar
+  private privado: string; // solo dentro de esta clase
   protected protegido: string; // esta clase y subclases
 
   constructor() {
-    this.publico = "todos pueden ver";
-    this.privado = "solo yo";
-    this.protegido = "yo y mis hijos";
+    this.publico = 'todos pueden ver';
+    this.privado = 'solo yo';
+    this.protegido = 'yo y mis hijos';
   }
 }
 
 class Hijo extends Ejemplo {
   metodo() {
-    console.log(this.publico);    // ✅
-    console.log(this.protegido);  // ✅
+    console.log(this.publico); // ✅
+    console.log(this.protegido); // ✅
     // console.log(this.privado); // ❌ Error
   }
 }
@@ -1011,16 +1038,13 @@ interface Usuario {
   edad: number;
 }
 
-function actualizarUsuario(
-  id: number,
-  cambios: Partial<Usuario>
-): Usuario {
+function actualizarUsuario(id: number, cambios: Partial<Usuario>): Usuario {
   const usuarioActual = obtenerUsuario(id);
   return { ...usuarioActual, ...cambios };
 }
 
 // Solo actualizar email
-actualizarUsuario(1, { email: "nuevo@example.com" });
+actualizarUsuario(1, { email: 'nuevo@example.com' });
 ```
 
 ---
@@ -1028,6 +1052,7 @@ actualizarUsuario(1, { email: "nuevo@example.com" });
 ## 🎯 Tips para Entrevistas
 
 ### ✅ DO
+
 - Usa tipos específicos en lugar de `any`
 - Aprovecha la inferencia de tipos cuando es obvia
 - Usa `readonly` para inmutabilidad
@@ -1036,6 +1061,7 @@ actualizarUsuario(1, { email: "nuevo@example.com" });
 - Documenta con JSDoc cuando sea necesario
 
 ### ❌ DON'T
+
 - Evita `any` a toda costa (demuestra que entiendes TypeScript)
 - No uses type assertions (`as`) innecesariamente
 - No ignores errores del compilador
@@ -1064,10 +1090,10 @@ const usuario = datos as Usuario;
 // ✅ Bien
 function esUsuario(datos: unknown): datos is Usuario {
   return (
-    typeof datos === "object" &&
+    typeof datos === 'object' &&
     datos !== null &&
-    "id" in datos &&
-    "nombre" in datos
+    'id' in datos &&
+    'nombre' in datos
   );
 }
 
@@ -1089,6 +1115,7 @@ if (esUsuario(datos)) {
 ## 🎓 Ejercicios Prácticos
 
 ### Ejercicio 1: Tipos Básicos
+
 ```typescript
 // Completa los tipos
 function combinar(input1: ???, input2: ???): ??? {
@@ -1102,6 +1129,7 @@ function combinar(input1: ???, input2: ???): ??? {
 ```
 
 ### Ejercicio 2: Generics
+
 ```typescript
 // Implementa una función genérica que devuelva el último elemento de un array
 function ultimo<???>(arr: ???): ??? {
@@ -1115,6 +1143,7 @@ function ultimo<T>(arr: T[]): T | undefined {
 ```
 
 ### Ejercicio 3: Interfaces
+
 ```typescript
 // Crea una interface para un producto de e-commerce con:
 // - id (obligatorio)

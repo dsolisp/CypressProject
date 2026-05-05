@@ -5,8 +5,8 @@
 export const LoginLocators = {
   usernameInput: '[data-test="username"]',
   passwordInput: '[data-test="password"]',
-  loginButton:   '[data-test="login-button"]',
-  errorMessage:  '[data-test="error"]',
-  loginWrapper:  '.login_wrapper',
-  loginLogo:     '.login_logo',
+  loginButton: '[data-test="login-button"]',
+  errorMessage: '[data-test="error"]',
+  loginWrapper: '.login_wrapper',
+  loginLogo: '.login_logo',
 } as const;

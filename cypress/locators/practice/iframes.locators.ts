@@ -4,9 +4,9 @@
  */
 export const IframesLocators = {
   // ── /iframes.html ────────────────────────────────────────────────
-  backHome:    '[data-test="back-home"]',
+  backHome: '[data-test="back-home"]',
   parentFrame: '[data-test="parent-frame"]',
-  outerFrame:  '[data-test="outer-frame"]',
+  outerFrame: '[data-test="outer-frame"]',
 
   // ── /iframes/editor.html (inside parentFrame) ────────────────────
   editor: '[data-test="editor"]',
@@ -15,8 +15,8 @@ export const IframesLocators = {
   childFrame: '[data-test="child-frame"]',
 
   // ── /iframes/inner-form.html (inside childFrame) ─────────────────
-  innerName:   '[data-test="inner-name"]',
-  innerEmail:  '[data-test="inner-email"]',
+  innerName: '[data-test="inner-name"]',
+  innerEmail: '[data-test="inner-email"]',
   innerSubmit: '[data-test="inner-submit"]',
   innerResult: '[data-test="inner-result"]',
 } as const;

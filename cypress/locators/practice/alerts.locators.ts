@@ -3,10 +3,10 @@
  * Pure selector definitions only — zero logic, zero assertions (Law 1 & Law 2).
  */
 export const AlertsLocators = {
-  backHome:       '[data-test="back-home"]',
-  triggerAlert:   '[data-test="trigger-alert"]',
+  backHome: '[data-test="back-home"]',
+  triggerAlert: '[data-test="trigger-alert"]',
   triggerConfirm: '[data-test="trigger-confirm"]',
-  triggerPrompt:  '[data-test="trigger-prompt"]',
-  result:         '[data-test="result"]',
-  resultText:     '[data-test="result-text"]',
+  triggerPrompt: '[data-test="trigger-prompt"]',
+  result: '[data-test="result"]',
+  resultText: '[data-test="result-text"]',
 } as const;

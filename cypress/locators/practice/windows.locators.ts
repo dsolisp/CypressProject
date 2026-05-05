@@ -4,12 +4,12 @@
  */
 export const WindowsLocators = {
   // ── /windows.html ─────────────────────────────────────────────────
-  backHome:      '[data-test="back-home"]',
-  openTabLink:   '[data-test="open-new-tab-link"]',
-  openTabJs:     '[data-test="open-new-tab-js"]',
+  backHome: '[data-test="back-home"]',
+  openTabLink: '[data-test="open-new-tab-link"]',
+  openTabJs: '[data-test="open-new-tab-js"]',
 
   // ── /windows/new.html ─────────────────────────────────────────────
   newWindowHeading: '[data-test="new-window-heading"]',
-  newWindowBody:    '[data-test="new-window-body"]',
-  closeWindow:      '[data-test="close-window"]',
+  newWindowBody: '[data-test="new-window-body"]',
+  closeWindow: '[data-test="close-window"]',
 } as const;

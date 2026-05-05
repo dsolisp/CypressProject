@@ -72,7 +72,10 @@ export default [
       },
     },
     rules: {
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      'no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
     },
   },
 
@@ -85,11 +88,13 @@ export default [
         'error',
         {
           selector: 'CallExpression[callee.property.name="should"]',
-          message: '❌ Law 2: No assertions in pages. Return chainables; let specs assert.',
+          message:
+            '❌ Law 2: No assertions in pages. Return chainables; let specs assert.',
         },
         {
           selector: 'CallExpression[callee.property.name="expect"]',
-          message: '❌ Law 2: No assertions in pages. Return chainables; let specs assert.',
+          message:
+            '❌ Law 2: No assertions in pages. Return chainables; let specs assert.',
         },
       ],
     },
@@ -116,8 +121,10 @@ export default [
       'no-restricted-syntax': [
         'error',
         {
-          selector: 'CallExpression[callee.object.name="cy"][callee.property.name=/^(get|find|contains)$/]',
-          message: '❌ Law 3: No raw cy.get/find/contains in specs. Use page object methods.',
+          selector:
+            'CallExpression[callee.object.name="cy"][callee.property.name=/^(get|find|contains)$/]',
+          message:
+            '❌ Law 3: No raw cy.get/find/contains in specs. Use page object methods.',
         },
       ],
     },

@@ -25,11 +25,14 @@ export type VisualConfig = {
 
 type ViewportPreset = 'mobile' | 'tablet' | 'desktop' | 'laptop';
 
-const VIEWPORT_PRESETS: Record<ViewportPreset, { width: number; height: number; device?: string }> = {
-  mobile:  { width: 375,  height: 812,  device: 'iphone-x' },
-  tablet:  { width: 768,  height: 1024, device: 'ipad-2'   },
+const VIEWPORT_PRESETS: Record<
+  ViewportPreset,
+  { width: number; height: number; device?: string }
+> = {
+  mobile: { width: 375, height: 812, device: 'iphone-x' },
+  tablet: { width: 768, height: 1024, device: 'ipad-2' },
   desktop: { width: 1920, height: 1080 },
-  laptop:  { width: 1366, height: 768  },
+  laptop: { width: 1366, height: 768 },
 };
 
 const VisualHelper = {
