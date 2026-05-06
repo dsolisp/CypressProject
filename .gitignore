@@ -19,7 +19,9 @@ cypress/videos/
 cypress/downloads/
 
 # ── Visual regression artifacts ────────────────────────────────────────────────
-cypress-image-diff-screenshots/
+# Keep committed baselines, ignore generated actual/diff output
+cypress-image-diff-screenshots/**
+!cypress-image-diff-screenshots/baseline/**
 cypress-image-diff-html-report/
 cypress/snapshots/actual/
 cypress/snapshots/diff/
