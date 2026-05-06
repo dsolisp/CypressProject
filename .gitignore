@@ -39,6 +39,9 @@ logs/
 *.db
 *.sqlite
 
+# ── Legacy contract-testing outputs (Pact removed) ────────────────────────────
+pacts/
+
 # ── OS files ──────────────────────────────────────────────────────────────────
 .DS_Store
 .DS_Store?
