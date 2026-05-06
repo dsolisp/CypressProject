@@ -51,6 +51,15 @@ cd CypressMasterclass
 
 **🎯 ACTION**: Create a `package.json` file.
 
+> **Note (this repo uses pnpm):** Some sections of this masterclass use `npm` / `npx` in examples because they’re common in the ecosystem.  
+> For consistency with this repository and CI, prefer these equivalents:
+>
+> - `npm ci` / `npm install` → `pnpm install` (use `pnpm install --frozen-lockfile` in CI)
+> - `npm install --save-dev <pkg>` → `pnpm add -D <pkg>`
+> - `npx <bin>` → `pnpm exec <bin>`
+>
+> If you don’t have pnpm yet: `corepack enable` (Node 16+).
+
 **▶️ Run in Terminal** (inside `CypressMasterclass/`):
 
 ```bash
@@ -6020,16 +6029,16 @@ FROM cypress/included:13.6.0
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json ./
+COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies
-RUN npm ci
+RUN corepack enable && pnpm install --frozen-lockfile
 
 # Copy the rest of the project
 COPY . .
 
 # Default command (can be overridden)
-CMD ["npx", "cypress", "run"]
+CMD ["pnpm", "run", "cy:run"]
 ```
 
 #### Step 19.2: Create Docker Compose

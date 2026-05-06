@@ -77,7 +77,7 @@ describe('SauceDemo — Inventory @cart @regression', () => {
   it('should sort products by name A-Z', () => {
     InventoryPage.sortBy('az');
     InventoryPage.getItemNames().then(($els) => {
-      const names = Array.from($els).map((el) => el.textContent ?? '');
+      const names = Array.from($els).map((el: Element) => el.textContent ?? '');
       const sorted = [...names].sort();
       expect(names).to.deep.equal(sorted);
     });
@@ -86,7 +86,7 @@ describe('SauceDemo — Inventory @cart @regression', () => {
   it('should sort products by price low to high', () => {
     InventoryPage.sortBy('lohi');
     InventoryPage.getItemPrices().then(($els) => {
-      const prices = Array.from($els).map((el) =>
+      const prices = Array.from($els).map((el: Element) =>
         parseFloat((el.textContent ?? '').replace('$', ''))
       );
       const sorted = [...prices].sort((a, b) => a - b);

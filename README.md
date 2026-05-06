@@ -47,13 +47,14 @@ The goal is to demonstrate proficiency in modern test automation tools, design p
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- npm
+- Node.js **24+**
+- **pnpm** (via Corepack)
 
 ### Installation
 
 ```bash
-npm install
+corepack enable
+pnpm install
 ```
 
 ### Database Setup
@@ -69,13 +70,13 @@ node scripts/seed_db.js
 **Interactive Mode (Test Runner):**
 
 ```bash
-npx cypress open
+pnpm run cy:open
 ```
 
 **Headless Mode (CI/CD):**
 
 ```bash
-npx cypress run
+pnpm run cy:run
 ```
 
 ## 🏗️ Project Structure
