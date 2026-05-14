@@ -1,100 +1,77 @@
 # Cypress QA Automation POC
 
-## 🚀 Project Overview
+This repository is a **portfolio-grade Cypress automation framework** focused on **maintainable patterns**, **CI parity**, and **observable test runs**.
 
-This project serves as a **Proof of Concept (POC)** demonstrating advanced QA Automation capabilities using **Cypress**. It showcases a comprehensive test automation framework designed to validate web applications, APIs, and database integrations, mirroring enterprise-grade standards.
+## Why this POC exists
 
-The goal is to demonstrate proficiency in modern test automation tools, design patterns, and best practices.
+This repo demonstrates how to build a Cypress-based framework that’s more than “just UI tests”:
 
-## 🛠️ Tech Stack & Tools
+- **Architecture discipline** (POM + locator rules via ADRs)
+- **Multi-layer automation** (UI + API + accessibility + visual + DB-backed checks)
+- **Hermetic-by-default execution** (isolated SQLite per run)
+- **Observability hooks** (OpenTelemetry trace id surfaced per run)
+- **CI-ready reporting** (Allure artifacts + consistent workflows across the portfolio)
 
-- **Core Framework**: [Cypress](https://www.cypress.io/) (E2E & Component Testing)
-- **Language**: JavaScript / TypeScript
-- **Database**: SQLite (for data-driven testing and seeding)
-- **API Testing**: Native Cypress HTTP requests
-- **Data Generation**: [Faker.js](https://fakerjs.dev/)
-- **Accessibility**: [cypress-axe](https://github.com/component-driven/cypress-axe)
-- **Reporting**: Cypress Dashboard / Local Reports
+## What’s implemented (source of truth: `package.json` + `cypress.config.ts`)
 
-## 📂 Key Features Implemented
+- **Framework**: Cypress (TypeScript)
+- **Reporting**: Allure (`allure-cypress`)
+- **Visual regression**: `cypress-image-diff-js` (committed baselines)
+- **Accessibility**: `cypress-axe` / `axe-core`
+- **DB integration**: SQLite (`sqlite3`) with seeding + query tasks
+- **Observability**: OpenTelemetry (`@opentelemetry/*`) wired from `cypress.config.ts`
 
-### 1. UI End-to-End Testing
+## Applications under test (evidence: `cypress.config.ts`, `cypress/support/constants.ts`)
 
-- Automated flows for **SauceDemo** (Login, Inventory, Cart, Checkout).
-- **Page Object Model (POM)** design pattern for maintainable and reusable code.
-- Handling of dynamic elements and complex user interactions.
+| Target | Default URL | Where it is used |
+|--------|-------------|------------------|
+| **SauceDemo** (primary UI) | `https://www.saucedemo.com` | `e2e.baseUrl` in `cypress.config.ts`; most UI specs under `cypress/ui/` |
+| **Practice app** (UI drills) | `http://localhost:8080` | `env.practiceBaseUrl` (`PRACTICE_BASE_URL`); practice specs under `cypress/ui/` |
+| **Public APIs** | `https://jsonplaceholder.typicode.com`, `https://swapi.dev/api` | Constants in `cypress/support/constants.ts`; backend specs under `cypress/backend/` |
 
-### 2. API Testing Integration
+This portfolio does **not** treat search engines (Google, Bing, etc.) as applications under test.
 
-- Comprehensive REST API testing against **SWAPI** (Star Wars API).
-- Validation of status codes, response bodies, headers, and schemas.
-- Advanced scenarios: Pagination handling, Search queries, and Negative testing.
+## CI scope (default branch: `.github/workflows/ci.yml`)
 
-### 3. Database Testing
+On `push` / `pull_request` to `main`, CI runs **quality + unit tests only** (`pnpm run lint`, `pnpm run format:check`, `pnpm run typecheck`, audits, `pnpm run test:unit`). It does **not** run headed Cypress UI by default. For full browser suites, run `pnpm run cy:run` locally or use `.github/workflows/full-tests.yml` (workflow dispatch).
 
-- Direct integration with **SQLite** to validate backend state.
-- **Data-Driven Testing**: Iterating through database records to drive UI tests.
-- **Seeding**: Automated database setup and teardown scripts (`scripts/seed_db.js`).
+## Quick start
 
-### 4. Advanced Patterns
-
-- **Custom Commands**: Encapsulated logic for repetitive actions (e.g., `cy.login()`, `cy.queryDb()`).
-- **Accessibility Testing**: Automated WCAG compliance checks using `cypress-axe`.
-- **Visual Testing**: Comprehensive visual regression testing options. See [Visual Testing Guide](docs/visual-testing-guide.md) for 5 different tools compatible with Cypress 15.
-- **Performance**: Basic response time assertions for API endpoints.
-
-## ⚡️ Getting Started
-
-### Prerequisites
+### Prereqs
 
 - Node.js **24+**
-- **pnpm** (via Corepack)
+- pnpm via Corepack
 
-### Installation
+### Install
 
 ```bash
 corepack enable
 pnpm install
 ```
 
-### Database Setup
-
-Initialize the local SQLite database with test data:
+### Seed DB (used by DB tests / local dev)
 
 ```bash
 node scripts/seed_db.js
 ```
 
-### Running Tests
-
-**Interactive Mode (Test Runner):**
+### Run
 
 ```bash
 pnpm run cy:open
-```
-
-**Headless Mode (CI/CD):**
-
-```bash
 pnpm run cy:run
 ```
 
-## 🏗️ Project Structure
+## Where the implementation lives (read the code)
 
-```
-├── cypress/
-│   ├── e2e/
-│   │   ├── backend/      # API & Database Tests
-│   │   ├── frontend/     # UI E2E Tests (SauceDemo)
-│   │   └── ...
-│   ├── pages/            # Page Object Models
-│   ├── support/          # Custom Commands & Config
-│   └── fixtures/         # Static Test Data
-├── scripts/              # Utility scripts (DB seeding)
-├── cypress.config.ts     # Main Configuration
-└── package.json
-```
+- **Cypress runtime wiring**: `cypress.config.ts` (SQLite tasks, OpenTelemetry `before:run` / `after:run`, image-diff plugin)
+- **OTel helpers**: `scripts/otel.ts` (imported from `cypress.config.ts`)
+- **UI + backend specs**: `cypress/ui/`, `cypress/backend/`, `cypress/accessibility/`, `cypress/performance/`
+- **POM + locators**: `cypress/pages/`, `cypress/locators/`
+- **Shared support**: `cypress/support/`
 
-## 🤝 Contribution
+## Documentation
 
-This project is a demonstration of personal knowledge and technical skills in QA Automation. Feel free to explore the code to understand the implementation details of various testing patterns.
+- **Start here**: `docs/ZERO_TO_HERO.md` (tutorial-style: setup → run → extend → troubleshoot)
+- **Visual regression**: `docs/visual-testing-guide.md`
+- **Architecture rules**: `docs/adr/` (start with `ADR-007-test-parity-policy.md`)
