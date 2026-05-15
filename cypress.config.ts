@@ -16,6 +16,7 @@ export default defineConfig({
     requestTimeout: TIMEOUTS.API,
     responseTimeout: TIMEOUTS.API,
     specPattern: 'cypress/**/*.cy.{ts,js}',
+    excludeSpecPattern: ['cypress/optional/**/*.cy.ts'],
     supportFile: 'cypress/support/e2e.ts',
 
     // Practice app URL — overridable via PRACTICE_BASE_URL env var (ADR-010)
@@ -44,9 +45,16 @@ export default defineConfig({
         runSpan = runTracer.startSpan('cypress.run', {
           attributes: {
             'cypress.browser': details.browser?.name ?? '',
+            'test.browser': details.browser?.name ?? '',
             'cypress.specs': Array.isArray(details.specs)
               ? details.specs.length
               : 0,
+            ...(process.env.GITHUB_SHA
+              ? { 'git.sha': process.env.GITHUB_SHA }
+              : {}),
+            ...(process.env.OTEL_TEST_SUITE
+              ? { 'test.suite': process.env.OTEL_TEST_SUITE }
+              : {}),
           },
         });
         const ctx = runSpan.spanContext();

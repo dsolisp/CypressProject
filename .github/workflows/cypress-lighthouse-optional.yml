@@ -1,0 +1,50 @@
+name: Cypress optional Lighthouse (CLI)
+
+# Not for PR CI — heavy, Chrome-specific; aligns with portfolio QA plan.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 4 * * 1'
+
+concurrency:
+  group: cypress-lighthouse-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          run_install: false
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Run Lighthouse (cypress-audit)
+        run: pnpm run cy:lighthouse:optional
+
+      - name: Upload Cypress screenshots (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-lighthouse-screenshots
+          path: cypress/screenshots/
+          if-no-files-found: ignore
