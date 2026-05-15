@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "cy:run": "cypress run",
+    "cy:lighthouse:optional": "cypress run --config-file cypress.config.lighthouse.cjs --browser chrome",
     "cy:open": "cypress open",
     "cy:run:sauce": "cypress run --spec 'cypress/ui/sauce/sauce.cy.ts'",
     "test:unit": "cypress run --spec 'cypress/unit/**/*.cy.ts'",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^23.2.1",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.7",
+    "@cypress-audit/lighthouse": "^1.4.2",
     "@faker-js/faker": "^10.1.0",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",

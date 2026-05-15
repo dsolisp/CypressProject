@@ -1,6 +1,11 @@
 # Cypress Architect Masterclass: The Thesis (2025 Edition)
 
-**Objective**: To build a university-level, enterprise-grade Test Automation Framework using Cypress.
+> **Working in this repository (`CypressProject`)?**  
+> Use **[`docs/ZERO_TO_HERO.md`](docs/ZERO_TO_HERO.md)** as the **implementation-first** guide: real `package.json` scripts (`pnpm run cy:open`, `pnpm run cy:run`, …), `cypress.config.ts`, folder layout under `cypress/ui/`, `cypress/backend/`, `cypress/support/`, and quality gates match that file—not every path below.
+>
+> **About this masterclass:** Long-form thesis material (Percy, Applitools, alternate folder names, `npm`/`npx` in copy-paste blocks) reflects **generic** greenfield steps. Here, **pnpm** is canonical (`packageManager` in `package.json`). Prefer `pnpm install`, `pnpm add -D <pkg>`, and `pnpm exec <bin>` (or the repo’s `pnpm run …` scripts). Where you still see `npx cypress …` or `cypress/e2e/…` later in this document, translate to `pnpm exec cypress …` and this repo’s `cypress/**/*.cy.ts` tree.
+
+**Objective**: To build a university-level, enterprise-grade Test Automation Framework using Cypress.  
 **Prerequisites**: Senior-level understanding of JavaScript/TypeScript.
 
 ---
@@ -26,7 +31,7 @@ A robust framework requires a pristine environment. We do not just "install Cypr
 node -v
 ```
 
-**✅ Expected Output**: `v18.x.x` or higher (LTS version)
+**✅ Expected Output**: Current **Active LTS** (for example `v20.x` / `v22.x`) or whatever your team standardizes; must satisfy Cypress’s [supported runtimes](https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements).
 
 **❌ If not installed**: Download from [nodejs.org](https://nodejs.org/)
 
@@ -51,22 +56,16 @@ cd CypressMasterclass
 
 **🎯 ACTION**: Create a `package.json` file.
 
-> **Note (this repo uses pnpm):** Some sections of this masterclass use `npm` / `npx` in examples because they’re common in the ecosystem.  
-> For consistency with this repository and CI, prefer these equivalents:
->
-> - `npm ci` / `npm install` → `pnpm install` (use `pnpm install --frozen-lockfile` in CI)
-> - `npm install --save-dev <pkg>` → `pnpm add -D <pkg>`
-> - `npx <bin>` → `pnpm exec <bin>`
->
-> If you don’t have pnpm yet: `corepack enable` (Node 16+).
+> **Note (this repo uses pnpm):** Greenfield examples below use **pnpm** so they match `CypressProject`. If you only have npm, `npm init -y` / `npm install` are fine—then see the mapping in the banner above.
 
 **▶️ Run in Terminal** (inside `CypressMasterclass/`):
 
 ```bash
-npm init -y
+corepack enable
+pnpm init
 ```
 
-**💡 What This Does**: Creates `package.json` with default values.
+**💡 What This Does**: Creates `package.json` (pnpm writes compatible metadata; this repo pins the client via `"packageManager": "pnpm@…"`—copy that field when stabilizing a team repo).
 
 **✅ Verify**: You should now see `package.json` in your directory.
 
@@ -125,28 +124,24 @@ npm init -y
 **▶️ Run in Terminal**:
 
 ```bash
-npm install --save-dev cypress typescript
-npm install --save-dev eslint prettier
-npm install --save-dev @faker-js/faker sqlite3
+pnpm add -D cypress typescript eslint prettier @faker-js/faker sqlite3
 ```
 
 **⏱️ Wait Time**: 2-3 minutes for installation.
 
-**💡 npm commands explained**:
+**💡 pnpm commands explained**:
 
-**`npm install --save-dev <package>`**: Install development dependency
+**`pnpm add -D <package>`**: Install a **dev** dependency (same idea as `npm install --save-dev`).
 
-- `--save-dev` (or `-D`): Adds to `devDependencies` in package.json
-- Dev dependencies: Only needed for development/testing, not production
-- Alternative: `npm install` (without `--save-dev`) for production dependencies
-- 📚 Docs: https://docs.npmjs.com/cli/v10/commands/npm-install
+- Adds to `devDependencies` in `package.json` and updates the lockfile.
+- 📚 Docs: https://pnpm.io/cli/add
 
-**`npx <command>`**: Execute package binaries
+**`pnpm exec <command>`**: Run a binary from installed packages (same idea as `npx`).
 
-- Runs commands from locally installed packages
-- Example: `npx cypress open` runs Cypress from node_modules
-- No need to add to package.json scripts
-- 📚 Docs: https://docs.npmjs.com/cli/v10/commands/npx
+- Example: `pnpm exec cypress open` (in **this** repo you can also use `pnpm run cy:open` once scripts exist—see `docs/ZERO_TO_HERO.md`).
+- 📚 Docs: https://pnpm.io/cli/exec
+
+**`pnpm install` / `pnpm install --frozen-lockfile`**: Install exactly what the lockfile says (CI).
 
 ---
 
@@ -275,7 +270,7 @@ Prettier configuration file for code formatting preferences.
 **▶️ Run in Terminal**:
 
 ```bash
-npx cypress open
+pnpm exec cypress open
 ```
 
 **👀 What Happens**:
@@ -302,6 +297,8 @@ CypressMasterclass/
 └── package.json
 ```
 
+**📌 In `CypressProject` (this monorepo folder):** Cypress already scaffolds specs under `cypress/ui/`, `cypress/backend/`, `cypress/accessibility/`, etc., with `cypress.config.ts` (TypeScript). Do not expect a bare `cypress/e2e/` tree—see [`docs/ZERO_TO_HERO.md`](docs/ZERO_TO_HERO.md) §3.
+
 ---
 
 #### Step 1.9: Create Setup Script (Optional)
@@ -315,8 +312,8 @@ CypressMasterclass/
 ```bash
 #!/bin/bash
 echo "🚀 Initializing Test Environment..."
-npm ci
-npx cypress install
+pnpm install --frozen-lockfile
+pnpm exec cypress install
 echo "✅ Environment Ready."
 ```
 
@@ -355,6 +352,8 @@ CypressMasterclass/
 ├── package.json
 └── setup_env.sh
 ```
+
+**On `CypressProject`:** you will have `pnpm-lock.yaml`, `cypress.config.ts` (not only `.js`), and the real spec layout from [`docs/ZERO_TO_HERO.md`](docs/ZERO_TO_HERO.md)—treat the tree above as the greenfield teaching shape.
 
 **➡️ Next**: Proceed to Phase 2 (Backend)
 

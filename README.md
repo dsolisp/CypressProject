@@ -23,11 +23,11 @@ This repo demonstrates how to build a Cypress-based framework that’s more than
 
 ## Applications under test (evidence: `cypress.config.ts`, `cypress/support/constants.ts`)
 
-| Target | Default URL | Where it is used |
-|--------|-------------|------------------|
-| **SauceDemo** (primary UI) | `https://www.saucedemo.com` | `e2e.baseUrl` in `cypress.config.ts`; most UI specs under `cypress/ui/` |
-| **Practice app** (UI drills) | `http://localhost:8080` | `env.practiceBaseUrl` (`PRACTICE_BASE_URL`); practice specs under `cypress/ui/` |
-| **Public APIs** | `https://jsonplaceholder.typicode.com`, `https://swapi.dev/api` | Constants in `cypress/support/constants.ts`; backend specs under `cypress/backend/` |
+| Target                       | Default URL                                                     | Where it is used                                                                    |
+| ---------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **SauceDemo** (primary UI)   | `https://www.saucedemo.com`                                     | `e2e.baseUrl` in `cypress.config.ts`; most UI specs under `cypress/ui/`             |
+| **Practice app** (UI drills) | `http://localhost:8080`                                         | `env.practiceBaseUrl` (`PRACTICE_BASE_URL`); practice specs under `cypress/ui/`     |
+| **Public APIs**              | `https://jsonplaceholder.typicode.com`, `https://swapi.dev/api` | Constants in `cypress/support/constants.ts`; backend specs under `cypress/backend/` |
 
 This portfolio does **not** treat search engines (Google, Bing, etc.) as applications under test.
 
@@ -70,8 +70,18 @@ pnpm run cy:run
 - **POM + locators**: `cypress/pages/`, `cypress/locators/`
 - **Shared support**: `cypress/support/`
 
+### Lighthouse-style vs Google Lighthouse CLI
+
+**Lighthouse-style** in this repo means **Axe** checks plus **RUM-style** performance using the browser **Performance API** and wall-clock assertions in Cypress — not the same as wiring **Google Lighthouse CLI** on every PR (optional spike only; see [`.github/workflows/cypress-lighthouse-optional.yml`](.github/workflows/cypress-lighthouse-optional.yml) and `docs/OPTIONAL_LIGHTHOUSE.md`). [`CYPRESS_MASTERCLASS.md`](CYPRESS_MASTERCLASS.md) may mention `cypress-audit` as a tutorial path; default CI does not depend on it.
+
+| Area                                        | Spec                                                                                                                                                                         |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessibility (incl. Lighthouse-named flow) | [`cypress/accessibility/lighthouse.cy.ts`](cypress/accessibility/lighthouse.cy.ts), [`cypress/accessibility/accessibility.cy.ts`](cypress/accessibility/accessibility.cy.ts) |
+| Performance (RUM-style)                     | [`cypress/performance/performance.cy.ts`](cypress/performance/performance.cy.ts)                                                                                             |
+
 ## Documentation
 
 - **Start here**: `docs/ZERO_TO_HERO.md` (tutorial-style: setup → run → extend → troubleshoot)
 - **Visual regression**: `docs/visual-testing-guide.md`
 - **Architecture rules**: `docs/adr/` (start with `ADR-007-test-parity-policy.md`)
+- **OTel test-run attributes** (portfolio monorepo): [`../shared-docs/docs/OTEL_TEST_RUN_ATTRIBUTES.md`](../shared-docs/docs/OTEL_TEST_RUN_ATTRIBUTES.md)

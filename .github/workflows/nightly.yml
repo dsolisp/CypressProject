@@ -1,5 +1,8 @@
 name: Nightly Test Suite
 
+# Optional Google Lighthouse CLI (not part of this matrix): see
+# .github/workflows/cypress-lighthouse-optional.yml and docs/OPTIONAL_LIGHTHOUSE.md
+
 on:
   schedule:
     - cron: '0 2 * * *'
