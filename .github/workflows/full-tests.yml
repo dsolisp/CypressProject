@@ -57,7 +57,7 @@ jobs:
       - name: Run Sauce UI tests
         if: ${{ inputs.suite == 'all' || inputs.suite == 'ui-sauce' }}
         continue-on-error: true
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: pnpm exec cypress run --spec 'cypress/ui/sauce/**/*.cy.ts'
@@ -71,12 +71,23 @@ jobs:
 
       - name: Start practice app
         if: ${{ inputs.suite == 'all' || inputs.suite == 'ui-practice' }}
-        run: docker compose -f qa-practice-app/docker-compose.yml up -d --wait
+        run: |
+          docker compose -f qa-practice-app/docker-compose.yml up -d
+          echo "Waiting for practice app on localhost:8080..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:8080/ > /dev/null 2>&1; then
+              echo "Practice app ready after $((i * 2))s"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "ERROR: Practice app did not start within 60s" >&2
+          exit 1
 
       - name: Run Practice UI tests
         if: ${{ inputs.suite == 'all' || inputs.suite == 'ui-practice' }}
         continue-on-error: true
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: pnpm exec cypress run --spec 'cypress/ui/practice/**/*.cy.ts'
@@ -84,7 +95,7 @@ jobs:
       - name: Run Backend tests
         if: ${{ inputs.suite == 'all' || inputs.suite == 'backend' }}
         continue-on-error: true
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: pnpm exec cypress run --spec 'cypress/backend/**/*.cy.ts'
@@ -92,7 +103,7 @@ jobs:
       - name: Run Visual tests
         if: ${{ inputs.suite == 'all' || inputs.suite == 'visual' }}
         continue-on-error: true
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: pnpm exec cypress run --spec 'cypress/ui/visual/**/*.cy.ts'
@@ -100,7 +111,7 @@ jobs:
       - name: Run Accessibility tests
         if: ${{ inputs.suite == 'all' || inputs.suite == 'a11y' }}
         continue-on-error: true
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: pnpm exec cypress run --spec 'cypress/accessibility/**/*.cy.ts'
@@ -108,7 +119,7 @@ jobs:
       - name: Run Performance tests
         if: ${{ inputs.suite == 'all' || inputs.suite == 'performance' }}
         continue-on-error: true
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: pnpm exec cypress run --spec 'cypress/performance/**/*.cy.ts'
@@ -116,14 +127,14 @@ jobs:
       - name: Run BDD tests
         if: ${{ inputs.suite == 'all' || inputs.suite == 'bdd' }}
         continue-on-error: true
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           command: pnpm exec cypress run --spec 'cypress/integration/**/*.feature'
 
       - name: Upload Allure results (JSON)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-results-${{ github.run_id }}
           path: allure-results/
@@ -153,7 +164,7 @@ jobs:
 
       - name: Upload Allure HTML report (artifact)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-report-${{ github.run_id }}
           path: allure-report/

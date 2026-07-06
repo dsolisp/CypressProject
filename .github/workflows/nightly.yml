@@ -83,7 +83,18 @@ jobs:
 
       - name: Start practice app
         if: matrix.suite == 'practice'
-        run: docker compose -f qa-practice-app/docker-compose.yml up -d --wait
+        run: |
+          docker compose -f qa-practice-app/docker-compose.yml up -d
+          echo "Waiting for practice app on localhost:8080..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:8080/ > /dev/null 2>&1; then
+              echo "Practice app ready after $((i * 2))s"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "ERROR: Practice app did not start within 60s" >&2
+          exit 1
 
       - name: Run Cypress suite (${{ matrix.suite }})
         continue-on-error: true
@@ -102,7 +113,7 @@ jobs:
 
       - name: Upload Allure results (JSON)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-results-${{ github.run_id }}-${{ matrix.suite }}
           path: allure-results/
@@ -132,7 +143,7 @@ jobs:
 
       - name: Upload Allure HTML report (artifact)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-report-${{ github.run_id }}-${{ matrix.suite }}
           path: allure-report/
