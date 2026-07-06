@@ -48,14 +48,11 @@ export function configureTracing(serviceName: string) {
     diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
   }
 
-  const provider = new NodeTracerProvider({
-    resource: resourceFromAttributes(testRunResourceAttributes(serviceName)),
-  });
-
   const endpoint = process.env.OTEL_EXPORTER_OTLP_ENDPOINT; // e.g. http://localhost:4318/v1/traces
+  const spanProcessors = [];
   if (endpoint) {
     const headers = parseOtelHeaders(process.env.OTEL_EXPORTER_OTLP_HEADERS);
-    provider.addSpanProcessor(
+    spanProcessors.push(
       new BatchSpanProcessor(
         new OTLPTraceExporter({
           url: endpoint,
@@ -64,6 +61,11 @@ export function configureTracing(serviceName: string) {
       )
     );
   }
+
+  const provider = new NodeTracerProvider({
+    resource: resourceFromAttributes(testRunResourceAttributes(serviceName)),
+    spanProcessors,
+  });
 
   provider.register();
 
