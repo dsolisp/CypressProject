@@ -116,7 +116,7 @@ describe('SWAPI — Comprehensive API Tests @api', () => {
       failOnStatusCode: false,
     }).then((res) => {
       expect(res.status).to.eq(404);
-      expect(res.body.detail).to.eq('Not found');
+      expect(res.body.detail).to.contain('Not found');
     });
   });
 

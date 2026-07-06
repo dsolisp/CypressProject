@@ -1,5 +1,6 @@
 import { defineConfig } from 'cypress';
 import sqlite3 from 'sqlite3';
+import fs from 'fs';
 import path from 'path';
 import getCompareSnapshotsPlugin from 'cypress-image-diff-js/plugin';
 import { allureCypress } from 'allure-cypress/reporter';
@@ -83,6 +84,8 @@ export default defineConfig({
           config.projectRoot,
           `test-results/db/${Date.now()}-${Math.random().toString(16).slice(2)}.db`
         );
+      // sqlite3 will not create missing parent directories — ensure they exist.
+      fs.mkdirSync(path.dirname(runDbPath), { recursive: true });
       config.env.DB_PATH = runDbPath;
 
       on('task', {
