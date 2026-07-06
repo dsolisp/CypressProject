@@ -39,7 +39,9 @@ export class SoftAssert {
   /** Record a failure when `haystack` does not contain `needle`. */
   contains(haystack: string, needle: string, message?: string): this {
     if (!haystack.includes(needle)) {
-      this.failures.push(message ?? `expected "${haystack}" to contain "${needle}"`);
+      this.failures.push(
+        message ?? `expected "${haystack}" to contain "${needle}"`
+      );
     }
     return this;
   }
@@ -58,7 +60,9 @@ export class SoftAssert {
   assertAll(): void {
     if (this.failures.length > 0) {
       const lines = this.failures.map((failure) => `  - ${failure}`).join('\n');
-      throw new Error(`${this.failures.length} soft assertion(s) failed:\n${lines}`);
+      throw new Error(
+        `${this.failures.length} soft assertion(s) failed:\n${lines}`
+      );
     }
   }
 }
