@@ -1,0 +1,64 @@
+name: Update Visual Baselines
+
+# Manually trigger this to regenerate Cypress snapshot baselines after intentional UI changes.
+# Deletes old snapshots for the visual suite and re-runs so cypress-image-diff-js writes fresh ones,
+# then commits them back to the branch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to update baselines on'
+        required: false
+        default: 'main'
+
+permissions:
+  contents: write
+
+jobs:
+  update-baselines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HEADLESS: 'true'
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.branch || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          run_install: false
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Delete existing visual snapshots
+        run: |
+          rm -rf cypress/snapshots/
+          echo "Deleted old snapshots — Cypress will write fresh baselines."
+
+      - name: Run visual tests (writes new baselines)
+        run: |
+          pnpm exec cypress run --spec 'cypress/ui/visual/**/*.cy.ts' || true
+
+      - name: Commit updated baselines
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cypress/snapshots/
+          if git diff --staged --quiet; then
+            echo "No baseline changes to commit."
+          else
+            git commit -m "chore: update Cypress visual baselines (linux) [skip ci]"
+            git push
+          fi
