@@ -74,6 +74,17 @@ jobs:
       - name: Install Cypress binary
         run: pnpm exec cypress install
 
+      - name: Checkout practice app
+        if: matrix.suite == 'practice'
+        uses: actions/checkout@v5
+        with:
+          repository: dsolisp/qa-practice-app
+          path: qa-practice-app
+
+      - name: Start practice app
+        if: matrix.suite == 'practice'
+        run: docker compose -f qa-practice-app/docker-compose.yml up -d --wait
+
       - name: Run Cypress suite (${{ matrix.suite }})
         continue-on-error: true
         run: |
