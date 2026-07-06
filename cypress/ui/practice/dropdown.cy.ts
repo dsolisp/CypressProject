@@ -1,4 +1,5 @@
 import DropdownPage from '../../pages/practice/dropdown.page';
+import { softly } from '../../support/soft-assert';
 
 /**
  * ADV-E1 — Static dropdown
@@ -34,8 +35,23 @@ describe('Practice App — Dropdown @practice @smoke', () => {
   // ── ADV-E2: Dynamic dropdown ─────────────────────────────────────────
   describe('ADV-E2: Dynamic dropdown (async load)', () => {
     it('should start disabled while loading', () => {
-      DropdownPage.getDynamicDropdown().should('be.disabled');
-      DropdownPage.getDynamicStatus().should('contain', 'Fetching');
+      // Soft assertions collect both failures and report them together,
+      // mirroring the Java SoftAssertions / Playwright expect.soft pattern.
+      DropdownPage.getDynamicDropdown().then(($dropdown) => {
+        DropdownPage.getDynamicStatus().then(($status) => {
+          softly((s) => {
+            s.check(
+              $dropdown.is(':disabled'),
+              'dynamic dropdown should be disabled while options load'
+            );
+            s.contains(
+              $status.text(),
+              'Fetching',
+              "status should contain 'Fetching' while loading"
+            );
+          });
+        });
+      });
     });
 
     it('should become enabled and show options after async load', () => {
@@ -45,7 +61,8 @@ describe('Practice App — Dropdown @practice @smoke', () => {
     });
 
     it('should select a dynamic option after load and update status', () => {
-      DropdownPage.selectDynamic('1');
+      // API returns option values: selenium, playwright, cypress, appium
+      DropdownPage.selectDynamic('selenium');
       DropdownPage.getDynamicStatus().should('not.contain', 'Fetching');
     });
   });

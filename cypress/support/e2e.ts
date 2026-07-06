@@ -14,6 +14,9 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+// Allure reporter — must be first so it hooks into all test lifecycle events
+import 'allure-cypress';
+
 // Core commands and auth helpers (ADR-009)
 import './commands';
 

@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress';
 import sqlite3 from 'sqlite3';
 import path from 'path';
 import getCompareSnapshotsPlugin from 'cypress-image-diff-js/plugin';
+import { allureCypress } from 'allure-cypress/reporter';
 import { TIMEOUTS } from './cypress/support/constants';
 import { configureTracing, tracer } from './scripts/otel';
 import { seed } from './scripts/seed_db.js';
@@ -18,6 +19,9 @@ export default defineConfig({
     specPattern: 'cypress/**/*.cy.{ts,js}',
     excludeSpecPattern: ['cypress/optional/**/*.cy.ts'],
     supportFile: 'cypress/support/e2e.ts',
+    // Deterministic viewport — matches baselines across all environments
+    viewportWidth: 1280,
+    viewportHeight: 720,
 
     // Practice app URL — overridable via PRACTICE_BASE_URL env var (ADR-010)
     env: {
@@ -37,6 +41,7 @@ export default defineConfig({
       on: Cypress.PluginEvents,
       config: Cypress.PluginConfigOptions
     ) {
+      allureCypress(on, config, { resultsDir: 'allure-results' });
       configureTracing('CypressProject');
       const runTracer = tracer();
       let runSpan: ReturnType<typeof runTracer.startSpan> | null = null;
