@@ -42,10 +42,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Delete existing visual snapshots
+      - name: Delete existing visual baselines
         run: |
-          rm -rf cypress/snapshots/
-          echo "Deleted old snapshots — Cypress will write fresh baselines."
+          rm -rf cypress-image-diff-screenshots/baseline/
+          echo "Deleted old baselines — cypress-image-diff-js will write fresh ones."
 
       - name: Run visual tests (writes new baselines)
         run: |
@@ -55,7 +55,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cypress/snapshots/
+          git add cypress-image-diff-screenshots/baseline/
           if git diff --staged --quiet; then
             echo "No baseline changes to commit."
           else
