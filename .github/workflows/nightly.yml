@@ -108,7 +108,9 @@ jobs:
             visual)        SPEC="cypress/ui/visual/**/*.cy.ts" ;;
             accessibility) SPEC="cypress/accessibility/**/*.cy.ts" ;;
             performance)   SPEC="cypress/performance/**/*.cy.ts" ;;
-            bdd)           SPEC="cypress/integration/**/*.feature" ;;
+            # ADR-011: Gherkin BDD lives only in Playwright. This cell runs the
+            # Cypress integration specs (*.cy.ts) — there are no *.feature files here.
+            bdd)           SPEC="cypress/integration/**/*.cy.ts" ;;
             *) echo "Unknown suite: ${{ matrix.suite }}"; exit 2 ;;
           esac
           pnpm exec cypress run --spec "$SPEC"

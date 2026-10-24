@@ -124,13 +124,14 @@ jobs:
           install: false
           command: pnpm exec cypress run --spec 'cypress/performance/**/*.cy.ts'
 
-      - name: Run BDD tests
+      # ADR-011: no Gherkin in Cypress — run integration *.cy.ts (matrix key stays "bdd").
+      - name: Run integration tests (bdd)
         if: ${{ inputs.suite == 'all' || inputs.suite == 'bdd' }}
         continue-on-error: true
         uses: cypress-io/github-action@v7
         with:
           install: false
-          command: pnpm exec cypress run --spec 'cypress/integration/**/*.feature'
+          command: pnpm exec cypress run --spec 'cypress/integration/**/*.cy.ts'
 
       - name: Upload Allure results (JSON)
         if: always()
